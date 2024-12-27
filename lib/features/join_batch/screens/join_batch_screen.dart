@@ -17,6 +17,8 @@ class JoinBatchScreen extends StatelessWidget {
             _buildFeatureSection(context),
             const SizedBox(height: 16),
             _buildBatchIDSection(context),
+            const SizedBox(height: 16),
+            _buildCreateBatchSection(context),
           ],
         ),
       ),
@@ -67,12 +69,12 @@ class JoinBatchScreen extends StatelessWidget {
 
   Widget _buildFeatureSection(BuildContext context) {
     final features = [
-      "Personalized learning assignments",
-      "Instant access to notices",
+      "Manage assignments & deadlines",
+      "Access notices & announcements",
+      "Real-time updates & notifications",
       "Collaborate with batchmates",
-      "Track your progress effectively",
-      "Access exclusive resources",
-      "Get real-time updates and feedback",
+      "Track progress & deadlines",
+      "View & manage class schedule",
     ];
 
     return _buildCard(
@@ -80,10 +82,12 @@ class JoinBatchScreen extends StatelessWidget {
       title: "Why Join BatchIQ?",
       content: Column(
         children: features
-            .map((feature) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: _buildFeatureRow(context, feature),
-                ))
+            .map(
+              (feature) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: _buildFeatureRow(context, feature),
+              ),
+            )
             .toList(),
       ),
     );
@@ -92,9 +96,16 @@ class JoinBatchScreen extends StatelessWidget {
   Widget _buildFeatureRow(BuildContext context, String featureTitle) {
     return Row(
       children: [
-        const Icon(Icons.check_circle, color: Colors.green),
+        const Icon(
+          Icons.check_circle,
+          color: Colors.green,
+          size: 20,
+        ),
         const SizedBox(width: 8),
-        Text(featureTitle, style: Theme.of(context).textTheme.titleLarge),
+        Text(
+          featureTitle,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
       ],
     );
   }
@@ -122,8 +133,9 @@ class JoinBatchScreen extends StatelessWidget {
                 const Expanded(
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: "For eg: 01732134",
-                      hintStyle: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey),
+                      hintText: "e.g. A7B3D2E1",
+                      hintStyle: TextStyle(
+                          fontWeight: FontWeight.w500, color: Colors.grey),
                       contentPadding: EdgeInsets.symmetric(
                         vertical: 0,
                         horizontal: 12,
@@ -149,6 +161,20 @@ class JoinBatchScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCreateBatchSection(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {},
+        child: const Text(
+          "Create a Batch",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
       ),
     );
   }
