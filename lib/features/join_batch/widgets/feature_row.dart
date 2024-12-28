@@ -15,9 +15,11 @@ class FeatureRow extends StatelessWidget {
           size: 20,
         ),
         const SizedBox(width: 8),
-        Text(
-          featureTitle,
-          style: Theme.of(context).textTheme.titleMedium,
+        Expanded(
+          child: Text(
+            featureTitle,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
         ),
       ],
     );
