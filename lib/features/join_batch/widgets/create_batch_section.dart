@@ -12,7 +12,7 @@ class CreateBatchSection extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          Get.to(const CreateBatchScreen());
+          Get.to(CreateBatchScreen());
         },
         child: const Text(
           "Create a Batch",
