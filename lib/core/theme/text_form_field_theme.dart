@@ -10,6 +10,7 @@ final InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     color: Colors.grey.shade600,
     fontSize: 14,
   ),
+  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.circular(12),
     borderSide: BorderSide(

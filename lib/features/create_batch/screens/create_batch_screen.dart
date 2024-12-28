@@ -46,6 +46,7 @@ class CreateBatchScreen extends StatelessWidget {
               const SizedBox(height: 16),
               TextFormField(
                 controller: batchDescriptionController,
+                maxLines: 2,
                 decoration: const InputDecoration(
                     labelText: "Batch Description",
                     hintText: "Enter your batch description"
@@ -57,7 +58,7 @@ class CreateBatchScreen extends StatelessWidget {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               SizedBox(
                 height: 50,
                 width: double.infinity,

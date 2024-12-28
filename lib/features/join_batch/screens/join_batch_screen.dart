@@ -10,6 +10,9 @@ class JoinBatchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    const bool isUserAdmin = true;
+
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
@@ -35,7 +38,7 @@ class JoinBatchScreen extends StatelessWidget {
             const SizedBox(height: 16),
             _buildBatchIDSection(context),
             const SizedBox(height: 16),
-            const CreateBatchSection(),
+            const CreateBatchSection(isUserAdmin: isUserAdmin,),
           ],
         ),
       ),
