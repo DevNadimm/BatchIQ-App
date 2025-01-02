@@ -17,6 +17,7 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
   final _userController = UserController();
   bool isUserAdmin = false;
   String? userName;
+  String? uid;
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
     setState(() {
       isUserAdmin = user?.role == "admin";
       userName = user?.name ?? "Guest";
+      uid = user?.uid ?? "";
     });
   }
 
@@ -56,7 +58,7 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
             const SizedBox(height: 16),
             _buildBatchIDSection(),
             const SizedBox(height: 16),
-            CreateBatchSection(isUserAdmin: isUserAdmin),
+            CreateBatchSection(isUserAdmin: isUserAdmin, uid: uid ?? "",),
           ],
         ),
       ),
