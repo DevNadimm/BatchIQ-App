@@ -1,6 +1,9 @@
+import 'package:batchiq_app/features/auth/screens/sign_up_screen.dart';
 import 'package:batchiq_app/features/auth/widgets/auth_divider.dart';
 import 'package:batchiq_app/features/auth/widgets/social_button.dart';
+import 'package:batchiq_app/features/auth/widgets/auth_footer.dart'; // Import the AuthFooter widget
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -76,7 +79,14 @@ class SignInScreen extends StatelessWidget {
                   )
                 ],
               ),
-
+              const SizedBox(height: 24),
+              AuthFooter(
+                label: "Don't have an account? ",
+                actionText: "Sign Up",
+                onTap: () {
+                  Get.to(const SignUpScreen());
+                },
+              ),
             ],
           ),
         ),
