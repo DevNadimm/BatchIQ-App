@@ -56,7 +56,7 @@ class HeaderSection extends StatelessWidget {
                     children: [
                       Stat(number: "02", label: "ASSIGNMENTS"),
                       Stat(number: "92", label: "CLASSES"),
-                      Stat(number: "08", label: "EXAMS"),
+                      Stat(number: "05", label: "EXAMS"),
                     ],
                   ),
                 ),

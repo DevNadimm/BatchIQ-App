@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
         title: Text(
-          "CSE 33 B",
+          "PCIU CSE 33 B1",
           style: Theme.of(context)
               .textTheme
               .headlineSmall!
