@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateBatchSection extends StatelessWidget {
-  final bool isUserAdmin;
   const CreateBatchSection({super.key, required this.isUserAdmin});
+
+  final bool isUserAdmin;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class CreateBatchSection extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          if (isUserAdmin){
+          if (isUserAdmin) {
             Get.to(CreateBatchScreen());
           } else {
             Get.to(ApplyForAdminScreen());

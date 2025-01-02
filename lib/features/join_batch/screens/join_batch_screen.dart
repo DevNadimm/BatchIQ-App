@@ -1,3 +1,4 @@
+import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/join_batch/widgets/batch_id_section.dart';
 import 'package:batchiq_app/features/join_batch/widgets/create_batch_section.dart';
 import 'package:batchiq_app/features/join_batch/widgets/custom_card.dart';
@@ -5,48 +6,65 @@ import 'package:batchiq_app/features/join_batch/widgets/feature_row.dart';
 import 'package:batchiq_app/features/join_batch/widgets/greeting_section.dart';
 import 'package:flutter/material.dart';
 
-class JoinBatchScreen extends StatelessWidget {
+class JoinBatchScreen extends StatefulWidget {
   const JoinBatchScreen({super.key});
 
   @override
+  State<JoinBatchScreen> createState() => _JoinBatchScreenState();
+}
+
+class _JoinBatchScreenState extends State<JoinBatchScreen> {
+  final _userController = UserController();
+  bool isUserAdmin = false;
+  String? userName;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUser();
+  }
+
+  Future<void> _fetchUser() async {
+    final user = await _userController.fetchUserData();
+    setState(() {
+      isUserAdmin = user?.role == "admin";
+      userName = user?.name ?? "Guest";
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-    const bool isUserAdmin = true;
-
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
-        title: const Row(
+        title: Row(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               backgroundImage: NetworkImage(
-                "https://cdn3.pixelcut.app/7/20/uncrop_hero_bdf08a8ca6.jpg",
-              ),
+                  "https://cdn3.pixelcut.app/7/20/uncrop_hero_bdf08a8ca6.jpg"),
             ),
-            SizedBox(width: 10),
-            GreetingSection(),
+            const SizedBox(width: 10),
+            GreetingSection(name: userName ?? "Guest"),
           ],
         ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _buildFeatureSection(),
             const SizedBox(height: 16),
-            _buildFeatureSection(context),
+            _buildBatchIDSection(),
             const SizedBox(height: 16),
-            _buildBatchIDSection(context),
-            const SizedBox(height: 16),
-            const CreateBatchSection(isUserAdmin: isUserAdmin,),
+            CreateBatchSection(isUserAdmin: isUserAdmin),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFeatureSection(BuildContext context) {
-    final features = [
+  Widget _buildFeatureSection() {
+    const features = [
       "Manage assignments & deadlines",
       "Access notices & announcements",
       "Real-time updates & notifications",
@@ -70,7 +88,7 @@ class JoinBatchScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBatchIDSection(BuildContext context) {
+  Widget _buildBatchIDSection() {
     return const CustomCard(
       title: "Have Batch ID?",
       content: Column(
