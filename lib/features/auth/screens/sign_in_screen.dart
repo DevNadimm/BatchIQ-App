@@ -175,4 +175,11 @@ class _SignInScreenState extends State<SignInScreen> {
             controller.errorMessage ?? "Something went wrong!",
           );
   }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 }
