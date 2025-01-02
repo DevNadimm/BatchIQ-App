@@ -1,9 +1,10 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
+import 'package:batchiq_app/features/home/screens/home_screen.dart';
 import 'package:batchiq_app/features/join_batch/screens/join_batch_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,6 +15,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final _userController = UserController();
+
   @override
   void initState() {
     super.initState();
@@ -27,7 +30,13 @@ class _SplashScreenState extends State<SplashScreen> {
     if (auth.currentUser == null) {
       Get.offAll(() => const SignInScreen());
     } else {
-      Get.offAll(() => const JoinBatchScreen());
+      final user = await _userController.fetchUserData();
+
+      if (user?.batchId != null) {
+        Get.offAll(() => const HomeScreen());
+      } else {
+        Get.offAll(() => const JoinBatchScreen());
+      }
     }
   }
 
@@ -41,10 +50,16 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Image.asset(
               'assets/logos/google.png',
-             scale: 8,
+              scale: 8,
             ),
             const SizedBox(height: 20),
-            Text("BatchIQ", style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white))
+            Text(
+              "BatchIQ",
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineLarge!
+                  .copyWith(color: Colors.white),
+            )
           ],
         ),
       ),
