@@ -1,13 +1,22 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:flutter/material.dart';
 
-class ApplyForAdminScreen extends StatelessWidget {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController reasonController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class ApplyForAdminScreen extends StatefulWidget {
 
-  ApplyForAdminScreen({super.key});
+  const ApplyForAdminScreen({super.key});
+
+  @override
+  State<ApplyForAdminScreen> createState() => _ApplyForAdminScreenState();
+}
+
+class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
+  final TextEditingController nameController = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController reasonController = TextEditingController();
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
