@@ -1,6 +1,8 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/progress_indicator.dart';
+import 'package:batchiq_app/core/utils/snackbar_message.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
+import 'package:batchiq_app/features/create_batch/controller/apply_admin_controller.dart';
 import 'package:flutter/material.dart';
 
 class ApplyForAdminScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
   final TextEditingController reasonController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  late String uid;
 
   @override
   void initState() {
@@ -27,9 +30,10 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
     isLoading = true;
     setState(() {});
     final controller = UserController();
-    final data = await controller.fetchUserData();
-    nameController.text = data?.name ?? "";
-    emailController.text = data?.email ?? "";
+    final user = await controller.fetchUserData();
+    nameController.text = user?.name ?? "";
+    emailController.text = user?.email ?? "";
+    uid = user?.uid ?? "";
     isLoading = false;
     setState(() {});
   }
@@ -163,7 +167,9 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
       height: 50,
       child: ElevatedButton(
         onPressed: () {
-          if (_formKey.currentState?.validate() ?? false) {}
+          if (_formKey.currentState?.validate() ?? false) {
+            applyAdmin();
+          }
         },
         child: const Text(
           "Apply for Admin",
@@ -171,6 +177,33 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> applyAdmin() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final controller = ApplyAdminController();
+    final result = await controller.applyAdmin(
+      uid: uid,
+      name: nameController.text.trim(),
+      email: emailController.text.trim(),
+      reason: reasonController.text.trim(),
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (result) {
+      SnackBarMessage.successMessage("Application submitted successfully!");
+      nameController.clear();
+      emailController.clear();
+      reasonController.clear();
+    } else {
+      SnackBarMessage.errorMessage("Failed to submit the application. Please try again.");
+    }
   }
 
   @override
