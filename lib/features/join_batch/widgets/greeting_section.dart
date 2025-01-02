@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class GreetingSection extends StatelessWidget {
-  const GreetingSection({super.key});
+  const GreetingSection({super.key, required this.name});
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,9 @@ class GreetingSection extends StatelessWidget {
           "$greetingMessage 👋",
           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
         ),
-        const Text(
-          "Nadim Chowdhury",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        Text(
+          name,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
       ],
     );
