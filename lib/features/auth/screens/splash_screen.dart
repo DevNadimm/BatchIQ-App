@@ -17,16 +17,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _navigateToHome();
+    _navigateToNextScreen();
   }
 
-  Future<void> _navigateToHome()async {
+  Future<void> _navigateToNextScreen() async {
     final auth = FirebaseAuth.instance;
     await Future.delayed(const Duration(seconds: 3));
-    if(auth.currentUser == null){
-      Get.offAll(const SignInScreen());
+
+    if (auth.currentUser == null) {
+      Get.offAll(() => const SignInScreen());
     } else {
-      Get.offAll(const JoinBatchScreen());
+      Get.offAll(() => const JoinBatchScreen());
     }
   }
 
