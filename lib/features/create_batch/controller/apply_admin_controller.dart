@@ -6,6 +6,7 @@ class ApplyAdminController extends GetxController {
 
   String? errorMessage;
   bool isSuccess = false;
+  bool isLoading = false;
 
   Future<bool> applyAdmin({
     required String uid,
@@ -13,6 +14,8 @@ class ApplyAdminController extends GetxController {
     required String email,
     required String reason,
   }) async {
+    isLoading = true;
+    update();
     final firestore = FirebaseFirestore.instance;
 
     try {
@@ -27,13 +30,13 @@ class ApplyAdminController extends GetxController {
 
       isSuccess = true;
       errorMessage = null;
-      update();
     } catch (e) {
       isSuccess = false;
       errorMessage = "Failed to submit application!";
+    } finally {
+      isLoading = false;
       update();
     }
     return isSuccess;
   }
-
 }
