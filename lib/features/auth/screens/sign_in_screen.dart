@@ -1,7 +1,7 @@
 import 'package:batchiq_app/features/auth/screens/sign_up_screen.dart';
 import 'package:batchiq_app/features/auth/widgets/auth_divider.dart';
 import 'package:batchiq_app/features/auth/widgets/social_button.dart';
-import 'package:batchiq_app/features/auth/widgets/auth_footer.dart'; // Import the AuthFooter widget
+import 'package:batchiq_app/features/auth/widgets/auth_footer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,16 +29,24 @@ class SignInScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: "Enter your email",
                   labelText: "Email",
+                  prefixIcon: Icon(
+                    Icons.email_outlined,
+                    color: Colors.grey.shade600,
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: "Enter your password",
                   labelText: "Password",
+                  prefixIcon: Icon(
+                    Icons.lock_outline_rounded,
+                    color: Colors.grey.shade600,
+                  ),
                 ),
               ),
               const SizedBox(height: 24),

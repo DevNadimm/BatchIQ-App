@@ -29,23 +29,35 @@ class SignUpScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: "Enter your name",
                   labelText: "Name",
+                  prefixIcon: Icon(
+                    Icons.person_outline_rounded,
+                    color: Colors.grey.shade600,
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: "Enter your email",
                   labelText: "Email",
+                  prefixIcon: Icon(
+                    Icons.email_outlined,
+                    color: Colors.grey.shade600,
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: "Enter your password",
                   labelText: "Password",
+                  prefixIcon: Icon(
+                    Icons.lock_outline_rounded,
+                    color: Colors.grey.shade600,
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
