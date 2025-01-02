@@ -3,7 +3,9 @@ import 'package:batchiq_app/core/utils/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/snackbar_message.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/create_batch/controller/apply_admin_controller.dart';
+import 'package:batchiq_app/features/create_batch/screens/current_status_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ApplyForAdminScreen extends StatefulWidget {
   const ApplyForAdminScreen({super.key});
@@ -201,6 +203,7 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
       nameController.clear();
       emailController.clear();
       reasonController.clear();
+      Get.off(const CurrentStatusScreen(status: "pending"));
     } else {
       SnackBarMessage.errorMessage("Failed to submit the application. Please try again.");
     }
