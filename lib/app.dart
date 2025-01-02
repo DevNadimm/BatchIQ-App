@@ -2,7 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/theme/elevated_button_theme.dart';
 import 'package:batchiq_app/core/theme/text_form_field_theme.dart';
 import 'package:batchiq_app/core/theme/text_theme.dart';
-import 'package:batchiq_app/features/home/screens/home_screen.dart';
+import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         inputDecorationTheme: inputDecorationTheme,
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const SignInScreen(),
     );
   }
 }
