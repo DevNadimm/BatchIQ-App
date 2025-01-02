@@ -1,8 +1,9 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/core/utils/progress_indicator.dart';
+import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 
 class ApplyForAdminScreen extends StatefulWidget {
-
   const ApplyForAdminScreen({super.key});
 
   @override
@@ -11,12 +12,27 @@ class ApplyForAdminScreen extends StatefulWidget {
 
 class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
   final TextEditingController nameController = TextEditingController();
-
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController reasonController = TextEditingController();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
+
+  void fetchData() async {
+    isLoading = true;
+    setState(() {});
+    final controller = UserController();
+    final data = await controller.fetchUserData();
+    nameController.text = data?.name ?? "";
+    emailController.text = data?.email ?? "";
+    isLoading = false;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,81 +51,85 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    "To create a batch, you need to be an admin. Apply below to become an admin and manage batches.",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: primaryColor,
+      body: Visibility(
+        visible: !isLoading,
+        replacement: const ProgressIndicatorWidget(),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      color: primaryColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      "To create a batch, you need to be an admin. Apply below to become an admin and manage batches.",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: primaryColor,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 24),
-                _buildTextField(
-                  controller: nameController,
-                  labelText: "Full Name",
-                  hintText: "Enter your full name",
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your name';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                _buildTextField(
-                  controller: emailController,
-                  labelText: "Email Address",
-                  hintText: "Enter your email",
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    } else if (!RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zAZ0-9.-]+$")
-                        .hasMatch(value)) {
-                      return 'Please enter a valid email address';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                _buildTextField(
-                  controller: reasonController,
-                  labelText: "Reason for Applying",
-                  hintText: "Why do you want to be an admin?",
-                  maxLines: 4,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please provide a reason';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Your application will be reviewed, and we will contact you at the email address provided.",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(color: Colors.grey),
-                ),
-                const SizedBox(height: 24),
-                _buildSubmitButton(context),
-              ],
+                  const SizedBox(height: 24),
+                  _buildTextField(
+                    controller: nameController,
+                    labelText: "Full Name",
+                    hintText: "Enter your full name",
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your name';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _buildTextField(
+                    controller: emailController,
+                    labelText: "Email Address",
+                    hintText: "Enter your email",
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      } else if (!RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zAZ0-9.-]+$")
+                          .hasMatch(value)) {
+                        return 'Please enter a valid email address';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _buildTextField(
+                    controller: reasonController,
+                    labelText: "Reason for Applying",
+                    hintText: "Why do you want to be an admin?",
+                    maxLines: 4,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please provide a reason';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    "Your application will be reviewed, and we will contact you at the email address provided.",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(color: Colors.grey),
+                  ),
+                  const SizedBox(height: 24),
+                  _buildSubmitButton(context),
+                ],
+              ),
             ),
           ),
         ),
@@ -151,5 +171,13 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    reasonController.dispose();
+    super.dispose();
   }
 }
