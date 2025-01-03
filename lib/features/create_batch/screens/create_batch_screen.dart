@@ -61,6 +61,7 @@ class _CreateBatchScreenState extends State<CreateBatchScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: batchNameController,
+                keyboardType: TextInputType.name,
                 decoration: const InputDecoration(
                   labelText: "Batch Name",
                   hintText: "Enter a unique batch name",
@@ -76,6 +77,7 @@ class _CreateBatchScreenState extends State<CreateBatchScreen> {
               TextFormField(
                 controller: batchDescriptionController,
                 maxLines: 3,
+                keyboardType: TextInputType.multiline,
                 decoration: const InputDecoration(
                   labelText: "Batch Description",
                   hintText: "Enter a short description for your batch",
@@ -108,7 +110,7 @@ class _CreateBatchScreenState extends State<CreateBatchScreen> {
                         ),
                       ),
                     );
-                  }
+                  },
                 ),
               ),
             ],
@@ -123,11 +125,11 @@ class _CreateBatchScreenState extends State<CreateBatchScreen> {
     final user = await userController.fetchUserData();
     final uid = user?.uid ?? "";
 
-    final createBatchController = CreateBatchController();
+    final createBatchController = CreateBatchController.instance;
     final result = await createBatchController.createBatch(
       uid: uid,
       batchName: batchNameController.text.trim(),
-      description: batchNameController.text,
+      description: batchDescriptionController.text,
     );
 
     if (result) {

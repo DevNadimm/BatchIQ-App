@@ -88,6 +88,7 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
                     controller: nameController,
                     labelText: "Full Name",
                     hintText: "Enter your full name",
+                    keyboardType: TextInputType.name,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your name';
@@ -116,6 +117,7 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
                     controller: reasonController,
                     labelText: "Reason for Applying",
                     hintText: "Why do you want to be an admin?",
+                    keyboardType: TextInputType.multiline,
                     maxLines: 4,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -167,36 +169,36 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
     return SizedBox(
       width: double.infinity,
       height: 50,
-      child: ElevatedButton(
-        onPressed: () {
-          if (_formKey.currentState?.validate() ?? false) {
-            applyAdmin();
-          }
-        },
-        child: const Text(
-          "Apply for Admin",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
+      child: GetBuilder<ApplyAdminController>(
+        builder: (controller) {
+          return Visibility(
+            visible: !controller.isLoading,
+            replacement: const ProgressIndicatorWidget(),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState?.validate() ?? false) {
+                  applyAdmin();
+                }
+              },
+              child: const Text(
+                "Apply for Admin",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+            ),
+          );
+        }
       ),
     );
   }
 
   Future<void> applyAdmin() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    final controller = ApplyAdminController();
+    final controller = ApplyAdminController.instance;
     final result = await controller.applyAdmin(
       uid: uid,
       name: nameController.text.trim(),
       email: emailController.text.trim(),
       reason: reasonController.text,
     );
-
-    setState(() {
-      isLoading = false;
-    });
 
     if (result) {
       SnackBarMessage.successMessage("Application submitted successfully!");
