@@ -1,9 +1,9 @@
 import 'package:batchiq_app/core/colors/colors.dart';
-import 'package:batchiq_app/core/utils/progress_indicator.dart';
-import 'package:batchiq_app/core/utils/snackbar_message.dart';
+import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
+import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
-import 'package:batchiq_app/features/create_batch/controller/apply_admin_controller.dart';
-import 'package:batchiq_app/features/create_batch/screens/current_status_screen.dart';
+import 'package:batchiq_app/features/batch_management/create_batch/controller/apply_admin_controller.dart';
+import 'package:batchiq_app/features/batch_management/create_batch/screens/current_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

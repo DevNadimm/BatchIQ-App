@@ -1,5 +1,5 @@
 import 'package:batchiq_app/core/colors/colors.dart';
-import 'package:batchiq_app/core/utils/progress_indicator.dart';
+import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';

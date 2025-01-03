@@ -1,4 +1,4 @@
-import 'package:batchiq_app/core/binders/controller_binders.dart';
+import 'package:batchiq_app/core/bindings/initial_bindings.dart';
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/theme/elevated_button_theme.dart';
 import 'package:batchiq_app/core/theme/text_form_field_theme.dart';
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(),
-      initialBinding: ControllerBinders(),
+      initialBinding: InitialBindings(),
     );
   }
 }

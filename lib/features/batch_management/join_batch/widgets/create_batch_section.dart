@@ -1,6 +1,6 @@
-import 'package:batchiq_app/features/create_batch/screens/apply_for_admin_screen.dart';
-import 'package:batchiq_app/features/create_batch/screens/create_batch_screen.dart';
-import 'package:batchiq_app/features/create_batch/screens/current_status_screen.dart';
+import 'package:batchiq_app/features/batch_management/create_batch/screens/apply_for_admin_screen.dart';
+import 'package:batchiq_app/features/batch_management/create_batch/screens/create_batch_screen.dart';
+import 'package:batchiq_app/features/batch_management/create_batch/screens/current_status_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

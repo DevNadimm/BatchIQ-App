@@ -2,7 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:batchiq_app/features/home/screens/home_screen.dart';
-import 'package:batchiq_app/features/join_batch/screens/join_batch_screen.dart';
+import 'package:batchiq_app/features/batch_management/join_batch/screens/join_batch_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

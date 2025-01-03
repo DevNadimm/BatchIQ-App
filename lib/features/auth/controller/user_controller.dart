@@ -1,4 +1,4 @@
-import 'package:batchiq_app/features/auth/user_model.dart';
+import 'package:batchiq_app/features/auth/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

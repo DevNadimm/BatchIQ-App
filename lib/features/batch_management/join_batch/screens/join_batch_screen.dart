@@ -1,10 +1,10 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
-import 'package:batchiq_app/features/join_batch/widgets/batch_id_section.dart';
-import 'package:batchiq_app/features/join_batch/widgets/create_batch_section.dart';
-import 'package:batchiq_app/features/join_batch/widgets/custom_card.dart';
-import 'package:batchiq_app/features/join_batch/widgets/feature_row.dart';
-import 'package:batchiq_app/features/join_batch/widgets/greeting_section.dart';
+import 'package:batchiq_app/features/batch_management/join_batch/widgets/batch_id_section.dart';
+import 'package:batchiq_app/features/batch_management/join_batch/widgets/create_batch_section.dart';
+import 'package:batchiq_app/features/batch_management/join_batch/widgets/custom_card.dart';
+import 'package:batchiq_app/features/batch_management/join_batch/widgets/feature_row.dart';
+import 'package:batchiq_app/features/batch_management/join_batch/widgets/greeting_section.dart';
 import 'package:batchiq_app/features/profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

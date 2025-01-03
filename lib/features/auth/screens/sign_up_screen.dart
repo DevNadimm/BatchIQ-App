@@ -1,11 +1,11 @@
-import 'package:batchiq_app/core/utils/progress_indicator.dart';
-import 'package:batchiq_app/core/utils/snackbar_message.dart';
+import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
+import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/auth/controller/sign_up_controller.dart';
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:batchiq_app/features/auth/widgets/auth_divider.dart';
 import 'package:batchiq_app/features/auth/widgets/social_button.dart';
 import 'package:batchiq_app/features/auth/widgets/auth_footer.dart';
-import 'package:batchiq_app/features/join_batch/screens/join_batch_screen.dart';
+import 'package:batchiq_app/features/batch_management/join_batch/screens/join_batch_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
