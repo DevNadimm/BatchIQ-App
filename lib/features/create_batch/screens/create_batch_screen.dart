@@ -1,12 +1,20 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:flutter/material.dart';
 
-class CreateBatchScreen extends StatelessWidget {
-  final TextEditingController batchNameController = TextEditingController();
-  final TextEditingController batchDescriptionController = TextEditingController();
-  final GlobalKey<FormState> _globalKey = GlobalKey();
+class CreateBatchScreen extends StatefulWidget {
 
-  CreateBatchScreen({super.key});
+  const CreateBatchScreen({super.key});
+
+  @override
+  State<CreateBatchScreen> createState() => _CreateBatchScreenState();
+}
+
+class _CreateBatchScreenState extends State<CreateBatchScreen> {
+  final TextEditingController batchNameController = TextEditingController();
+
+  final TextEditingController batchDescriptionController = TextEditingController();
+
+  final GlobalKey<FormState> _globalKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
