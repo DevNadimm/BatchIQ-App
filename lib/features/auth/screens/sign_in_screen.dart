@@ -5,6 +5,7 @@ import 'package:batchiq_app/features/auth/screens/sign_up_screen.dart';
 import 'package:batchiq_app/features/auth/widgets/auth_divider.dart';
 import 'package:batchiq_app/features/auth/widgets/social_button.dart';
 import 'package:batchiq_app/features/auth/widgets/auth_footer.dart';
+import 'package:batchiq_app/features/home/screens/home_screen.dart';
 import 'package:batchiq_app/features/join_batch/screens/join_batch_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -169,11 +170,15 @@ class _SignInScreenState extends State<SignInScreen> {
   void onTapSignIn(String email, String password) async {
     final controller = SignInController.instance;
     final isSignIn = await controller.signIn(email: email, password: password);
-    isSignIn
-        ? Get.offAll(const JoinBatchScreen())
-        : SnackBarMessage.errorMessage(
-            controller.errorMessage ?? "Something went wrong!",
-          );
+    if (isSignIn) {
+      controller.isJoinedBatch
+          ? Get.offAll(const HomeScreen())
+          : Get.offAll(const JoinBatchScreen());
+    } else {
+      SnackBarMessage.errorMessage(
+        controller.errorMessage ?? "Something went wrong!",
+      );
+    }
   }
 
   @override
