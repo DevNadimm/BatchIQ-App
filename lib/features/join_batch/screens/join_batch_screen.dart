@@ -5,7 +5,9 @@ import 'package:batchiq_app/features/join_batch/widgets/create_batch_section.dar
 import 'package:batchiq_app/features/join_batch/widgets/custom_card.dart';
 import 'package:batchiq_app/features/join_batch/widgets/feature_row.dart';
 import 'package:batchiq_app/features/join_batch/widgets/greeting_section.dart';
+import 'package:batchiq_app/features/profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class JoinBatchScreen extends StatefulWidget {
   const JoinBatchScreen({super.key});
@@ -42,13 +44,18 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
         forceMaterialTransparency: true,
         title: Row(
           children: [
-            CircleAvatar(
-              backgroundColor: primaryColor,
-              child: Text(
-                userName != null && userName!.isNotEmpty
-                    ? userName![0].toUpperCase()
-                    : "G",
-                style: const TextStyle(fontSize: 18, color: Colors.white),
+            GestureDetector(
+              onTap: (){
+                Get.to(const ProfileScreen());
+              },
+              child: CircleAvatar(
+                backgroundColor: primaryColor,
+                child: Text(
+                  userName != null && userName!.isNotEmpty
+                      ? userName![0].toUpperCase()
+                      : "G",
+                  style: const TextStyle(fontSize: 18, color: Colors.white),
+                ),
               ),
             ),
             const SizedBox(width: 10),
