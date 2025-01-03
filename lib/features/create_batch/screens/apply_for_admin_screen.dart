@@ -191,7 +191,7 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
       uid: uid,
       name: nameController.text.trim(),
       email: emailController.text.trim(),
-      reason: reasonController.text.trim(),
+      reason: reasonController.text,
     );
 
     setState(() {
