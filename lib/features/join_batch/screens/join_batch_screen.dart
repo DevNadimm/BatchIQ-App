@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/join_batch/widgets/batch_id_section.dart';
 import 'package:batchiq_app/features/join_batch/widgets/create_batch_section.dart';
@@ -41,9 +42,14 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
         forceMaterialTransparency: true,
         title: Row(
           children: [
-            const CircleAvatar(
-              backgroundImage: NetworkImage(
-                  "https://cdn3.pixelcut.app/7/20/uncrop_hero_bdf08a8ca6.jpg"),
+            CircleAvatar(
+              backgroundColor: primaryColor,
+              child: Text(
+                userName != null && userName!.isNotEmpty
+                    ? userName![0].toUpperCase()
+                    : "G",
+                style: const TextStyle(fontSize: 18, color: Colors.white),
+              ),
             ),
             const SizedBox(width: 10),
             GreetingSection(name: userName ?? "Guest"),
@@ -58,7 +64,10 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
             const SizedBox(height: 16),
             _buildBatchIDSection(),
             const SizedBox(height: 16),
-            CreateBatchSection(isUserAdmin: isUserAdmin, uid: uid ?? "",),
+            CreateBatchSection(
+              isUserAdmin: isUserAdmin,
+              uid: uid ?? "",
+            ),
           ],
         ),
       ),
