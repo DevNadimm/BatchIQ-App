@@ -1,8 +1,13 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/core/utils/progress_indicator.dart';
+import 'package:batchiq_app/core/utils/snackbar_message.dart';
+import 'package:batchiq_app/features/auth/controller/user_controller.dart';
+import 'package:batchiq_app/features/create_batch/controller/create_batch_controller.dart';
+import 'package:batchiq_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CreateBatchScreen extends StatefulWidget {
-
   const CreateBatchScreen({super.key});
 
   @override
@@ -11,9 +16,7 @@ class CreateBatchScreen extends StatefulWidget {
 
 class _CreateBatchScreenState extends State<CreateBatchScreen> {
   final TextEditingController batchNameController = TextEditingController();
-
   final TextEditingController batchDescriptionController = TextEditingController();
-
   final GlobalKey<FormState> _globalKey = GlobalKey();
 
   @override
@@ -88,14 +91,24 @@ class _CreateBatchScreenState extends State<CreateBatchScreen> {
               SizedBox(
                 height: 50,
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_globalKey.currentState?.validate() ?? false) {}
-                  },
-                  child: const Text(
-                    "Create Batch",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
+                child: GetBuilder<CreateBatchController>(
+                  builder: (controller) {
+                    return Visibility(
+                      visible: !controller.isLoading,
+                      replacement: const ProgressIndicatorWidget(),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_globalKey.currentState?.validate() ?? false) {
+                            createBatch();
+                          }
+                        },
+                        child: const Text(
+                          "Create Batch",
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    );
+                  }
                 ),
               ),
             ],
@@ -103,5 +116,32 @@ class _CreateBatchScreenState extends State<CreateBatchScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> createBatch() async {
+    final userController = UserController();
+    final user = await userController.fetchUserData();
+    final uid = user?.uid ?? "";
+
+    final createBatchController = CreateBatchController();
+    final result = await createBatchController.createBatch(
+      uid: uid,
+      batchName: batchNameController.text.trim(),
+      description: batchNameController.text,
+    );
+
+    if (result) {
+      SnackBarMessage.successMessage("Batch created successfully!");
+      Get.off(const HomeScreen());
+    } else {
+      SnackBarMessage.errorMessage("Failed to create the batch. Please try again.");
+    }
+  }
+
+  @override
+  void dispose() {
+    batchNameController.dispose();
+    batchDescriptionController.dispose();
+    super.dispose();
   }
 }
