@@ -49,15 +49,15 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/logos/google.png',
-              scale: 8,
+              'assets/app_logos/batch-iq-logo-rounded.png',
+              scale: 35,
             ),
             const SizedBox(height: 20),
             Text(
               "BatchIQ",
               style: Theme.of(context)
                   .textTheme
-                  .headlineLarge!
+                  .displayMedium!
                   .copyWith(color: Colors.white),
             )
           ],

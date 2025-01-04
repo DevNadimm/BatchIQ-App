@@ -1,5 +1,5 @@
 name: batchiq_app
-description: "A new Flutter project."
+description: "A Flutter app for efficient batch management, offering tools to organize, track, and analyze tasks with ease."
 publish_to: 'none'
 version: 1.0.0+1
 environment:
@@ -16,6 +16,7 @@ dependencies:
   http: ^1.2.2
   intl: ^0.20.1
   url_launcher: ^6.3.1
+  flutter_launcher_icons: ^0.14.2
 
 dev_dependencies:
   flutter_test:
@@ -24,7 +25,15 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
   assets:
     - assets/logos/
     - assets/icons/
+    - assets/app_logos/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/app_logos/batch-iq-logo.jpg"
+  min_sdk_android: 21
+  adaptive_icon_foreground: "assets/app_logos/batch-iq-logo.jpg"
+  adaptive_icon_background: "#ffffff"
