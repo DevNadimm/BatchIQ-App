@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class BatchIQNavigationDrawer extends StatelessWidget {
   const BatchIQNavigationDrawer({super.key});
@@ -50,20 +51,46 @@ class BatchIQNavigationDrawer extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                _buildDrawerItem(context, Icons.dashboard,
-                    "Dashboard Overview (Admin)", () {}),
                 _buildDrawerItem(
-                    context, Icons.person, "Manage Profiles", () {}),
+                  context,
+                  HugeIcons.strokeRoundedDashboardBrowsing,
+                  "Dashboard Overview (Admin)",
+                  () {},
+                ),
+                _buildDrawerItem(
+                  context,
+                  HugeIcons.strokeRoundedUserAccount,
+                  "Manage Profiles",
+                  () {},
+                ),
                 Divider(color: Colors.grey.shade300),
                 _buildDrawerItem(
-                    context, Icons.feedback, "Help & Feedback", () {
-                  sendEmail();
-                }),
+                  context,
+                  HugeIcons.strokeRoundedHelpSquare,
+                  "Help & Feedback",
+                  () {
+                    sendEmail();
+                  },
+                ),
                 _buildDrawerItem(
-                    context, Icons.code, "Developer Information", () {}),
+                  context,
+                  HugeIcons.strokeRoundedDeveloper,
+                  "Developer Information",
+                  () {},
+                ),
                 Divider(color: Colors.grey.shade300),
-                _buildDrawerItem(context, Icons.share, "Share App", () {}),
-                _buildDrawerItem(context, Icons.info, "About Us", () {}),
+                _buildDrawerItem(
+                  context,
+                  HugeIcons.strokeRoundedShare01,
+                  "Share App",
+                  () {},
+                ),
+                _buildDrawerItem(
+                  context,
+                  HugeIcons.strokeRoundedUserGroup,
+                  "About Us",
+                  () {},
+                ),
               ],
             ),
           ),
@@ -74,11 +101,11 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                 // Handle logout
                 final auth = FirebaseAuth.instance;
                 await auth.signOut();
-                if(auth.currentUser == null){
+                if (auth.currentUser == null) {
                   Get.to(const SignInScreen());
                 }
               },
-              icon: const Icon(Icons.logout),
+              icon: const Icon(HugeIcons.strokeRoundedLogout03),
               label: const Text("Logout"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red.shade400,
@@ -104,10 +131,10 @@ class BatchIQNavigationDrawer extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Row(
           children: [
-            Icon(
-              icon,
+            HugeIcon(
+              icon: icon,
               color: primaryFontColor.withOpacity(0.8),
-              size: 20,
+              size: 22,
             ),
             const SizedBox(width: 16),
             Expanded(
