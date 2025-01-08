@@ -69,7 +69,7 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
           children: [
             _buildFeatureSection(),
             const SizedBox(height: 16),
-            _buildBatchIDSection(),
+            _buildBatchIDSection(uid ?? ""),
             const SizedBox(height: 16),
             CreateBatchSection(
               isUserAdmin: isUserAdmin,
@@ -106,18 +106,18 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
     );
   }
 
-  Widget _buildBatchIDSection() {
-    return const CustomCard(
+  Widget _buildBatchIDSection(String uid) {
+    return CustomCard(
       title: "Have Batch ID?",
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Enter here to join",
             style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey),
           ),
-          SizedBox(height: 4),
-          BatchIDSection(),
+          const SizedBox(height: 4),
+          BatchIDSection(userId: uid,),
         ],
       ),
     );
