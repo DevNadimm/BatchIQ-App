@@ -3,6 +3,7 @@ import 'package:batchiq_app/features/home/widgets/header_section.dart';
 import 'package:batchiq_app/features/home/widgets/navigation_drawer.dart';
 import 'package:batchiq_app/features/home/widgets/todays_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,8 +21,19 @@ class HomeScreen extends StatelessWidget {
               .headlineSmall!
               .copyWith(color: Colors.white),
         ),
+        leading: IconButton(
+          onPressed: () {
+
+          },
+          icon: const Icon(HugeIcons.strokeRoundedMenu02),
+        ),
         centerTitle: true,
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(HugeIcons.strokeRoundedUserAdd02),
+          ),
+        ],
       ),
       drawer: const BatchIQNavigationDrawer(),
       body: const Column(
