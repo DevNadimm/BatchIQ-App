@@ -24,16 +24,14 @@ class BatchIQNavigationDrawer extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 30,
-                  backgroundImage: NetworkImage(
-                    "https://cdn3.pixelcut.app/7/20/uncrop_hero_bdf08a8ca6.jpg",
-                  ),
+                  backgroundImage: AssetImage("assets/images/avatar.jpg")
                 ),
                 const SizedBox(height: 12),
                 Text(
                   "Nadim Chowdhury",
                   style: Theme.of(context)
                       .textTheme
-                      .titleMedium!
+                      .titleLarge!
                       .copyWith(color: Colors.white),
                 ),
                 const SizedBox(height: 4),
@@ -41,7 +39,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   "nadimchowdhury87@gmail.com",
                   style: Theme.of(context)
                       .textTheme
-                      .bodySmall!
+                      .bodyMedium!
                       .copyWith(color: Colors.white70),
                 ),
               ],
