@@ -24,6 +24,20 @@ class JoinBatchController extends GetxController {
         await firestore.collection("Users").doc(userId).update({
           "batchId": batchId,
         });
+
+        // Upload batch member
+        final user = await firestore.collection("Users").doc(userId).get();
+        final userName = await user["name"];
+        final userRole = await user["role"];
+
+        Map<String, dynamic> userBody = {
+          "name": userName,
+          "joinedAt": FieldValue.serverTimestamp(),
+          "role": userRole
+        };
+
+        await firestore.collection("Batches").doc(batchId).collection("Members").doc(userId).set(userBody);
+
         _isSuccess = true;
       } catch (e) {
         _isSuccess = false;

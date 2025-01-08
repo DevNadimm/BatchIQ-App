@@ -1,6 +1,9 @@
+import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:batchiq_app/features/home/controller/send_email.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:get/get.dart';
 
 class BatchIQNavigationDrawer extends StatelessWidget {
   const BatchIQNavigationDrawer({super.key});
@@ -67,8 +70,13 @@ class BatchIQNavigationDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton.icon(
-              onPressed: () {
+              onPressed: () async {
                 // Handle logout
+                final auth = FirebaseAuth.instance;
+                await auth.signOut();
+                if(auth.currentUser == null){
+                  Get.to(const SignInScreen());
+                }
               },
               icon: const Icon(Icons.logout),
               label: const Text("Logout"),
