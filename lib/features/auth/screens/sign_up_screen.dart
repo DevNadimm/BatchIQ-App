@@ -65,6 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 24),
                 TextFormField(
                   controller: _emailTEController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: "Enter your email",
                     labelText: "Email",

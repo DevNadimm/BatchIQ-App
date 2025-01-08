@@ -45,7 +45,7 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
         title: Row(
           children: [
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Get.to(const ProfileScreen());
               },
               child: CircleAvatar(
