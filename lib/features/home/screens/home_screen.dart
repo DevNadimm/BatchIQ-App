@@ -1,13 +1,20 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/features/home/screens/add_friend_screen.dart';
 import 'package:batchiq_app/features/home/widgets/header_section.dart';
 import 'package:batchiq_app/features/home/widgets/navigation_drawer.dart';
 import 'package:batchiq_app/features/home/widgets/todays_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +41,9 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(const AddFriendScreen(batchId: '',));
+            },
             icon: const Icon(HugeIcons.strokeRoundedUserAdd02),
           ),
         ],
