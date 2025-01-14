@@ -1,3 +1,4 @@
+import 'package:batchiq_app/features/admin_dashboard/screens/admin_dashboard_screen.dart';
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:batchiq_app/shared/controller/launch_url.dart';
 import 'package:batchiq_app/features/home/screens/developer_information_screen.dart';
@@ -53,7 +54,9 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   context,
                   HugeIcons.strokeRoundedDashboardBrowsing,
                   "Admin Dashboard",
-                  () {},
+                  () {
+                    Get.to(const BatchIQAdminDashboard());
+                  },
                 ),
                 _buildDrawerItem(
                   context,
