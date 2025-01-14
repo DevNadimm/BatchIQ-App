@@ -1,4 +1,5 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/core/utils/ui/icons_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -22,9 +23,7 @@ class InviteFriendScreen extends StatelessWidget {
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
-            HugeIcons.strokeRoundedArrowLeft02,
-          ),
+          icon: Icon(backArrow),
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.5),

@@ -1,5 +1,6 @@
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:batchiq_app/features/home/controller/send_email.dart';
+import 'package:batchiq_app/features/home/screens/developer_information_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:batchiq_app/core/colors/colors.dart';
@@ -23,9 +24,8 @@ class BatchIQNavigationDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage("assets/images/avatar.jpg")
-                ),
+                    radius: 30,
+                    backgroundImage: AssetImage("assets/images/avatar.jpg")),
                 const SizedBox(height: 12),
                 Text(
                   "Nadim Chowdhury",
@@ -74,7 +74,9 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   context,
                   HugeIcons.strokeRoundedDeveloper,
                   "Developer Information",
-                  () {},
+                  () {
+                    Get.to(const DeveloperInformationScreen());
+                  },
                 ),
                 Divider(color: Colors.grey.shade300),
                 _buildDrawerItem(
