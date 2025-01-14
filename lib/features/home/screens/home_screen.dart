@@ -1,4 +1,5 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/home/screens/add_friend_screen.dart';
 import 'package:batchiq_app/features/home/widgets/header_section.dart';
 import 'package:batchiq_app/features/home/widgets/navigation_drawer.dart';
@@ -15,6 +16,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late String batchId;
+
+  @override
+  void initState() {
+    _fetchUser();
+    super.initState();
+  }
+
+  Future<void> _fetchUser() async {
+    final userController = UserController();
+    final user = await userController.fetchUserData();
+    setState(() {
+      batchId = (user?.batchId ?? "");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +59,11 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(const AddFriendScreen(batchId: '',));
+              Get.to(
+                AddFriendScreen(
+                  batchId: batchId,
+                ),
+              );
             },
             icon: const Icon(HugeIcons.strokeRoundedUserAdd02),
           ),
