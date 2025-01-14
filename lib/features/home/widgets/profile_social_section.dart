@@ -12,23 +12,29 @@ class ProfileSocialSection extends StatelessWidget {
         _socialIcon(
           assetPath: "assets/logos/facebook.png",
           onTap: () {
-            LaunchURL.launchFacebook;
+            LaunchURL.launchFacebook();
           },
         ),
         const SizedBox(width: 12),
         _socialIcon(
           assetPath: "assets/logos/twitter.png",
-          onTap: () {},
+          onTap: () {
+            LaunchURL.launchTwitter();
+          },
         ),
         const SizedBox(width: 12),
         _socialIcon(
           assetPath: "assets/logos/linkedin.png",
-          onTap: () {},
+          onTap: () {
+            LaunchURL.launchLinkedIn();
+          },
         ),
         const SizedBox(width: 12),
         _socialIcon(
           assetPath: "assets/logos/github.png",
-          onTap: () {},
+          onTap: () {
+            LaunchURL.launchLinkedIn();
+          },
         ),
       ],
     );
