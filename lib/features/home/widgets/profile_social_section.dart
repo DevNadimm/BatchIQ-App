@@ -33,7 +33,7 @@ class ProfileSocialSection extends StatelessWidget {
         _socialIcon(
           assetPath: "assets/logos/github.png",
           onTap: () {
-            LaunchURL.launchLinkedIn();
+            LaunchURL.launchGithub();
           },
         ),
       ],
