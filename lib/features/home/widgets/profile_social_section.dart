@@ -1,3 +1,4 @@
+import 'package:batchiq_app/shared/controller/launch_url.dart';
 import 'package:flutter/material.dart';
 
 class ProfileSocialSection extends StatelessWidget {
@@ -10,7 +11,9 @@ class ProfileSocialSection extends StatelessWidget {
       children: [
         _socialIcon(
           assetPath: "assets/logos/facebook.png",
-          onTap: () {},
+          onTap: () {
+            LaunchURL.launchFacebook;
+          },
         ),
         const SizedBox(width: 12),
         _socialIcon(
@@ -24,7 +27,7 @@ class ProfileSocialSection extends StatelessWidget {
         ),
         const SizedBox(width: 12),
         _socialIcon(
-          assetPath: "assets/logos/medium.png",
+          assetPath: "assets/logos/github.png",
           onTap: () {},
         ),
       ],
