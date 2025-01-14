@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class AddFriendScreen extends StatelessWidget {
-  const AddFriendScreen({super.key, required this.batchId});
+class InviteFriendScreen extends StatelessWidget {
+  const InviteFriendScreen({super.key, required this.batchId});
 
   final String batchId;
 
@@ -15,7 +15,7 @@ class AddFriendScreen extends StatelessWidget {
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text(
-          "Add Friend",
+          "Invite Friend",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         leading: IconButton(

@@ -1,6 +1,6 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
-import 'package:batchiq_app/features/home/screens/add_friend_screen.dart';
+import 'package:batchiq_app/features/home/screens/invite_friend_screen.dart';
 import 'package:batchiq_app/features/home/widgets/header_section.dart';
 import 'package:batchiq_app/features/home/widgets/navigation_drawer.dart';
 import 'package:batchiq_app/features/home/widgets/todays_timeline.dart';
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             onPressed: () {
               Get.to(
-                AddFriendScreen(
+                InviteFriendScreen(
                   batchId: batchId,
                 ),
               );
