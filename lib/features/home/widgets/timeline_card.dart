@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class TimelineCard extends StatelessWidget {
   final String time;
@@ -32,21 +33,25 @@ class TimelineCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Row(
-              children: [
-                topRow(context, time, Icons.access_time_filled_rounded),
-                const SizedBox(width: 8),
-                topRow(context, room, Icons.room),
-              ],
+            topRow(
+              context,
+              time,
+              HugeIcons.strokeRoundedTime03,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
+            topRow(
+              context,
+              room,
+              HugeIcons.strokeRoundedMeetingRoom,
+            ),
+            const SizedBox(height: 10),
             Text(
               title,
               style: Theme.of(context).textTheme.titleMedium,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             bottomRow(context, status),
           ],
         ),
@@ -60,10 +65,10 @@ Widget topRow(BuildContext context, String titleText, IconData icon) {
     children: [
       Icon(
         icon,
-        size: 16,
+        size: 18,
         color: secondaryFontColor,
       ),
-      const SizedBox(width: 4),
+      const SizedBox(width: 5),
       Text(
         titleText,
         style: Theme.of(context)
@@ -93,7 +98,7 @@ Widget bottomRow(BuildContext context, String statusText) {
     children: [
       CircleAvatar(
         backgroundColor: getStatusColor(statusText),
-        radius: 5,
+        radius: 6,
       ),
       const SizedBox(width: 4),
       Text(
