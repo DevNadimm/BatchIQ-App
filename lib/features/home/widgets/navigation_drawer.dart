@@ -52,7 +52,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                 _buildDrawerItem(
                   context,
                   HugeIcons.strokeRoundedDashboardBrowsing,
-                  "Dashboard Overview (Admin)",
+                  "Admin Dashboard",
                   () {},
                 ),
                 _buildDrawerItem(

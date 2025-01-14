@@ -48,7 +48,7 @@ class InviteFriendScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Share your Batch ID with your friend so they can send you a join request and be part of the batch.",
+                    "Share your Batch ID with your friend so they can join and become part of the batch.",
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
