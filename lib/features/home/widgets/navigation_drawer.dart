@@ -1,5 +1,5 @@
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
-import 'package:batchiq_app/features/home/controller/send_email.dart';
+import 'package:batchiq_app/shared/controller/launch_url.dart';
 import 'package:batchiq_app/features/home/screens/developer_information_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
