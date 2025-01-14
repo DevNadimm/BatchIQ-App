@@ -67,7 +67,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   HugeIcons.strokeRoundedHelpSquare,
                   "Help & Feedback",
                   () {
-                    sendEmail();
+                    LaunchURL.sendEmail();
                   },
                 ),
                 _buildDrawerItem(
