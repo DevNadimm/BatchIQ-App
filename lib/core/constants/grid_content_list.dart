@@ -6,7 +6,8 @@ class GridContent {
   final String adminDescription;
   final String iconPath;
   final Color color;
-  final VoidCallback onTap;
+  final VoidCallback onTapAdmin;
+  final VoidCallback onUserTap;
 
   GridContent({
     required this.name,
@@ -14,7 +15,8 @@ class GridContent {
     required this.color,
     required this.userDescription,
     required this.adminDescription,
-    required this.onTap,
+    required this.onTapAdmin,
+    required this.onUserTap,
   });
 }
 
@@ -25,7 +27,8 @@ List<GridContent> gridContentList = [
     adminDescription: "Manage assignments for all members.",
     iconPath: "assets/icons/assignment.png",
     color: Colors.green,
-    onTap: () {},
+    onTapAdmin: () {},
+    onUserTap: () {},
   ),
   GridContent(
     name: "My Calendar",
@@ -33,7 +36,8 @@ List<GridContent> gridContentList = [
     adminDescription: "Manage calendar events for members.",
     iconPath: "assets/icons/calender.png",
     color: Colors.blue,
-    onTap: () {},
+    onTapAdmin: () {},
+    onUserTap: () {},
   ),
   GridContent(
     name: "Announcement",
@@ -41,7 +45,8 @@ List<GridContent> gridContentList = [
     adminDescription: "Post and manage announcements.",
     iconPath: "assets/icons/announcement.png",
     color: Colors.orange,
-    onTap: () {},
+    onTapAdmin: () {},
+    onUserTap: () {},
   ),
   GridContent(
     name: "Exams",
@@ -49,7 +54,8 @@ List<GridContent> gridContentList = [
     adminDescription: "Manage exam schedules and results.",
     iconPath: "assets/icons/exam.png",
     color: Colors.red,
-    onTap: () {},
+    onTapAdmin: () {},
+    onUserTap: () {},
   ),
   GridContent(
     name: "Notification",
@@ -57,7 +63,8 @@ List<GridContent> gridContentList = [
     adminDescription: "Send notifications to members.",
     iconPath: "assets/icons/notification.png",
     color: Colors.purple,
-    onTap: () {},
+    onTapAdmin: () {},
+    onUserTap: () {},
   ),
   GridContent(
     name: "Resources",
@@ -65,6 +72,7 @@ List<GridContent> gridContentList = [
     adminDescription: "Manage all available resources.",
     iconPath: "assets/icons/resources.png",
     color: Colors.teal,
-    onTap: () {},
+    onTapAdmin: () {},
+    onUserTap: () {},
   ),
 ];
