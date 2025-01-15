@@ -16,7 +16,7 @@ class MembersAndAdminContainer extends StatelessWidget {
           buildInfoContainer(
             context: context,
             width: containerWidth,
-            title: "Members",
+            title: "Students",
             count: 120,
             imagePath: "assets/icons/members.png",
             iconBackgroundColor: const Color(0xffC8E6C9),
@@ -24,7 +24,7 @@ class MembersAndAdminContainer extends StatelessWidget {
           buildInfoContainer(
             context: context,
             width: containerWidth,
-            title: "Admin",
+            title: "Admins",
             count: 5,
             imagePath: "assets/icons/admin.png",
             iconBackgroundColor: const Color(0xffFFCDD2),
