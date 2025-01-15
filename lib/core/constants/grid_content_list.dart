@@ -53,8 +53,8 @@ List<GridContent> gridContentList = [
   ),
   GridContent(
     name: "Exams",
-    userDescription: "View your upcoming exams and results.",
-    adminDescription: "Manage exam schedules and results.",
+    userDescription: "View your upcoming exams.",
+    adminDescription: "Manage exam schedules.",
     iconPath: "assets/icons/exam.png",
     color: Colors.red,
     onTapAdmin: () => Get.to(const HomeScreen()),
