@@ -66,7 +66,7 @@ class MembersAndAdminContainer extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: iconBackgroundColor,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Image.asset(imagePath, scale: 22,)
               )
