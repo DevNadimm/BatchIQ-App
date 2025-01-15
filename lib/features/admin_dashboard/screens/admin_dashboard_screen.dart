@@ -1,5 +1,6 @@
 import 'package:batchiq_app/core/utils/ui/icons_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/widgets/members_and_admin_container.dart';
+import 'package:batchiq_app/shared/widgets/content_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,9 +35,17 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           ),
         ),
       ),
-      body: const Column(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MembersAndAdminContainer(),
+          const MembersAndAdminContainer(),
+          const SizedBox(height: 32),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text("Features", style: Theme.of(context).textTheme.headlineSmall!,),
+          ),
+          const SizedBox(height: 16),
+          const ContentGrid(isAdminDashboard: true),
         ],
       ),
     );

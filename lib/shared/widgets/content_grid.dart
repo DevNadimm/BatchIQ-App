@@ -3,7 +3,9 @@ import 'package:batchiq_app/core/constants/grid_content_list.dart';
 import 'package:flutter/material.dart';
 
 class ContentGrid extends StatelessWidget {
-  const ContentGrid({super.key});
+  const ContentGrid({super.key, required this.isAdminDashboard});
+
+  final bool isAdminDashboard;
 
   @override
   Widget build(BuildContext context) {
@@ -16,23 +18,41 @@ class ContentGrid extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           final GridContent grid = gridContentList[index];
           return Container(
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: primaryColor,
+              color: shadeColor,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  grid.icon,
-                  color: Colors.white,
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: grid.color,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Image.asset(
+                    "assets/icons/members.png",
+                    scale: 20,
+                    color: Colors.white,
+                  ),
                 ),
+                const SizedBox(height: 10),
                 Text(
                   grid.name,
+                  style: Theme.of(context).textTheme.titleLarge!,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  isAdminDashboard
+                      ? grid.adminDescription
+                      : grid.userDescription,
                   style: Theme.of(context)
                       .textTheme
-                      .titleLarge!
-                      .copyWith(color: Colors.white),
+                      .bodySmall!
+                      .copyWith(color: secondaryFontColor),
                 )
               ],
             ),
@@ -40,7 +60,7 @@ class ContentGrid extends StatelessWidget {
         },
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 1.6,
+          childAspectRatio: 1.1,
           mainAxisSpacing: 16,
           crossAxisSpacing: 16,
         ),
