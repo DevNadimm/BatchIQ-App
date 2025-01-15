@@ -1,5 +1,4 @@
 import 'package:batchiq_app/core/colors/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MembersAndAdminContainer extends StatelessWidget {
@@ -19,7 +18,7 @@ class MembersAndAdminContainer extends StatelessWidget {
             width: containerWidth,
             title: "Members",
             count: 120,
-            icon: CupertinoIcons.person_2,
+            imagePath: "assets/icons/members.png",
             iconBackgroundColor: const Color(0xffC8E6C9),
           ),
           buildInfoContainer(
@@ -27,7 +26,7 @@ class MembersAndAdminContainer extends StatelessWidget {
             width: containerWidth,
             title: "Admin",
             count: 5,
-            icon: CupertinoIcons.person_circle,
+            imagePath: "assets/icons/admin.png",
             iconBackgroundColor: const Color(0xffFFCDD2),
           ),
         ],
@@ -40,7 +39,7 @@ class MembersAndAdminContainer extends StatelessWidget {
     required double width,
     required String title,
     required int count,
-    required IconData icon,
+    required String imagePath,
     required Color iconBackgroundColor,
   }) {
     return Container(
@@ -69,10 +68,7 @@ class MembersAndAdminContainer extends StatelessWidget {
                   color: iconBackgroundColor,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
-                  icon,
-                  color: Colors.black,
-                ),
+                child: Image.asset(imagePath, scale: 22,)
               )
             ],
           ),
