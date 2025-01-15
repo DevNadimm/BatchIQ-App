@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 final InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   labelStyle: TextStyle(
-      color: secondaryFontColor.withOpacity(0.9),
-      fontSize: 16,
-      fontWeight: FontWeight.w500),
+    color: secondaryFontColor.withOpacity(0.9),
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  ),
   hintStyle: TextStyle(
     color: Colors.grey.shade600,
     fontSize: 14,

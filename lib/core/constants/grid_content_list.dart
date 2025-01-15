@@ -1,4 +1,7 @@
+import 'package:batchiq_app/features/admin_dashboard/screens/assignment_admin_screen.dart';
+import 'package:batchiq_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class GridContent {
   final String name;
@@ -7,7 +10,7 @@ class GridContent {
   final String iconPath;
   final Color color;
   final VoidCallback onTapAdmin;
-  final VoidCallback onUserTap;
+  final VoidCallback onTapUser;
 
   GridContent({
     required this.name,
@@ -16,7 +19,7 @@ class GridContent {
     required this.userDescription,
     required this.adminDescription,
     required this.onTapAdmin,
-    required this.onUserTap,
+    required this.onTapUser,
   });
 }
 
@@ -27,8 +30,8 @@ List<GridContent> gridContentList = [
     adminDescription: "Manage assignments for all members.",
     iconPath: "assets/icons/assignment.png",
     color: Colors.green,
-    onTapAdmin: () {},
-    onUserTap: () {},
+    onTapAdmin: () => Get.to(const AssignmentAdminScreen()),
+    onTapUser: () {},
   ),
   GridContent(
     name: "My Calendar",
@@ -36,8 +39,8 @@ List<GridContent> gridContentList = [
     adminDescription: "Manage calendar events for members.",
     iconPath: "assets/icons/calender.png",
     color: Colors.blue,
-    onTapAdmin: () {},
-    onUserTap: () {},
+    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapUser: () {},
   ),
   GridContent(
     name: "Announcement",
@@ -45,8 +48,8 @@ List<GridContent> gridContentList = [
     adminDescription: "Post and manage announcements.",
     iconPath: "assets/icons/announcement.png",
     color: Colors.orange,
-    onTapAdmin: () {},
-    onUserTap: () {},
+    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapUser: () {},
   ),
   GridContent(
     name: "Exams",
@@ -54,8 +57,8 @@ List<GridContent> gridContentList = [
     adminDescription: "Manage exam schedules and results.",
     iconPath: "assets/icons/exam.png",
     color: Colors.red,
-    onTapAdmin: () {},
-    onUserTap: () {},
+    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapUser: () {},
   ),
   GridContent(
     name: "Notification",
@@ -63,8 +66,8 @@ List<GridContent> gridContentList = [
     adminDescription: "Send notifications to members.",
     iconPath: "assets/icons/notification.png",
     color: Colors.purple,
-    onTapAdmin: () {},
-    onUserTap: () {},
+    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapUser: () {},
   ),
   GridContent(
     name: "Resources",
@@ -72,7 +75,7 @@ List<GridContent> gridContentList = [
     adminDescription: "Manage all available resources.",
     iconPath: "assets/icons/resources.png",
     color: Colors.teal,
-    onTapAdmin: () {},
-    onUserTap: () {},
+    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapUser: () {},
   ),
 ];
