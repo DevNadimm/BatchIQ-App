@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
 
 class GridContent {
   final String name;
   final String userDescription;
   final String adminDescription;
-  final IconData icon;
+  final String iconPath;
   final Color color;
   final VoidCallback onTap;
 
   GridContent({
     required this.name,
-    required this.icon,
+    required this.iconPath,
     required this.color,
     required this.userDescription,
     required this.adminDescription,
@@ -23,16 +22,16 @@ List<GridContent> gridContentList = [
   GridContent(
     name: "Assignment",
     userDescription: "View and manage your assignments.",
-    adminDescription: "Manage assignments for all users.",
-    icon: HugeIcons.strokeRoundedAssignments,
+    adminDescription: "Manage assignments for all members.",
+    iconPath: "assets/icons/assignment.png",
     color: Colors.green,
     onTap: () {},
   ),
   GridContent(
     name: "My Calendar",
     userDescription: "Track and organize your calendar events.",
-    adminDescription: "Manage calendar events for users.",
-    icon: HugeIcons.strokeRoundedTimeManagement,
+    adminDescription: "Manage calendar events for members.",
+    iconPath: "assets/icons/calender.png",
     color: Colors.blue,
     onTap: () {},
   ),
@@ -40,7 +39,7 @@ List<GridContent> gridContentList = [
     name: "Announcement",
     userDescription: "Check important announcements.",
     adminDescription: "Post and manage announcements.",
-    icon: HugeIcons.strokeRoundedSpeaker01,
+    iconPath: "assets/icons/announcement.png",
     color: Colors.orange,
     onTap: () {},
   ),
@@ -48,15 +47,15 @@ List<GridContent> gridContentList = [
     name: "Exams",
     userDescription: "View your upcoming exams and results.",
     adminDescription: "Manage exam schedules and results.",
-    icon: HugeIcons.strokeRoundedTestTube,
+    iconPath: "assets/icons/exam.png",
     color: Colors.red,
     onTap: () {},
   ),
   GridContent(
     name: "Notification",
     userDescription: "Stay updated with your notifications.",
-    adminDescription: "Send notifications to users.",
-    icon: HugeIcons.strokeRoundedNotification01,
+    adminDescription: "Send notifications to members.",
+    iconPath: "assets/icons/notification.png",
     color: Colors.purple,
     onTap: () {},
   ),
@@ -64,7 +63,7 @@ List<GridContent> gridContentList = [
     name: "Resources",
     userDescription: "Access and manage your resources.",
     adminDescription: "Manage all available resources.",
-    icon: HugeIcons.strokeRoundedResourcesRemove,
+    iconPath: "assets/icons/resources.png",
     color: Colors.teal,
     onTap: () {},
   ),

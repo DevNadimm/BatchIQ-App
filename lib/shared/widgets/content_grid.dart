@@ -34,7 +34,7 @@ class ContentGrid extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Image.asset(
-                    "assets/icons/members.png",
+                    grid.iconPath,
                     scale: 20,
                     color: Colors.white,
                   ),
