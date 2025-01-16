@@ -3,7 +3,7 @@ import 'package:batchiq_app/core/utils/ui/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/create_assignment_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/edit_assignment_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -166,7 +166,7 @@ class _EditAssignmentScreenState extends State<EditAssignmentScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-                GetBuilder<CreateAssignmentController>(
+                GetBuilder<EditAssignmentController>(
                     builder: (controller) {
                       return Visibility(
                         visible: !controller.isLoading,
@@ -197,9 +197,9 @@ class _EditAssignmentScreenState extends State<EditAssignmentScreen> {
   }
 
   Future<void> editAssignment() async {
-    final CreateAssignmentController createAssignmentController = CreateAssignmentController.instance;
+    final EditAssignmentController editAssignmentController = EditAssignmentController.instance;
 
-    final isSuccess = await createAssignmentController.editAssignment(
+    final isSuccess = await editAssignmentController.editAssignment(
       title: title.text,
       description: description.text,
       deadline: deadline.text,
@@ -216,7 +216,7 @@ class _EditAssignmentScreenState extends State<EditAssignmentScreen> {
       final controller = AssignmentAdminController.instance;
       await controller.getAssignments();
     } else {
-      SnackBarMessage.errorMessage(createAssignmentController.errorMessage ?? "Something went wrong!");
+      SnackBarMessage.errorMessage(editAssignmentController.errorMessage ?? "Something went wrong!");
     }
   }
 }
