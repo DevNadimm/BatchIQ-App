@@ -21,6 +21,13 @@ List<GridContent> adminGridContentList = [
     onTapAdmin: () => Get.to(const HomeScreen()),
   ),
   GridContent(
+    name: "Class Schedule",
+    adminDescription: "Manage class schedules.",
+    iconPath: IconImageName.classSchedule,
+    color: Colors.blueGrey,
+    onTapAdmin: () => Get.to(const HomeScreen()),
+  ),
+  GridContent(
     name: "Announcement",
     adminDescription: "Post and manage announcements.",
     iconPath: IconImageName.announcement,

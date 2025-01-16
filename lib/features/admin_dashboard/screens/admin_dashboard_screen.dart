@@ -35,18 +35,24 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const MembersAndAdminContainer(),
-          const SizedBox(height: 32),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text("Features", style: Theme.of(context).textTheme.headlineSmall!,),
-          ),
-          const SizedBox(height: 16),
-          const AdminContentGrid(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const MembersAndAdminContainer(),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "Features",
+                style: Theme.of(context).textTheme.headlineSmall!,
+              ),
+            ),
+            const SizedBox(height: 16),
+            const AdminContentGrid(),
+            const SizedBox(height: 16),
+          ],
+        ),
       ),
     );
   }
