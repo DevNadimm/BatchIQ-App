@@ -1,4 +1,5 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/core/utils/ui/icon_image_name.dart';
 import 'package:flutter/material.dart';
 
 class CurrentStatusScreen extends StatefulWidget {
@@ -76,7 +77,7 @@ class _CurrentStatusScreenState extends State<CurrentStatusScreen> {
     switch (status) {
       case "rejected":
         return StatusData(
-          imageUrl: "assets/icons/reject.png",
+          imageUrl: IconImageName.rejected,
           title: "Application Rejected",
           description:
               "Your application for Admin access has been rejected. Please check the email for the reason and address any issues. You can reapply after making the necessary changes.",
@@ -84,7 +85,7 @@ class _CurrentStatusScreenState extends State<CurrentStatusScreen> {
         );
       default:
         return StatusData(
-          imageUrl: "assets/icons/pending.png",
+          imageUrl: IconImageName.pending,
           title: "Application Pending",
           description:
               "Your application for Admin access is currently under review. This process may take some time. We will notify you once a decision has been made. Please check back later for updates.",

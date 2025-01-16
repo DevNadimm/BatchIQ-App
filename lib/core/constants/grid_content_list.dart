@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/utils/ui/icon_image_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_admin_screen.dart';
 import 'package:batchiq_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ List<GridContent> gridContentList = [
     name: "Assignment",
     userDescription: "View and manage your assignments.",
     adminDescription: "Manage assignments for all members.",
-    iconPath: "assets/icons/assignment.png",
+    iconPath: IconImageName.assignment,
     color: Colors.green,
     onTapAdmin: () => Get.to(const AssignmentAdminScreen()),
     onTapUser: () {},
@@ -37,7 +38,7 @@ List<GridContent> gridContentList = [
     name: "My Calendar",
     userDescription: "Track and organize your calendar events.",
     adminDescription: "Manage calendar events for members.",
-    iconPath: "assets/icons/calender.png",
+    iconPath: IconImageName.calendar,
     color: Colors.blue,
     onTapAdmin: () => Get.to(const HomeScreen()),
     onTapUser: () {},
@@ -46,7 +47,7 @@ List<GridContent> gridContentList = [
     name: "Announcement",
     userDescription: "Check important announcements.",
     adminDescription: "Post and manage announcements.",
-    iconPath: "assets/icons/announcement.png",
+    iconPath: IconImageName.announcement,
     color: Colors.orange,
     onTapAdmin: () => Get.to(const HomeScreen()),
     onTapUser: () {},
@@ -55,7 +56,7 @@ List<GridContent> gridContentList = [
     name: "Exams",
     userDescription: "View your upcoming exams.",
     adminDescription: "Manage exam schedules.",
-    iconPath: "assets/icons/exam.png",
+    iconPath: IconImageName.exam,
     color: Colors.red,
     onTapAdmin: () => Get.to(const HomeScreen()),
     onTapUser: () {},
@@ -64,7 +65,7 @@ List<GridContent> gridContentList = [
     name: "Notification",
     userDescription: "Stay updated with your notifications.",
     adminDescription: "Send notifications to members.",
-    iconPath: "assets/icons/notification.png",
+    iconPath: IconImageName.notification,
     color: Colors.purple,
     onTapAdmin: () => Get.to(const HomeScreen()),
     onTapUser: () {},
@@ -73,7 +74,7 @@ List<GridContent> gridContentList = [
     name: "Resources",
     userDescription: "Access and manage your resources.",
     adminDescription: "Manage all available resources.",
-    iconPath: "assets/icons/resources.png",
+    iconPath: IconImageName.resources,
     color: Colors.teal,
     onTapAdmin: () => Get.to(const HomeScreen()),
     onTapUser: () {},

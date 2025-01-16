@@ -1,4 +1,5 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/core/utils/ui/icon_image_name.dart';
 import 'package:flutter/material.dart';
 
 class MembersAndAdminContainer extends StatelessWidget {
@@ -18,7 +19,7 @@ class MembersAndAdminContainer extends StatelessWidget {
             width: containerWidth,
             title: "Students",
             count: 120,
-            imagePath: "assets/icons/members.png",
+            imagePath: IconImageName.members,
             iconBackgroundColor: const Color(0xffC8E6C9),
           ),
           buildInfoContainer(
@@ -26,7 +27,7 @@ class MembersAndAdminContainer extends StatelessWidget {
             width: containerWidth,
             title: "Admins",
             count: 5,
-            imagePath: "assets/icons/admin.png",
+            imagePath: IconImageName.admin,
             iconBackgroundColor: const Color(0xffFFCDD2),
           ),
         ],
