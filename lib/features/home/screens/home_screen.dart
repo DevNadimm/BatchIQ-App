@@ -1,10 +1,10 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/home/screens/invite_friend_screen.dart';
-import 'package:batchiq_app/shared/widgets/content_grid.dart';
 import 'package:batchiq_app/features/home/widgets/header_section.dart';
 import 'package:batchiq_app/features/home/widgets/navigation_drawer.dart';
 import 'package:batchiq_app/features/home/widgets/todays_timeline.dart';
+import 'package:batchiq_app/features/home/widgets/user_content_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(height: 24),
                   TodaysTimeline(),
                   SizedBox(height: 24),
-                  ContentGrid(isAdminDashboard: false),
+                  UserContentGrid(),
                   SizedBox(height: 16),
                 ],
               ),

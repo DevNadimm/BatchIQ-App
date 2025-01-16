@@ -1,24 +1,25 @@
 import 'package:batchiq_app/core/colors/colors.dart';
-import 'package:batchiq_app/core/constants/grid_content_list.dart';
+import 'package:batchiq_app/core/constants/grid_content_class.dart';
+import 'package:batchiq_app/core/constants/user_grid_content_list.dart';
 import 'package:flutter/material.dart';
 
-class ContentGrid extends StatelessWidget {
-  const ContentGrid({super.key, required this.isAdminDashboard});
-
-  final bool isAdminDashboard;
+class UserContentGrid extends StatelessWidget {
+  const UserContentGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<GridContent> contentList = userGridContentList;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: gridContentList.length,
+        itemCount: contentList.length,
         itemBuilder: (BuildContext context, int index) {
-          final GridContent grid = gridContentList[index];
+          final GridContent grid = contentList[index];
           return GestureDetector(
-            onTap: () => isAdminDashboard ? grid.onTapAdmin() : grid.onTapUser(),
+            onTap: () => grid.onTapUser!(),
             child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -48,14 +49,12 @@ class ContentGrid extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    isAdminDashboard
-                        ? grid.adminDescription
-                        : grid.userDescription,
+                    grid.userDescription!,
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall!
                         .copyWith(color: secondaryFontColor),
-                  )
+                  ),
                 ],
               ),
             ),
