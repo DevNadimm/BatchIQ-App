@@ -55,4 +55,12 @@ List<GridContent> adminGridContentList = [
     color: Colors.teal,
     onTapAdmin: () => Get.to(const HomeScreen()),
   ),
+  GridContent(
+    name: "Batch Settings",
+    adminDescription: "Manage and configure batch settings",
+    iconPath: IconImageName.resources,
+    color: Colors.deepPurpleAccent,
+    onTapAdmin: () => Get.to(const HomeScreen()),
+  )
+
 ];
