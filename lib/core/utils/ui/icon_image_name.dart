@@ -14,4 +14,5 @@ class IconImageName {
   /// Filled Icons
   static const String pending = "assets/icons/filed_colorful_icons/pending.png";
   static const String rejected = "assets/icons/filed_colorful_icons/reject.png";
+  static const String emptyContent = "assets/icons/filed_colorful_icons/no-content.png";
 }

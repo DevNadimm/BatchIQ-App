@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/utils/ui/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
@@ -56,23 +57,27 @@ class _AssignmentAdminScreenState extends State<AssignmentAdminScreen> {
                 return Visibility(
                   visible: !controller.isLoading,
                   replacement: const ProgressIndicatorWidget(),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 8),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: controller.assignments.length,
-                          itemBuilder: (context, index) {
-                            final assignment = controller.assignments[index];
-                            return AssignmentCard(assignment: assignment);
-                          },
+                  child: controller.assignments.isEmpty
+                      ? const EmptyList(
+                          title: "Empty Assignment!",
+                        )
+                      : SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 8),
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: controller.assignments.length,
+                                itemBuilder: (context, index) {
+                                  final assignment = controller.assignments[index];
+                                  return AssignmentCard(assignment: assignment);
+                                },
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                          ),
                         ),
-                        const SizedBox(height: 8),
-                      ],
-                    ),
-                  ),
                 );
               },
             ),
