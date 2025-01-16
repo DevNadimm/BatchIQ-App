@@ -3,8 +3,8 @@ import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-class GetAssignmentAdminController extends GetxController {
-  static final instance = Get.find<GetAssignmentAdminController>();
+class AssignmentAdminController extends GetxController {
+  static final instance = Get.find<AssignmentAdminController>();
 
   String? errorMessage;
   bool isSuccess = false;
@@ -36,6 +36,33 @@ class GetAssignmentAdminController extends GetxController {
     } catch (e) {
       isSuccess = false;
       errorMessage = "Failed to load assignments";
+    } finally {
+      isLoading = false;
+      update();
+    }
+
+    return isSuccess;
+  }
+
+  Future<bool> deleteAssignment(String assignmentId) async {
+    final firestore = FirebaseFirestore.instance;
+
+    isLoading = true;
+    update();
+
+    try {
+      final UserController userController = UserController();
+      final data = await userController.fetchUserData();
+      final batchId = data?.batchId ?? "";
+
+      await firestore.collection("Batches").doc(batchId).collection("Assignments").doc(assignmentId).delete();
+      assignments.removeWhere((assignment) => assignment.id == assignmentId);
+
+      isSuccess = true;
+      errorMessage = null;
+    } catch (e) {
+      isSuccess = false;
+      errorMessage = "Failed to delete assignment";
     } finally {
       isLoading = false;
       update();

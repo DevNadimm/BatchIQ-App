@@ -6,7 +6,7 @@ import 'package:batchiq_app/features/batch_management/create_batch/controller/cr
 import 'package:batchiq_app/features/batch_management/join_batch/controller/join_batch_controller.dart';
 import 'package:get/get.dart';
 
-import '../../features/admin_dashboard/controller/get_assignment_admin_controller.dart';
+import '../../features/admin_dashboard/controller/assignment_admin_controller.dart';
 
 class InitialBindings implements Bindings{
   @override
@@ -17,6 +17,6 @@ class InitialBindings implements Bindings{
     Get.put(CreateBatchController());
     Get.put(JoinBatchController());
     Get.put(CreateAssignmentController());
-    Get.put(GetAssignmentAdminController());
+    Get.put(AssignmentAdminController());
   }
 }
