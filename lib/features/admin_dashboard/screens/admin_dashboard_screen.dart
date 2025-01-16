@@ -4,14 +4,9 @@ import 'package:batchiq_app/features/admin_dashboard/widgets/admin_content_grid.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AdminDashboardScreen extends StatefulWidget {
+class AdminDashboardScreen extends StatelessWidget {
   const AdminDashboardScreen({super.key});
 
-  @override
-  State<AdminDashboardScreen> createState() => _AdminDashboardScreenState();
-}
-
-class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
