@@ -35,6 +35,14 @@ class CreateAssignmentController extends GetxController {
         "link": link,
       });
 
+      await firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc().set({
+        "title": title,
+        "description": description,
+        "createdBy": uid,
+        "date": deadline,
+        "eventType": "assignment",
+      });
+
       isSuccess = true;
       errorMessage = null;
     } catch (e) {
