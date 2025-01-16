@@ -2,6 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/ui/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/create_assignment_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +29,20 @@ class _EditAssignmentScreenState extends State<EditAssignmentScreen> {
 
   @override
   void initState() {
+    fetchData();
+    super.initState();
+  }
+
+  void fetchData () {
     title.text = widget.assignment.title;
     description.text = widget.assignment.description;
     link.text = widget.assignment.link;
     deadline.text = widget.assignment.deadline;
-    super.initState();
+    try {
+      selectedDeadline = DateFormat("MMM d, yyyy").parse(widget.assignment.deadline);
+    } catch (e) {
+      selectedDeadline = null;
+    }
   }
 
   Future<void> _pickDeadline(BuildContext context) async {
@@ -203,6 +213,8 @@ class _EditAssignmentScreenState extends State<EditAssignmentScreen> {
       description.clear();
       deadline.clear();
       link.clear();
+      final controller = AssignmentAdminController.instance;
+      await controller.getAssignments();
     } else {
       SnackBarMessage.errorMessage(createAssignmentController.errorMessage ?? "Something went wrong!");
     }

@@ -2,6 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/ui/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/create_assignment_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -191,6 +192,8 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
       description.clear();
       deadline.clear();
       link.clear();
+      final controller = AssignmentAdminController.instance;
+      await controller.getAssignments();
     } else {
       SnackBarMessage.errorMessage(createAssignmentController.errorMessage ?? "Something went wrong!");
     }

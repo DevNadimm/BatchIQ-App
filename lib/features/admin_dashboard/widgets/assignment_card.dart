@@ -2,8 +2,10 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/edit_assignment_screen.dart';
 import 'package:batchiq_app/shared/controller/launch_url.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class AssignmentCard extends StatelessWidget {
@@ -45,6 +47,13 @@ class AssignmentCard extends StatelessWidget {
                   position: PopupMenuPosition.under,
                   itemBuilder: (BuildContext context) => [
                     PopupMenuItem(
+                      onTap: () {
+                        Get.to(
+                          EditAssignmentScreen(
+                            assignment: assignment,
+                          ),
+                        );
+                      },
                       child: Row(
                         children: [
                           Icon(
@@ -105,8 +114,11 @@ class AssignmentCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(HugeIcons.strokeRoundedCalendar03,
-                        size: 20, color: secondaryFontColor,),
+                    Icon(
+                      HugeIcons.strokeRoundedCalendar03,
+                      size: 20,
+                      color: secondaryFontColor,
+                    ),
                     const SizedBox(width: 4),
                     Text(
                       assignment.deadline,
