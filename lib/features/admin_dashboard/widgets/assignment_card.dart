@@ -1,4 +1,5 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dart';
 import 'package:batchiq_app/shared/controller/launch_url.dart';
@@ -64,8 +65,7 @@ class AssignmentCard extends StatelessWidget {
                     ),
                     PopupMenuItem(
                       onTap: () async {
-                        final controller = AssignmentAdminController.instance;
-                        await controller.deleteAssignment(assignment.id);
+                        await deleteAssignment();
                       },
                       child: Row(
                         children: [
@@ -143,5 +143,15 @@ class AssignmentCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> deleteAssignment() async {
+    final controller = AssignmentAdminController.instance;
+    final isDelete = await controller.deleteAssignment(assignment.id);
+    if (isDelete) {
+      SnackBarMessage.successMessage("Your assignment has been deleted successfully!");
+    } else {
+      SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
+    }
   }
 }
