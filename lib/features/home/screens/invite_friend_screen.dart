@@ -1,5 +1,5 @@
 import 'package:batchiq_app/core/colors/colors.dart';
-import 'package:batchiq_app/core/utils/ui/icons_name.dart';
+import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

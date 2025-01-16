@@ -1,5 +1,5 @@
 import 'package:batchiq_app/core/utils/ui/empty_list.dart';
-import 'package:batchiq_app/core/utils/ui/icons_name.dart';
+import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/create_assignment_screen.dart';

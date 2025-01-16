@@ -1,7 +1,7 @@
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:batchiq_app/core/utils/ui/icons_name.dart';
+import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/count_members_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/widgets/members_and_admin_container.dart';
 import 'package:batchiq_app/features/admin_dashboard/widgets/admin_content_grid.dart';
