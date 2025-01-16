@@ -1,5 +1,8 @@
 import 'package:batchiq_app/core/utils/ui/icons_name.dart';
+import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/get_assignment_admin_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/create_assignment_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/widgets/assignment_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +14,17 @@ class AssignmentAdminScreen extends StatefulWidget {
 }
 
 class _AssignmentAdminScreenState extends State<AssignmentAdminScreen> {
+  @override
+  void initState() {
+    fetchAssignment();
+    super.initState();
+  }
+
+  Future<void> fetchAssignment() async {
+    final controller = GetAssignmentAdminController.instance;
+    await controller.getAssignments();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +50,32 @@ class _AssignmentAdminScreenState extends State<AssignmentAdminScreen> {
       ),
       body: Column(
         children: [
-          const Expanded(
-            child: Center(child: Text("Assignment")),
+          Expanded(
+            child: GetBuilder<GetAssignmentAdminController>(
+              builder: (controller) {
+                return Visibility(
+                  visible: !controller.isLoading,
+                  replacement: const ProgressIndicatorWidget(),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 8),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: controller.assignments.length,
+                          itemBuilder: (context, index) {
+                            final assignment = controller.assignments[index];
+                            return AssignmentCard(assignment: assignment);
+                          },
+                        ),
+                        const SizedBox(height: 8),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
           Column(
             children: [
