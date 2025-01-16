@@ -3,7 +3,10 @@ import 'package:batchiq_app/core/utils/ui/icon_image_name.dart';
 import 'package:flutter/material.dart';
 
 class MembersAndAdminContainer extends StatelessWidget {
-  const MembersAndAdminContainer({super.key});
+  const MembersAndAdminContainer({super.key, required this.students, required this.admins});
+
+  final int students;
+  final int admins;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class MembersAndAdminContainer extends StatelessWidget {
             context: context,
             width: containerWidth,
             title: "Students",
-            count: 120,
+            count: students,
             imagePath: IconImageName.members,
             iconBackgroundColor: const Color(0xffC8E6C9),
           ),
@@ -26,7 +29,7 @@ class MembersAndAdminContainer extends StatelessWidget {
             context: context,
             width: containerWidth,
             title: "Admins",
-            count: 5,
+            count: admins,
             imagePath: IconImageName.admin,
             iconBackgroundColor: const Color(0xffFFCDD2),
           ),

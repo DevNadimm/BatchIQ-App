@@ -1,3 +1,5 @@
+import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/count_members_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/create_assignment_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/edit_assignment_controller.dart';
 import 'package:batchiq_app/features/auth/controller/sign_in_controller.dart';
@@ -6,8 +8,6 @@ import 'package:batchiq_app/features/batch_management/create_batch/controller/ap
 import 'package:batchiq_app/features/batch_management/create_batch/controller/create_batch_controller.dart';
 import 'package:batchiq_app/features/batch_management/join_batch/controller/join_batch_controller.dart';
 import 'package:get/get.dart';
-
-import '../../features/admin_dashboard/controller/assignment_admin_controller.dart';
 
 class InitialBindings implements Bindings{
   @override
@@ -20,5 +20,6 @@ class InitialBindings implements Bindings{
     Get.put(CreateAssignmentController());
     Get.put(AssignmentAdminController());
     Get.put(EditAssignmentController());
+    Get.put(MemberCountController());
   }
 }
