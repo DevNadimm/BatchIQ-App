@@ -1,5 +1,6 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dart';
+import 'package:batchiq_app/shared/controller/launch_url.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -54,7 +55,7 @@ class AssignmentCard extends StatelessWidget {
                 assignment.link.isNotEmpty
                     ? GestureDetector(
                         onTap: () {
-                          // On tap here
+                          LaunchURL.launchURL(assignment.link);
                         },
                         child: Row(
                           children: [

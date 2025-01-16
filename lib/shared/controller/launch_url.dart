@@ -30,6 +30,12 @@ class LaunchURL {
     }
   }
 
+  static Future<void> launchURL(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   static Future<void> sendEmail() async {
     launchUrl(Uri.parse("mailto:nadimm.dev@gmail.com?subject=BatchIQ: User Feedback"));
   }
