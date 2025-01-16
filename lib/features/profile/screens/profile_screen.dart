@@ -1,10 +1,12 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/core/utils/ui/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -75,10 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 top: 0,
                 child: IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                  ),
+                  icon: Icon(backArrow),
                 ),
               ),
             ],
@@ -106,7 +105,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               radius: 18,
               backgroundColor: shadeColor,
               child: IconButton(
-                icon: Icon(Icons.edit, color: primaryColor, size: 16),
+                icon: Icon(HugeIcons.strokeRoundedEdit02,
+                    color: primaryColor, size: 16),
                 onPressed: () {
                   // Add edit functionality here
                 },
@@ -191,23 +191,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           _buildListTile(
             title: "Edit Profile",
-            icon: Icons.edit,
+            icon: HugeIcons.strokeRoundedEdit02,
             onTap: () {},
           ),
           _buildListTile(
             title: "Notifications",
-            icon: Icons.notifications,
+            icon: HugeIcons.strokeRoundedNotification02,
             onTap: () {},
           ),
           _buildListTile(
             title: "Help & Support",
-            icon: Icons.help,
+            icon: HugeIcons.strokeRoundedHelpSquare,
             onTap: () {},
           ),
           const Divider(),
           _buildListTile(
             title: "Logout",
-            icon: Icons.logout,
+            icon: HugeIcons.strokeRoundedLogout03,
             onTap: () {
               final auth = FirebaseAuth.instance;
               auth.signOut();
@@ -229,12 +229,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Color textColor = const Color(0xff0b132b),
   }) {
     return ListTile(
-      leading: Icon(icon, color: iconColor),
+      leading: Icon(
+        icon,
+        color: iconColor,
+        size: 20,
+      ),
       title: Text(
         title,
         style: TextStyle(color: textColor, fontWeight: FontWeight.w500),
       ),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
       onTap: onTap,
     );
   }
