@@ -1,5 +1,5 @@
 import 'package:batchiq_app/core/constants/grid_content_class.dart';
-import 'package:batchiq_app/core/utils/ui/icon_image_name.dart';
+import 'package:batchiq_app/core/constants/icon_image_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_admin_screen.dart';
 import 'package:batchiq_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +58,7 @@ List<GridContent> adminGridContentList = [
   GridContent(
     name: "Batch Settings",
     adminDescription: "Manage and configure batch settings",
-    iconPath: IconImageName.resources,
+    iconPath: IconImageName.batchSettings,
     color: Colors.deepPurpleAccent,
     onTapAdmin: () => Get.to(const HomeScreen()),
   )

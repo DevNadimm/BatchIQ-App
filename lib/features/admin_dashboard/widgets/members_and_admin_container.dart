@@ -1,5 +1,5 @@
 import 'package:batchiq_app/core/colors/colors.dart';
-import 'package:batchiq_app/core/utils/ui/icon_image_name.dart';
+import 'package:batchiq_app/core/constants/icon_image_name.dart';
 import 'package:flutter/material.dart';
 
 class MembersAndAdminContainer extends StatelessWidget {

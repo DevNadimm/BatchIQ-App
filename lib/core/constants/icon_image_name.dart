@@ -11,6 +11,7 @@ class IconImageName {
   static const String members = "assets/icons/outline_icons/members.png";
   static const String admin = "assets/icons/outline_icons/admin.png";
   static const String classSchedule = "assets/icons/outline_icons/class_schedule.png";
+  static const String batchSettings = "assets/icons/outline_icons/settings.png";
 
   /// Filled Icons
   static const String pending = "assets/icons/filed_colorful_icons/pending.png";
