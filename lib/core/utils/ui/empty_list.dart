@@ -14,7 +14,7 @@ class EmptyList extends StatelessWidget {
       children: [
         Image.asset(
           IconImageName.emptyContent,
-          scale: 10,
+          scale: 8,
         ),
         const SizedBox(height: 10),
         Text(
