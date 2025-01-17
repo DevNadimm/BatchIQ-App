@@ -57,7 +57,7 @@ List<GridContent> adminGridContentList = [
   ),
   GridContent(
     name: "Batch Settings",
-    adminDescription: "Manage and configure batch settings",
+    adminDescription: "Manage and configure batch settings.",
     iconPath: IconImageName.batchSettings,
     color: Colors.deepPurpleAccent,
     onTapAdmin: () => Get.to(const HomeScreen()),
