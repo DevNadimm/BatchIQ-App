@@ -151,56 +151,52 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
                 const SizedBox(height: 16),
 
                 /// Send Notification Switch
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: primaryColor.withOpacity(0.4),
-                      width: 1.0,
-                    ),
+                SwitchListTile(
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      width: 1,
+                      color: primaryColor.withOpacity(0.4),
+                    ),
                   ),
-                  child: SwitchListTile(
-                    value: sendNotification,
-                    onChanged: (value) {
-                      setState(() {
-                        sendNotification = value;
-                      });
-                    },
-                    title: Text(
-                      "Send Notification",
-                      style: TextStyle(
-                        color: secondaryFontColor.withOpacity(0.9),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  value: sendNotification,
+                  onChanged: (value) {
+                    setState(() {
+                      sendNotification = value;
+                    });
+                  },
+                  title: Text(
+                    "Send Notification",
+                    style: TextStyle(
+                      color: secondaryFontColor.withOpacity(0.9),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
 
                 /// Add to My Calendar Switch
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: primaryColor.withOpacity(0.4),
-                      width: 1.0,
-                    ),
+                SwitchListTile(
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      width: 1,
+                      color: primaryColor.withOpacity(0.4),
+                    ),
                   ),
-                  child: SwitchListTile(
-                    value: addToCalendar,
-                    onChanged: (value) {
-                      setState(() {
-                        addToCalendar = value;
-                      });
-                    },
-                    title: Text(
-                      "Add to My Calendar",
-                      style: TextStyle(
-                        color: secondaryFontColor.withOpacity(0.9),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  value: addToCalendar,
+                  onChanged: (value) {
+                    setState(() {
+                      addToCalendar = value;
+                    });
+                  },
+                  title: Text(
+                    "Add to My Calendar",
+                    style: TextStyle(
+                      color: secondaryFontColor.withOpacity(0.9),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
