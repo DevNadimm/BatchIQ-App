@@ -58,11 +58,18 @@ class AssignmentAdminController extends GetxController {
       /// For Batches
       await firestore.collection("Batches").doc(batchId).collection("Assignments").doc(assignmentId).delete();
 
-      /// For My Calender
-      final docRef = firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc(assignmentId);
-      final docSnapshot = await docRef.get();
-      if (docSnapshot.exists) {
-        await docRef.delete();
+      /// For My Calendar
+      final calendarDocRef = firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc(assignmentId);
+      final calendarDocSnapshot = await calendarDocRef.get();
+      if (calendarDocSnapshot.exists) {
+        await calendarDocRef.delete();
+      }
+
+      /// For Notification
+      final notificationDocRef = firestore.collection("Batches").doc(batchId).collection("Notifications").doc(assignmentId);
+      final notificationDocSnapshot = await notificationDocRef.get();
+      if (notificationDocSnapshot.exists) {
+        await notificationDocRef.delete();
       }
 
       assignments.removeWhere((assignment) => assignment.id == assignmentId);
