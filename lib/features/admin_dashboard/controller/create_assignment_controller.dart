@@ -16,6 +16,8 @@ class CreateAssignmentController extends GetxController {
     required String description,
     required String link,
     required String deadline,
+    required bool sendNotification,
+    required bool addToCalendar,
   }) async {
     final firestore = FirebaseFirestore.instance;
 
@@ -39,23 +41,27 @@ class CreateAssignmentController extends GetxController {
         "link": link,
       });
 
-      /// For My Calender
-      await firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc(docId).set({
-        "title": title,
-        "description": description,
-        "createdBy": uid,
-        "date": deadline,
-        "eventType": "assignment",
-      });
+      /// Add to Calendar if enabled
+      if (addToCalendar) {
+        await firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc(docId).set({
+          "title": title,
+          "description": description,
+          "createdBy": uid,
+          "date": deadline,
+          "eventType": "assignment",
+        });
+      }
 
-      /// For Notification
-      final notificationController = CreateNotificationController.instance;
-      await notificationController.createNotification(
-        type: 'assignment',
-        title: title,
-        body: description,
-        documentId: docId,
-      );
+      /// Send Notification if enabled
+      if (sendNotification) {
+        final notificationController = CreateNotificationController.instance;
+        await notificationController.createNotification(
+          type: 'assignment',
+          title: title,
+          body: description,
+          documentId: docId,
+        );
+      }
 
       isSuccess = true;
       errorMessage = null;
