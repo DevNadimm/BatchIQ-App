@@ -36,13 +36,23 @@ class EditAssignmentController extends GetxController {
       });
 
       /// For My Calendar
-      final docRef = firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc(docId);
-      final docSnapshot = await docRef.get();
-      if (docSnapshot.exists) {
-        await docRef.update({
+      final calendarDocRef = firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc(docId);
+      final calendarDocSnapshot = await calendarDocRef.get();
+      if (calendarDocSnapshot.exists) {
+        await calendarDocRef.update({
           "title": title,
           "description": description,
           "date": deadline,
+        });
+      }
+
+      /// For Notification
+      final notificationDocRef = firestore.collection("Batches").doc(batchId).collection("Notifications").doc(docId);
+      final notificationDocSnapshot = await notificationDocRef.get();
+      if (notificationDocSnapshot.exists) {
+        await notificationDocRef.update({
+          "title": title,
+          "body": description,
         });
       }
 

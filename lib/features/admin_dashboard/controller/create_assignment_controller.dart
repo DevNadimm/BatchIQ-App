@@ -1,4 +1,5 @@
 import 'package:batchiq_app/core/utils/id_generator.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/create_notification_controller.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -29,6 +30,7 @@ class CreateAssignmentController extends GetxController {
       final batchId = data?.batchId ?? "";
       final docId = generateDocId("ASSIGNMENT");
 
+      /// For Batches
       await firestore.collection("Batches").doc(batchId).collection("Assignments").doc(docId).set({
         "createdBy": uid,
         "deadline": deadline,
@@ -37,6 +39,7 @@ class CreateAssignmentController extends GetxController {
         "link": link,
       });
 
+      /// For My Calender
       await firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc(docId).set({
         "title": title,
         "description": description,
@@ -44,6 +47,15 @@ class CreateAssignmentController extends GetxController {
         "date": deadline,
         "eventType": "assignment",
       });
+
+      /// For Notification
+      final notificationController = CreateNotificationController.instance;
+      await notificationController.createNotification(
+        type: 'assignment',
+        title: title,
+        body: description,
+        documentId: docId,
+      );
 
       isSuccess = true;
       errorMessage = null;
