@@ -27,9 +27,13 @@ class CreateNotificationController extends GetxController {
 
       final uid = data?.uid ?? "";
       final batchId = data?.batchId ?? "";
-      //final documentId.isEmpty ?docId =  ? generateDocId("NOTIFICATION"): documentId;
+      final documentType = type.toUpperCase();
 
-      await firestore.collection("Batches").doc(batchId).collection("Assignments").doc(docId).set({
+      final String docId = documentId?.isNotEmpty == true
+          ? documentId!
+          : generateDocId(documentType);
+
+      await firestore.collection("Batches").doc(batchId).collection("Notifications").doc(docId).set({
         "title": title,
         "body": body,
         "type": type,
