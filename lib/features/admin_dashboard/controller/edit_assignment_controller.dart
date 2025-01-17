@@ -27,12 +27,24 @@ class EditAssignmentController extends GetxController {
 
       final batchId = data?.batchId ?? "";
 
+      /// For Batches
       await firestore.collection("Batches").doc(batchId).collection("Assignments").doc(docId).update({
         "deadline": deadline,
         "title": title,
         "description": description,
         "link": link,
       });
+
+      /// For My Calendar
+      final docRef = firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc(docId);
+      final docSnapshot = await docRef.get();
+      if (docSnapshot.exists) {
+        await docRef.update({
+          "title": title,
+          "description": description,
+          "date": deadline,
+        });
+      }
 
       isSuccess = true;
       errorMessage = null;

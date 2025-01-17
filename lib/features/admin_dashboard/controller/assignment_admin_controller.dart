@@ -55,7 +55,16 @@ class AssignmentAdminController extends GetxController {
       final data = await userController.fetchUserData();
       final batchId = data?.batchId ?? "";
 
+      /// For Batches
       await firestore.collection("Batches").doc(batchId).collection("Assignments").doc(assignmentId).delete();
+
+      /// For My Calender
+      final docRef = firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc(assignmentId);
+      final docSnapshot = await docRef.get();
+      if (docSnapshot.exists) {
+        await docRef.delete();
+      }
+
       assignments.removeWhere((assignment) => assignment.id == assignmentId);
 
       isSuccess = true;

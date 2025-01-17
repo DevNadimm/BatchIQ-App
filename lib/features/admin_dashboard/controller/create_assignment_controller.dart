@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/utils/id_generator.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -26,8 +27,9 @@ class CreateAssignmentController extends GetxController {
 
       final uid = data?.uid ?? "";
       final batchId = data?.batchId ?? "";
+      final docId = generateDocId("ASSIGNMENT");
 
-      await firestore.collection("Batches").doc(batchId).collection("Assignments").doc().set({
+      await firestore.collection("Batches").doc(batchId).collection("Assignments").doc(docId).set({
         "createdBy": uid,
         "deadline": deadline,
         "title": title,
@@ -35,7 +37,7 @@ class CreateAssignmentController extends GetxController {
         "link": link,
       });
 
-      await firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc().set({
+      await firestore.collection("Batches").doc(batchId).collection("MyCalendar").doc(docId).set({
         "title": title,
         "description": description,
         "createdBy": uid,
