@@ -25,6 +25,9 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   DateTime? selectedDeadline;
 
+  bool sendNotification = false;
+  bool addToCalendar = false;
+
   Future<void> _pickDeadline(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -108,7 +111,7 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
                     hintText: "Add a link (optional)",
                     labelText: "Link (Optional)",
                     suffixIcon: IconButton(
-                      icon: const Icon(HugeIcons.strokeRoundedFilePaste),  // Paste icon
+                      icon: const Icon(HugeIcons.strokeRoundedFilePaste),
                       onPressed: () async {
                         final data = await Clipboard.getData('text/plain');
                         if (data?.text != null) {
@@ -146,6 +149,63 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
+
+                /// Send Notification Switch
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: primaryColor.withOpacity(0.4),
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: SwitchListTile(
+                    value: sendNotification,
+                    onChanged: (value) {
+                      setState(() {
+                        sendNotification = value;
+                      });
+                    },
+                    title: Text(
+                      "Send Notification",
+                      style: TextStyle(
+                        color: secondaryFontColor.withOpacity(0.9),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                /// Add to My Calendar Switch
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: primaryColor.withOpacity(0.4),
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: SwitchListTile(
+                    value: addToCalendar,
+                    onChanged: (value) {
+                      setState(() {
+                        addToCalendar = value;
+                      });
+                    },
+                    title: Text(
+                      "Add to My Calendar",
+                      style: TextStyle(
+                        color: secondaryFontColor.withOpacity(0.9),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
                 GetBuilder<CreateAssignmentController>(
                   builder: (controller) {
                     return Visibility(
@@ -154,9 +214,9 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState?.validate() ?? false) {
-                          await createAssignment();
-                        }
-                      },
+                            await createAssignment();
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 50),
                         ),
@@ -166,7 +226,7 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
                         ),
                       ),
                     );
-                  }
+                  },
                 ),
               ],
             ),
@@ -184,14 +244,20 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
       description: description.text,
       deadline: deadline.text,
       link: link.text,
+      sendNotification: sendNotification,
+      addToCalendar: addToCalendar,
     );
 
     if (isSuccess) {
       SnackBarMessage.successMessage("Your assignment has been created successfully!");
+
       title.clear();
       description.clear();
       deadline.clear();
       link.clear();
+      sendNotification = false;
+      addToCalendar = false;
+
       final controller = AssignmentAdminController.instance;
       await controller.getAssignments();
     } else {
