@@ -29,7 +29,7 @@ List<GridContent> adminGridContentList = [
     onTapAdmin: () => Get.to(const HomeScreen()),
   ),
   GridContent(
-    name: "Exams Schedule",
+    name: "Exam Schedule",
     adminDescription: "Manage exam schedules.",
     iconPath: IconImageName.exam,
     color: Colors.red,
