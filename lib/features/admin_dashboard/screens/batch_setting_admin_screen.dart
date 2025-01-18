@@ -79,31 +79,35 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
   }
 
   Widget _buildListItem(
-      BuildContext context, {
-        required IconData icon,
-        required String title,
-        required String description,
-        required VoidCallback onTap,
-      }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
-          child: Icon(icon, color: Theme.of(context).primaryColor),
-        ),
-        title: Text(
-          title,
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          description,
-          style: Theme.of(context).textTheme.bodySmall!.copyWith(color: secondaryFontColor),
-        ),
-        trailing: const Icon(Icons.chevron_right, color: Colors.grey),
-        onTap: onTap,
-        contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String description,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      splashColor: primaryColor.withOpacity(0.1),
+      leading: CircleAvatar(
+        backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
+        child: Icon(icon, color: Theme.of(context).primaryColor),
       ),
+      title: Text(
+        title,
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium!
+            .copyWith(fontWeight: FontWeight.bold),
+      ),
+      subtitle: Text(
+        description,
+        style: Theme.of(context)
+            .textTheme
+            .bodySmall!
+            .copyWith(color: secondaryFontColor),
+      ),
+      trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+      onTap: onTap,
+      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16.0),
     );
   }
 }
