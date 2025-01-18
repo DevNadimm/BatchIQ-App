@@ -1,6 +1,7 @@
 import 'package:batchiq_app/core/constants/grid_content_class.dart';
 import 'package:batchiq_app/core/constants/icon_image_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_admin_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/batch_setting_admin_screen.dart';
 import 'package:batchiq_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,17 +29,17 @@ List<GridContent> adminGridContentList = [
     onTapAdmin: () => Get.to(const HomeScreen()),
   ),
   GridContent(
+    name: "Exams Schedule",
+    adminDescription: "Manage exam schedules.",
+    iconPath: IconImageName.exam,
+    color: Colors.red,
+    onTapAdmin: () => Get.to(const HomeScreen()),
+  ),
+  GridContent(
     name: "Announcement",
     adminDescription: "Post and manage announcements.",
     iconPath: IconImageName.announcement,
     color: Colors.orange,
-    onTapAdmin: () => Get.to(const HomeScreen()),
-  ),
-  GridContent(
-    name: "Exams",
-    adminDescription: "Manage exam schedules.",
-    iconPath: IconImageName.exam,
-    color: Colors.red,
     onTapAdmin: () => Get.to(const HomeScreen()),
   ),
   GridContent(
@@ -60,7 +61,7 @@ List<GridContent> adminGridContentList = [
     adminDescription: "Manage and configure batch settings.",
     iconPath: IconImageName.batchSettings,
     color: Colors.deepPurpleAccent,
-    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapAdmin: () => Get.to(const BatchSettingAdminScreen()),
   )
 
 ];
