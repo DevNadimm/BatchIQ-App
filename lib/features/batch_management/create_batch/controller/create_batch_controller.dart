@@ -23,7 +23,7 @@ class CreateBatchController extends GetxController {
     try {
       await firestore.collection("Batches").doc(batchId).set({
         "createdBy": uid,
-        "createdAt": FieldValue.serverTimestamp(),
+        "createdAt": DateTime.now().toString(),
         "name": batchName,
         "description": description,
       });
@@ -39,7 +39,7 @@ class CreateBatchController extends GetxController {
 
       Map<String, dynamic> userBody = {
          "name": userName,
-         "joinedAt": FieldValue.serverTimestamp(),
+         "joinedAt": DateTime.now().toString(),
          "role": userRole
        };
 

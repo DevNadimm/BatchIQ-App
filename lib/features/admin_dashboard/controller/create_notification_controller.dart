@@ -37,7 +37,7 @@ class CreateNotificationController extends GetxController {
         "title": title,
         "body": body,
         "type": type,
-        "createdAt": FieldValue.serverTimestamp(),
+        "createdAt": DateTime.now().toString(),
         "createdBy": uid,
       });
 

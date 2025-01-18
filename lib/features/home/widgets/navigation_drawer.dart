@@ -1,8 +1,8 @@
 import 'package:batchiq_app/features/admin_dashboard/screens/admin_dashboard_screen.dart';
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:batchiq_app/features/profile/screens/profile_screen.dart';
-import 'package:batchiq_app/shared/controller/launch_url.dart';
 import 'package:batchiq_app/features/home/screens/developer_information_screen.dart';
+import 'package:batchiq_app/shared/url_launcher/launch_url.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:batchiq_app/core/colors/colors.dart';

@@ -1,4 +1,4 @@
-import 'package:batchiq_app/shared/controller/launch_url.dart';
+import 'package:batchiq_app/shared/url_launcher/launch_url.dart';
 import 'package:flutter/material.dart';
 
 class ProfileSocialSection extends StatelessWidget {

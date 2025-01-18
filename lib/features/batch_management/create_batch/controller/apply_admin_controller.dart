@@ -25,7 +25,7 @@ class ApplyAdminController extends GetxController {
         "fullName": name,
         "email": email,
         "reason": reason,
-        "appliedAt": FieldValue.serverTimestamp(),
+        "appliedAt": DateTime.now().toString(),
         "status": "pending",
       });
 

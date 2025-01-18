@@ -32,7 +32,7 @@ class JoinBatchController extends GetxController {
 
         Map<String, dynamic> userBody = {
           "name": userName,
-          "joinedAt": FieldValue.serverTimestamp(),
+          "joinedAt": DateTime.now().toString(),
           "role": userRole
         };
 
