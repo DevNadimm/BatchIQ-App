@@ -238,7 +238,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title,
         style: TextStyle(color: textColor, fontWeight: FontWeight.w500),
       ),
-      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.grey,),
       onTap: onTap,
     );
   }
