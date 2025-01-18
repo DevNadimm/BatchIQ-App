@@ -39,7 +39,6 @@ class CreateNotificationController extends GetxController {
         "type": type,
         "createdAt": FieldValue.serverTimestamp(),
         "createdBy": uid,
-        "read": false,
       });
 
       isSuccess = true;
