@@ -2,7 +2,7 @@ import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/announcement_admin_controller.dart';
-import 'package:batchiq_app/features/admin_dashboard/screens/create_announcement_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/announcement_screens/create_announcement_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/widgets/announcement_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

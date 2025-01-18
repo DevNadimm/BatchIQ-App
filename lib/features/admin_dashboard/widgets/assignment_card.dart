@@ -2,7 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dart';
-import 'package:batchiq_app/features/admin_dashboard/screens/edit_assignment_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/assignment_screens/edit_assignment_screen.dart';
 import 'package:batchiq_app/shared/controller/launch_url.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
