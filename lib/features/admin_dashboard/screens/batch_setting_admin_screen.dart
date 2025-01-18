@@ -35,98 +35,74 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            _buildActionCard(
-              context,
-              icon: HugeIcons.strokeRoundedSetting07,
-              title: "Info Management",
-              description: "Update batch name, description, and view batch ID.",
-              onTap: () {
-                // Navigate to Info Management screen
-              },
-            ),
-            const SizedBox(height: 16.0),
-            _buildActionCard(
-              context,
-              icon: HugeIcons.strokeRoundedUser,
-              title: "Member Management",
-              description: "Manage members, promote or demote, and remove users.",
-              onTap: () {
-                // Navigate to Member Management screen
-              },
-            ),
-            const SizedBox(height: 16.0),
-            _buildActionCard(
-              context,
-              icon: HugeIcons.strokeRoundedDownload02,
-              title: "Download Member List",
-              description: "Export the member list as a downloadable file.",
-              onTap: () {
-                // Add download logic
-              },
-            ),
-            const SizedBox(height: 16.0),
-            _buildActionCard(
-              context,
-              icon: HugeIcons.strokeRoundedDelete01,
-              title: "Delete Batch",
-              description: "Permanently delete this batch.",
-              onTap: () {
-                // Add delete logic
-              },
-            ),
-          ],
-        ),
+      body: ListView(
+        children: [
+          _buildListItem(
+            context,
+            icon: HugeIcons.strokeRoundedSetting07,
+            title: "Info Management",
+            description: "Update batch name, description, and view batch ID.",
+            onTap: () {
+              // Navigate to Info Management screen
+            },
+          ),
+          _buildListItem(
+            context,
+            icon: HugeIcons.strokeRoundedUser,
+            title: "Member Management",
+            description: "Manage members, promote or demote, and remove users.",
+            onTap: () {
+              // Navigate to Member Management screen
+            },
+          ),
+          _buildListItem(
+            context,
+            icon: HugeIcons.strokeRoundedDownload02,
+            title: "Download Member List",
+            description: "Export the member list as a downloadable file.",
+            onTap: () {
+              // Add download logic
+            },
+          ),
+          _buildListItem(
+            context,
+            icon: HugeIcons.strokeRoundedDelete01,
+            title: "Delete Batch",
+            description: "Permanently delete this batch.",
+            onTap: () {
+              // Add delete logic
+            },
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildActionCard(
+  Widget _buildListItem(
       BuildContext context, {
         required IconData icon,
         required String title,
         required String description,
         required VoidCallback onTap,
       }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-        elevation: 1,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              CircleAvatar(
-                backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
-                child: Icon(icon, color: Theme.of(context).primaryColor),
-              ),
-              const SizedBox(width: 16.0),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge!.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 4.0),
-                    Text(
-                      description,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: secondaryFontColor),
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(Icons.chevron_right, color: Colors.grey),
-            ],
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2),
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
+          child: Icon(icon, color: Theme.of(context).primaryColor),
         ),
+        title: Text(
+          title,
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          description,
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(color: secondaryFontColor),
+        ),
+        trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+        onTap: onTap,
+        contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
       ),
     );
   }
