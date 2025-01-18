@@ -1,6 +1,7 @@
 import 'package:batchiq_app/features/admin_dashboard/controller/announcement_admin_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/count_members_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/create_announcement_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/create_assignment_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/create_notification_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/edit_assignment_controller.dart';
@@ -25,5 +26,6 @@ class InitialBindings implements Bindings{
     Get.put(MemberCountController());
     Get.put(CreateNotificationController());
     Get.put(AnnouncementAdminController());
+    Get.put(CreateAnnouncementController());
   }
 }

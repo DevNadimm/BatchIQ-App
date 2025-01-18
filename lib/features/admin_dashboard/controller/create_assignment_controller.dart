@@ -30,7 +30,7 @@ class CreateAssignmentController extends GetxController {
 
       final uid = data?.uid ?? "";
       final batchId = data?.batchId ?? "";
-      final docId = generateDocId("ASSIGNMENT");
+      final docId = generateDocId("ASSIGNMENT-");
 
       /// For Batches
       await firestore.collection("Batches").doc(batchId).collection("Assignments").doc(docId).set({
