@@ -1,5 +1,6 @@
 import 'package:batchiq_app/core/constants/grid_content_class.dart';
 import 'package:batchiq_app/core/constants/icon_image_name.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/announcement_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/batch_setting_admin_screen.dart';
 import 'package:batchiq_app/features/home/screens/home_screen.dart';
@@ -40,7 +41,7 @@ List<GridContent> adminGridContentList = [
     adminDescription: "Post and manage announcements.",
     iconPath: IconImageName.announcement,
     color: Colors.orange,
-    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapAdmin: () => Get.to(const AnnouncementAdminScreen()),
   ),
   GridContent(
     name: "Notification",
