@@ -2,8 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
-import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:batchiq_app/shared/dialogs/logout_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -208,10 +207,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildListTile(
             title: "Logout",
             icon: HugeIcons.strokeRoundedLogout03,
-            onTap: () {
-              final auth = FirebaseAuth.instance;
-              auth.signOut();
-              Get.offAll(const SignInScreen());
+            onTap: () async {
+              Get.dialog(LogoutDialog());
             },
             iconColor: Colors.red,
             textColor: Colors.red,

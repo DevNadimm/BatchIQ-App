@@ -1,12 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class UserModel {
   final String uid;
   final String name;
   final String email;
   final String role;
   final String? batchId;
-  final DateTime createdAt;
+  final String? createdAt;
 
   UserModel({
     required this.uid,
@@ -24,7 +22,7 @@ class UserModel {
       email: data['email'] ?? 'N/A',
       role: data['role'] ?? 'student',
       batchId: data['batchId'],
-      createdAt: (data['createdAt'] as Timestamp).toDate(),
+      createdAt: data['createdAt'] ?? '',
     );
   }
 }

@@ -1,9 +1,8 @@
 import 'package:batchiq_app/features/admin_dashboard/screens/admin_dashboard_screen.dart';
-import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:batchiq_app/features/profile/screens/profile_screen.dart';
 import 'package:batchiq_app/features/home/screens/developer_information_screen.dart';
+import 'package:batchiq_app/shared/dialogs/logout_dialog.dart';
 import 'package:batchiq_app/shared/url_launcher/launch_url.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:get/get.dart';
@@ -104,12 +103,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton.icon(
               onPressed: () async {
-                // Handle logout
-                final auth = FirebaseAuth.instance;
-                await auth.signOut();
-                if (auth.currentUser == null) {
-                  Get.to(const SignInScreen());
-                }
+                Get.dialog(LogoutDialog());
               },
               icon: const Icon(HugeIcons.strokeRoundedLogout03),
               label: const Text("Logout"),

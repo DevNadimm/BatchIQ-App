@@ -33,7 +33,7 @@ class SignUpController extends GetxController {
         'email': email,
         'role': 'student',
         'batchId': null,
-        'createdAt': FieldValue.serverTimestamp(),
+        'createdAt': DateTime.now().toString(),
       });
 
       isLoading = false;
