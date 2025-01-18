@@ -118,7 +118,7 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
                     const SizedBox(height: 4.0),
                     Text(
                       description,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: secondaryFontColor),
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: secondaryFontColor),
                     ),
                   ],
                 ),
