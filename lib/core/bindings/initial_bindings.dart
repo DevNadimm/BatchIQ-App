@@ -5,6 +5,7 @@ import 'package:batchiq_app/features/admin_dashboard/controller/create_announcem
 import 'package:batchiq_app/features/admin_dashboard/controller/create_assignment_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/create_notification_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/edit_assignment_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/notification_admin_controller.dart';
 import 'package:batchiq_app/features/auth/controller/sign_in_controller.dart';
 import 'package:batchiq_app/features/auth/controller/sign_up_controller.dart';
 import 'package:batchiq_app/features/batch_management/create_batch/controller/apply_admin_controller.dart';
@@ -27,5 +28,6 @@ class InitialBindings implements Bindings{
     Get.put(CreateNotificationController());
     Get.put(AnnouncementAdminController());
     Get.put(CreateAnnouncementController());
+    Get.put(NotificationAdminController());
   }
 }

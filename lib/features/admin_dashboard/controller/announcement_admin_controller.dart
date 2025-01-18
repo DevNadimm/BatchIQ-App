@@ -55,7 +55,7 @@ class AnnouncementAdminController extends GetxController {
       final data = await userController.fetchUserData();
       final batchId = data?.batchId ?? "";
 
-      /// For Batches
+      /// For Announcements
       await firestore.collection("Batches").doc(batchId).collection("Announcements").doc(announcementId).delete();
 
       /// For My Calendar

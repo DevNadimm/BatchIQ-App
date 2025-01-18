@@ -2,6 +2,7 @@ import 'package:batchiq_app/core/constants/grid_content_class.dart';
 import 'package:batchiq_app/core/constants/icon_image_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/announcement_screens/announcement_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_screens/assignment_admin_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/notification_screens/notification_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/settings_screens/batch_setting_admin_screen.dart';
 import 'package:batchiq_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ List<GridContent> adminGridContentList = [
     adminDescription: "Send notifications to members.",
     iconPath: IconImageName.notification,
     color: Colors.purple,
-    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapAdmin: () => Get.to(const NotificationAdminScreen()),
   ),
   GridContent(
     name: "Resources",
