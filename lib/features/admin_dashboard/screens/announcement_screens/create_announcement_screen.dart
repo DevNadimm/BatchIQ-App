@@ -1,4 +1,5 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/core/constants/announcement_type_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
@@ -26,16 +27,6 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
 
   bool sendNotification = false;
   bool addToCalendar = false;
-  List<String> announcementType = [
-    'General',
-    'Reminder',
-    'Event',
-    'Assignment',
-    'Exam',
-    'Notice',
-    'Task',
-    'Alert'
-  ];
   String? selectedAnnouncementType;
 
   Future<void> _pickDeadline(BuildContext context) async {
@@ -114,14 +105,16 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-                CustomDropdownButton(
-                  announcementTypes: announcementType,
+                CustomDropdownButton<String>(
+                  items: announcementType,
                   selectedValue: selectedAnnouncementType,
                   onChanged: (value) {
                     setState(() {
                       selectedAnnouncementType = value;
                     });
                   },
+                  itemLabel: (item) => item,
+                  hintText: 'Select Announcement Type',
                 ),
                 if (addToCalendar)
                   Column(
@@ -251,6 +244,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
       title.clear();
       message.clear();
       date.clear();
+      //selectedAnnouncementType = null;
       sendNotification = false;
       addToCalendar = false;
       final controller = AnnouncementController.instance;

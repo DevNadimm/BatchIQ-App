@@ -2,21 +2,25 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropdownButton extends StatelessWidget {
-  final List<String> announcementTypes;
-  final String? selectedValue;
-  final Function(String?) onChanged;
+class CustomDropdownButton<T> extends StatelessWidget {
+  final List<T> items;
+  final T? selectedValue;
+  final ValueChanged<T?> onChanged;
+  final String Function(T) itemLabel;
+  final String hintText;
 
   const CustomDropdownButton({
     super.key,
-    required this.announcementTypes,
+    required this.items,
     required this.selectedValue,
     required this.onChanged,
+    required this.itemLabel,
+    this.hintText = 'Select an option',
   });
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField2<String>(
+    return DropdownButtonFormField2<T>(
       isExpanded: true,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(vertical: 12),
@@ -25,7 +29,7 @@ class CustomDropdownButton extends StatelessWidget {
         ),
       ),
       hint: Text(
-        'Announcement Type',
+        hintText,
         style: TextStyle(
           color: secondaryFontColor.withOpacity(0.9),
           fontSize: 16,
@@ -33,22 +37,24 @@ class CustomDropdownButton extends StatelessWidget {
         ),
       ),
       value: selectedValue,
-      items: announcementTypes
-          .map((item) => DropdownMenuItem<String>(
-                value: item,
-                child: Text(
-                  item,
-                  style: TextStyle(
-                    color: secondaryFontColor.withOpacity(0.9),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ))
+      items: items
+          .map(
+            (item) => DropdownMenuItem<T>(
+          value: item,
+          child: Text(
+            itemLabel(item),
+            style: TextStyle(
+              color: secondaryFontColor.withOpacity(0.9),
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      )
           .toList(),
       validator: (value) {
         if (value == null) {
-          return 'Please select an announcement type.';
+          return 'Please select an option.';
         }
         return null;
       },
