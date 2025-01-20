@@ -1,7 +1,7 @@
 import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/announcement_admin_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/announcement_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/announcement_screens/create_announcement_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/widgets/announcement_card.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class _AnnouncementAdminScreenState extends State<AnnouncementAdminScreen> {
   }
 
   Future<void> fetchAnnouncement() async {
-    final controller = AnnouncementAdminController.instance;
+    final controller = AnnouncementController.instance;
     await controller.getAnnouncements();
   }
 
@@ -53,7 +53,7 @@ class _AnnouncementAdminScreenState extends State<AnnouncementAdminScreen> {
       body: Column(
         children: [
           Expanded(
-            child: GetBuilder<AnnouncementAdminController>(
+            child: GetBuilder<AnnouncementController>(
               builder: (controller) {
                 return Visibility(
                   visible: !controller.isLoading,

@@ -3,6 +3,7 @@ class AnnouncementModel {
   final String title;
   final String message;
   final String createdAt;
+  final String updatedAt;
   final String createdBy;
   final String type;
 
@@ -11,6 +12,7 @@ class AnnouncementModel {
     required this.title,
     required this.message,
     required this.createdAt,
+    required this.updatedAt,
     required this.createdBy,
     required this.type,
   });
@@ -21,6 +23,7 @@ class AnnouncementModel {
       title: data['title'] ?? '',
       message: data['message'] ?? '',
       createdAt: data['createdAt'] ?? '',
+      updatedAt: data['updatedAt'] ?? '',
       createdBy: data['createdBy'] ?? '',
       type: data['type'] ?? '',
     );
@@ -31,6 +34,7 @@ class AnnouncementModel {
       'title': title,
       'message': message,
       'createdAt': createdAt,
+      'updatedAt': updatedAt,
       'createdBy': createdBy,
       'type': type,
     };

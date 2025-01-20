@@ -1,7 +1,7 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/formatters/date_formatters.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/announcement_admin_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/announcement_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/announcement_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -149,8 +149,8 @@ class AnnouncementCard extends StatelessWidget {
   }
 
   Future<void> deleteAnnouncement() async {
-    final controller = AnnouncementAdminController.instance;
-    final isDelete = await controller.deleteAnnouncement(announcement.id);
+    final controller = AnnouncementController.instance;
+    final isDelete = await controller.deleteAnnouncements(announcement.id);
     if (isDelete) {
       SnackBarMessage.successMessage(
           "Your announcement has been deleted successfully!");

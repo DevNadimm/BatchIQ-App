@@ -1,7 +1,7 @@
 import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/assignment_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_screens/create_assignment_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/widgets/assignment_card.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class _AssignmentAdminScreenState extends State<AssignmentAdminScreen> {
   }
 
   Future<void> fetchAssignment() async {
-    final controller = AssignmentAdminController.instance;
+    final controller = AssignmentController.instance;
     await controller.getAssignments();
   }
 
@@ -52,7 +52,7 @@ class _AssignmentAdminScreenState extends State<AssignmentAdminScreen> {
       body: Column(
         children: [
           Expanded(
-            child: GetBuilder<AssignmentAdminController>(
+            child: GetBuilder<AssignmentController>(
               builder: (controller) {
                 return Visibility(
                   visible: !controller.isLoading,

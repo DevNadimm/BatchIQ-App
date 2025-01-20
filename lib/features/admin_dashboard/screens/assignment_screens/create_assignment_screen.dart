@@ -2,8 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/create_assignment_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/assignment_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -202,7 +201,7 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                GetBuilder<CreateAssignmentController>(
+                GetBuilder<AssignmentController>(
                   builder: (controller) {
                     return Visibility(
                       visible: !controller.isLoading,
@@ -233,7 +232,7 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
   }
 
   Future<void> createAssignment() async {
-    final CreateAssignmentController createAssignmentController = CreateAssignmentController.instance;
+    final AssignmentController createAssignmentController = AssignmentController.instance;
 
     final isSuccess = await createAssignmentController.createAssignment(
       title: title.text,
@@ -254,7 +253,7 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
       sendNotification = false;
       addToCalendar = false;
 
-      final controller = AssignmentAdminController.instance;
+      final controller = AssignmentController.instance;
       await controller.getAssignments();
     } else {
       SnackBarMessage.errorMessage(createAssignmentController.errorMessage ?? "Something went wrong!");

@@ -1,7 +1,7 @@
 import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/notification_admin_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/widgets/notification_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +22,7 @@ class _NotificationAdminScreenState extends State<NotificationAdminScreen> {
   }
 
   Future<void> fetchAnnouncement() async {
-    final controller = NotificationAdminController.instance;
+    final controller = NotificationController.instance;
     await controller.getNotifications();
   }
 
@@ -52,7 +52,7 @@ class _NotificationAdminScreenState extends State<NotificationAdminScreen> {
       body: Column(
         children: [
           Expanded(
-            child: GetBuilder<NotificationAdminController>(
+            child: GetBuilder<NotificationController>(
               builder: (controller) {
                 return Visibility(
                   visible: !controller.isLoading,

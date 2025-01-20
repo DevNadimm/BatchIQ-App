@@ -2,8 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/announcement_admin_controller.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/create_announcement_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/announcement_controller.dart';
 import 'package:batchiq_app/shared/buttons/custom_dropdown_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -204,7 +203,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                GetBuilder<CreateAnnouncementController>(
+                GetBuilder<AnnouncementController>(
                   builder: (controller) {
                     return Visibility(
                       visible: !controller.isLoading,
@@ -236,15 +235,15 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
   }
 
   Future<void> createAnnouncement() async {
-    final CreateAnnouncementController createAnnouncementController = CreateAnnouncementController.instance;
+    final AnnouncementController announcementController = AnnouncementController.instance;
 
-    final isSuccess = await createAnnouncementController.createAnnouncement(
+    final isSuccess = await announcementController.createAnnouncements(
       title: title.text,
       sendNotification: sendNotification,
       addToCalendar: addToCalendar,
       message: message.text,
       type: selectedAnnouncementType?.toLowerCase() ?? "",
-      date: addToCalendar ? date.text : "",
+      date: date.text,
     );
 
     if (isSuccess) {
@@ -254,10 +253,10 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
       date.clear();
       sendNotification = false;
       addToCalendar = false;
-      final controller = AnnouncementAdminController.instance;
+      final controller = AnnouncementController.instance;
       await controller.getAnnouncements();
     } else {
-      SnackBarMessage.errorMessage(createAnnouncementController.errorMessage ?? "Something went wrong!");
+      SnackBarMessage.errorMessage(announcementController.errorMessage ?? "Something went wrong!");
     }
   }
 }

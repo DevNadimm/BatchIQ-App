@@ -2,8 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/assignment_admin_controller.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/edit_assignment_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/assignment_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -166,7 +165,7 @@ class _EditAssignmentScreenState extends State<EditAssignmentScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-                GetBuilder<EditAssignmentController>(
+                GetBuilder<AssignmentController>(
                     builder: (controller) {
                       return Visibility(
                         visible: !controller.isLoading,
@@ -197,7 +196,7 @@ class _EditAssignmentScreenState extends State<EditAssignmentScreen> {
   }
 
   Future<void> editAssignment() async {
-    final EditAssignmentController editAssignmentController = EditAssignmentController.instance;
+    final AssignmentController editAssignmentController = AssignmentController.instance;
 
     final isSuccess = await editAssignmentController.editAssignment(
       title: title.text,
@@ -213,7 +212,7 @@ class _EditAssignmentScreenState extends State<EditAssignmentScreen> {
       description.clear();
       deadline.clear();
       link.clear();
-      final controller = AssignmentAdminController.instance;
+      final controller = AssignmentController.instance;
       await controller.getAssignments();
     } else {
       SnackBarMessage.errorMessage(editAssignmentController.errorMessage ?? "Something went wrong!");
