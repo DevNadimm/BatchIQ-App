@@ -72,7 +72,7 @@ class AnnouncementController extends GetxController {
       final userData = await _fetchUserData();
       final batchId = userData["batchId"] ?? "";
       final uid = userData["uid"] ?? "";
-      final docId = generateDocId("ANNOUNCEMENT-");
+      final docId = generateDocId("ANNOUNCEMENT-${type.toUpperCase()}-");
 
       final batchRef = _firestore.collection("Batches").doc(batchId);
 
