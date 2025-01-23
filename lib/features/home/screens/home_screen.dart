@@ -1,5 +1,9 @@
 import 'package:batchiq_app/core/colors/colors.dart';
+import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
+import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
+import 'package:batchiq_app/features/auth/models/user_model.dart';
+import 'package:batchiq_app/features/home/controller/batch_info_controller.dart';
 import 'package:batchiq_app/features/home/screens/invite_friend_screen.dart';
 import 'package:batchiq_app/features/home/widgets/header_section.dart';
 import 'package:batchiq_app/features/home/widgets/navigation_drawer.dart';
@@ -17,78 +21,101 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late String batchId;
+  UserModel? userModel;
 
   @override
   void initState() {
-    _fetchUser();
     super.initState();
+    _initializeData();
   }
 
-  Future<void> _fetchUser() async {
+  Future<void> _initializeData() async {
     final userController = UserController();
-    final user = await userController.fetchUserData();
-    setState(() {
-      batchId = (user?.batchId ?? "");
-    });
+    final fetchedUserModel = await userController.fetchUserData();
+
+    if (fetchedUserModel != null) {
+      setState(() {
+        userModel = fetchedUserModel;
+      });
+
+      if (userModel!.batchId != null) {
+        await BatchInfoController.instance.fetchBatchInfo(userModel!.batchId!);
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        foregroundColor: Colors.white,
-        title: Text(
-          "PCIU CSE 33 B1",
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .copyWith(color: Colors.white),
-        ),
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              icon: const Icon(HugeIcons.strokeRoundedMenu02),
-            );
-          },
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.to(
-                InviteFriendScreen(
-                  batchId: batchId,
-                ),
-              );
-            },
-            icon: const Icon(HugeIcons.strokeRoundedUserAdd02),
-          ),
-        ],
-      ),
-      drawer: const BatchIQNavigationDrawer(),
-      body: const Column(
-        children: [
-          HeaderSection(height: 85),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 24),
-                  TodaysTimeline(),
-                  SizedBox(height: 24),
-                  UserContentGrid(),
-                  SizedBox(height: 16),
-                ],
-              ),
+    return GetBuilder<BatchInfoController>(
+      builder: (controller) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: primaryColor,
+            foregroundColor: Colors.white,
+            title: Text(
+              controller.batchInfoModel.name,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(color: Colors.white),
             ),
+            leading: Builder(
+              builder: (context) {
+                return IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  icon: const Icon(HugeIcons.strokeRoundedMenu02),
+                );
+              },
+            ),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  if (userModel != null && userModel!.batchId != null) {
+                    Get.to(
+                      InviteFriendScreen(
+                        batchId: userModel!.batchId!,
+                      ),
+                    );
+                  } else {
+                    SnackBarMessage.errorMessage('User data is not available.');
+                  }
+                },
+                icon: const Icon(HugeIcons.strokeRoundedUserAdd02),
+              ),
+            ],
           ),
-        ],
-      ),
+          drawer: userModel != null
+              ? BatchIQNavigationDrawer(userModel: userModel!)
+              : const Center(
+                  child: Text('User data not available'),
+                ),
+          body: controller.isLoading
+              ? const Center(
+                  child: ProgressIndicatorWidget(),
+                )
+              : const Column(
+                  children: [
+                    HeaderSection(height: 85),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(height: 24),
+                            TodaysTimeline(),
+                            SizedBox(height: 24),
+                            UserContentGrid(),
+                            SizedBox(height: 16),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+        );
+      },
     );
   }
 }
