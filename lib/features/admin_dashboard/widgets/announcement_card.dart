@@ -3,7 +3,9 @@ import 'package:batchiq_app/core/utils/formatters/date_formatters.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/announcement_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/announcement_model.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/announcement_screens/edit_announcement_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class AnnouncementCard extends StatelessWidget {
@@ -46,11 +48,11 @@ class AnnouncementCard extends StatelessWidget {
                   itemBuilder: (BuildContext context) => [
                     PopupMenuItem(
                       onTap: () {
-                        // Get.to(
-                        //   EditAnnouncementScreen(
-                        //     announcement: announcement,
-                        //   ),
-                        // );
+                        Get.to(
+                          EditAnnouncementScreen(
+                            announcement: announcement,
+                          ),
+                        );
                       },
                       child: Row(
                         children: [

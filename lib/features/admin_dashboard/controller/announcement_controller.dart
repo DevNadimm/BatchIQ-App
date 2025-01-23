@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/constants/error_messages.dart';
 import 'package:batchiq_app/core/utils/id_generator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/announcement_model.dart';
@@ -51,7 +52,7 @@ class AnnouncementController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to load announcements: $e";
+      errorMessage = ErrorMessages.fetchAnnouncementsError;
     } finally {
       _setLoading(false);
     }
@@ -108,7 +109,7 @@ class AnnouncementController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to upload announcements: $e";
+      errorMessage = ErrorMessages.createAnnouncementsError;
     } finally {
       _setLoading(false);
     }
@@ -119,7 +120,6 @@ class AnnouncementController extends GetxController {
   Future<bool> editAnnouncements({
     required String title,
     required String message,
-    required String type,
     required String docId,
   }) async {
     _setLoading(true);
@@ -132,14 +132,16 @@ class AnnouncementController extends GetxController {
       await batchRef.collection("Announcements").doc(docId).update({
         "title": title,
         "message": message,
-        "type": type,
         "updatedAt": DateTime.now().toString(),
       });
 
-      await batchRef.collection("MyCalendar").doc(docId).update({
-        "title": title,
-        "description": message,
-      });
+      final myCalenderSnapshot = await batchRef.collection("MyCalendar").doc(docId).get();
+      if (myCalenderSnapshot.exists) {
+        await batchRef.collection("MyCalendar").doc(docId).update({
+          "title": title,
+          "description": message,
+        });
+      }
 
       await NotificationController.instance.editNotification(
         title: title,
@@ -152,7 +154,7 @@ class AnnouncementController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to edit announcements: $e";
+      errorMessage = ErrorMessages.editAnnouncementsError;
     } finally {
       _setLoading(false);
     }
@@ -181,7 +183,7 @@ class AnnouncementController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to delete announcement: $e";
+      errorMessage = ErrorMessages.deleteAnnouncementsError;
     } finally {
       _setLoading(false);
     }
