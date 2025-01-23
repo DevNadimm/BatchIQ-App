@@ -14,10 +14,12 @@ class NotificationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 1,
+      elevation: 0,
+      color: Colors.transparent,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
+        side: BorderSide(width: 1.5, color: notification.read? primaryColor.withOpacity(0.1) : primaryColor.withOpacity(0.3)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -89,7 +91,14 @@ class NotificationCard extends StatelessWidget {
                       ),
                     ),
                   ],
-                  child: const Icon(HugeIcons.strokeRoundedMoreVertical),
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: primaryColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(HugeIcons.strokeRoundedMoreVertical),
+                  ),
                 )
               ],
             ),
