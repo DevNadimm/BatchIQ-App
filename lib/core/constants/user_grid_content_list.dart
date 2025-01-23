@@ -1,6 +1,10 @@
 import 'package:batchiq_app/core/constants/grid_content_class.dart';
 import 'package:batchiq_app/core/constants/icon_image_name.dart';
+import 'package:batchiq_app/features/home/screens/announcement_screen.dart';
+import 'package:batchiq_app/features/home/screens/assignment_screen.dart';
+import 'package:batchiq_app/features/home/screens/notification_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 List<GridContent> userGridContentList = [
   GridContent(
@@ -8,7 +12,9 @@ List<GridContent> userGridContentList = [
     userDescription: "View and manage your assignments.",
     iconPath: IconImageName.assignment,
     color: Colors.green,
-    onTapUser: () {},
+    onTapUser: () {
+      Get.to(const AssignmentScreen());
+    },
   ),
   GridContent(
     name: "My Calendar",
@@ -22,7 +28,9 @@ List<GridContent> userGridContentList = [
     userDescription: "Check important announcements.",
     iconPath: IconImageName.announcement,
     color: Colors.orange,
-    onTapUser: () {},
+    onTapUser: () {
+      Get.to(const AnnouncementScreen());
+    },
   ),
   GridContent(
     name: "Exams",
@@ -36,7 +44,9 @@ List<GridContent> userGridContentList = [
     userDescription: "Stay updated with your notifications.",
     iconPath: IconImageName.notification,
     color: Colors.purple,
-    onTapUser: () {},
+    onTapUser: () {
+      Get.to(const NotificationScreen());
+    },
   ),
   GridContent(
     name: "Resources",

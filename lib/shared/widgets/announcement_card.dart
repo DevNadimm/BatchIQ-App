@@ -9,9 +9,10 @@ import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class AnnouncementCard extends StatelessWidget {
-  const AnnouncementCard({super.key, required this.announcement});
+  const AnnouncementCard({super.key, required this.announcement, required this.isAdmin});
 
   final AnnouncementModel announcement;
+  final bool isAdmin;
 
   @override
   Widget build(BuildContext context) {
@@ -41,71 +42,72 @@ class AnnouncementCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                PopupMenuButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 4,
-                  position: PopupMenuPosition.under,
-                  itemBuilder: (BuildContext context) => [
-                    PopupMenuItem(
-                      onTap: () {
-                        Get.to(
-                          EditAnnouncementScreen(
-                            announcement: announcement,
-                          ),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            HugeIcons.strokeRoundedNoteEdit,
-                            color: secondaryFontColor,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            "Edit",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(color: secondaryFontColor),
-                          ),
-                        ],
+                if (isAdmin)
+                  PopupMenuButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 4,
+                    position: PopupMenuPosition.under,
+                    itemBuilder: (BuildContext context) => [
+                      PopupMenuItem(
+                        onTap: () {
+                          Get.to(
+                            EditAnnouncementScreen(
+                              announcement: announcement,
+                            ),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              HugeIcons.strokeRoundedNoteEdit,
+                              color: secondaryFontColor,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              "Edit",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(color: secondaryFontColor),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    PopupMenuItem(
-                      onTap: () async {
-                        await deleteAnnouncement();
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            HugeIcons.strokeRoundedDelete01,
-                            color: secondaryFontColor,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            "Delete",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(color: secondaryFontColor),
-                          ),
-                        ],
+                      PopupMenuItem(
+                        onTap: () async {
+                          await deleteAnnouncement();
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              HugeIcons.strokeRoundedDelete01,
+                              color: secondaryFontColor,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              "Delete",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(color: secondaryFontColor),
+                            ),
+                          ],
+                        ),
                       ),
+                    ],
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: primaryColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Icon(HugeIcons.strokeRoundedMoreVertical),
                     ),
-                  ],
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: primaryColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(HugeIcons.strokeRoundedMoreVertical),
                   ),
-                )
               ],
             ),
             const SizedBox(height: 8),

@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class NotificationCard extends StatelessWidget {
-  const NotificationCard({super.key, required this.notification});
+  const NotificationCard({super.key, required this.notification, required this.isAdmin});
 
   final NotificationModel notification;
+  final bool isAdmin;
 
   @override
   Widget build(BuildContext context) {
@@ -33,73 +34,74 @@ class NotificationCard extends StatelessWidget {
                   child: Text(
                     notification.title,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                          fontWeight: FontWeight.bold,
+                        ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                PopupMenuButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 4,
-                  position: PopupMenuPosition.under,
-                  itemBuilder: (BuildContext context) => [
-                    PopupMenuItem(
-                      onTap: () {
-                        // Add your edit notification screen navigation logic
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            HugeIcons.strokeRoundedNoteEdit,
-                            color: secondaryFontColor,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            "Edit",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(color: secondaryFontColor),
-                          ),
-                        ],
+                if (isAdmin)
+                  PopupMenuButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 4,
+                    position: PopupMenuPosition.under,
+                    itemBuilder: (BuildContext context) => [
+                      PopupMenuItem(
+                        onTap: () {
+                          // Add your edit notification screen navigation logic
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              HugeIcons.strokeRoundedNoteEdit,
+                              color: secondaryFontColor,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              "Edit",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(color: secondaryFontColor),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    PopupMenuItem(
-                      onTap: () async {
-                        await deleteNotification();
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            HugeIcons.strokeRoundedDelete01,
-                            color: secondaryFontColor,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            "Delete",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(color: secondaryFontColor),
-                          ),
-                        ],
+                      PopupMenuItem(
+                        onTap: () async {
+                          await deleteNotification();
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              HugeIcons.strokeRoundedDelete01,
+                              color: secondaryFontColor,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              "Delete",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(color: secondaryFontColor),
+                            ),
+                          ],
+                        ),
                       ),
+                    ],
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: primaryColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Icon(HugeIcons.strokeRoundedMoreVertical),
                     ),
-                  ],
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: primaryColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(HugeIcons.strokeRoundedMoreVertical),
                   ),
-                )
               ],
             ),
             const SizedBox(height: 8),
