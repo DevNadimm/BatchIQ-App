@@ -32,7 +32,7 @@ class _NotificationAdminScreenState extends State<NotificationAdminScreen> {
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text(
-          "Notification",
+          "Notifications",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         leading: IconButton(

@@ -32,7 +32,7 @@ class _AssignmentAdminScreenState extends State<AssignmentAdminScreen> {
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text(
-          "Assignment",
+          "Assignments",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         leading: IconButton(

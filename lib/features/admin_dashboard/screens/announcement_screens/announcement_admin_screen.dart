@@ -33,7 +33,7 @@ class _AnnouncementAdminScreenState extends State<AnnouncementAdminScreen> {
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text(
-          "Announcement",
+          "Announcements",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         leading: IconButton(
