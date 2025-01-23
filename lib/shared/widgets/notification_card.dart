@@ -94,6 +94,7 @@ class NotificationCard extends StatelessWidget {
                       ),
                     ],
                     child: Container(
+                      margin: const EdgeInsets.only(left: 4),
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         color: primaryColor.withOpacity(0.1),
