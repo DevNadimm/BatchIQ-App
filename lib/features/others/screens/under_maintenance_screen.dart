@@ -80,12 +80,14 @@ class ErrorInfo extends StatelessWidget {
             ),
             const SizedBox(height: 16 * 2.5),
             SizedBox(
+              height: 50,
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: onTap,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(buttonText),
+                child: Text(
+                  buttonText,
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
