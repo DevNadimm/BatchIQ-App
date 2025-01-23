@@ -4,7 +4,7 @@ import 'package:batchiq_app/features/admin_dashboard/screens/announcement_screen
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_screens/assignment_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/notification_screens/notification_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/settings_screens/batch_setting_admin_screen.dart';
-import 'package:batchiq_app/features/home/screens/home_screen.dart';
+import 'package:batchiq_app/features/others/screens/under_maintenance_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,21 +21,21 @@ List<GridContent> adminGridContentList = [
     adminDescription: "Manage calendar events for members.",
     iconPath: IconImageName.calendar,
     color: Colors.blue,
-    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapAdmin: () => Get.to(const UnderMaintenanceScreen()),
   ),
   GridContent(
     name: "Class Schedule",
     adminDescription: "Manage class schedules.",
     iconPath: IconImageName.classSchedule,
     color: Colors.blueGrey,
-    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapAdmin: () => Get.to(const UnderMaintenanceScreen()),
   ),
   GridContent(
     name: "Exam Schedule",
     adminDescription: "Manage exam schedules.",
     iconPath: IconImageName.exam,
     color: Colors.red,
-    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapAdmin: () => Get.to(const UnderMaintenanceScreen()),
   ),
   GridContent(
     name: "Announcement",
@@ -56,7 +56,7 @@ List<GridContent> adminGridContentList = [
     adminDescription: "Manage all available resources.",
     iconPath: IconImageName.resources,
     color: Colors.teal,
-    onTapAdmin: () => Get.to(const HomeScreen()),
+    onTapAdmin: () => Get.to(const UnderMaintenanceScreen()),
   ),
   GridContent(
     name: "Batch Settings",
