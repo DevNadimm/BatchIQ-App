@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/constants/error_messages.dart';
 import 'package:batchiq_app/core/utils/id_generator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dart';
@@ -43,7 +44,7 @@ class AssignmentController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to load assignments";
+      errorMessage = ErrorMessages.fetchAssignmentsError;
     } finally {
       _setLoading(false);
     }
@@ -99,7 +100,7 @@ class AssignmentController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to upload assignment!";
+      errorMessage = ErrorMessages.createAssignmentsError;
     } finally {
       _setLoading(false);
     }
@@ -150,7 +151,7 @@ class AssignmentController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to edit assignment!";
+      errorMessage = ErrorMessages.editAssignmentsError;
     } finally {
       _setLoading(false);
     }
@@ -185,7 +186,7 @@ class AssignmentController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to delete assignment";
+      errorMessage = ErrorMessages.deleteAssignmentsError;
     } finally {
       _setLoading(false);
     }
