@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/constants/error_messages.dart';
 import 'package:batchiq_app/core/utils/id_generator.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/notification_model.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
@@ -62,7 +63,7 @@ class NotificationController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to load notifications";
+      errorMessage = ErrorMessages.fetchNotificationsError;
     } finally {
       _setLoading(false);
     }
@@ -116,7 +117,7 @@ class NotificationController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to upload notification: ${e.toString()}";
+      errorMessage = ErrorMessages.createNotificationsError;
     } finally {
       _setLoading(false);
     }
@@ -158,7 +159,7 @@ class NotificationController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to edit notification: ${e.toString()}";
+      errorMessage = ErrorMessages.editNotificationsError;
     } finally {
       _setLoading(false);
     }
@@ -196,7 +197,7 @@ class NotificationController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to delete notification: ${e.toString()}";
+      errorMessage = ErrorMessages.deleteNotificationsError;
     } finally {
       _setLoading(false);
     }
@@ -235,7 +236,7 @@ class NotificationController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = "Failed to mark notification as read: ${e.toString()}";
+      errorMessage = "Failed to mark notification as read.";
     } finally {
       _setLoading(false);
     }
