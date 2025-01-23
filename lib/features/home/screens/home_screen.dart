@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   } else {
-                    SnackBarMessage.errorMessage('User data is not available.');
+                    SnackBarMessage.errorMessage('Oops! We couldn’t load your data. Please try again later.');
                   }
                 },
                 icon: const Icon(HugeIcons.strokeRoundedUserAdd02),
@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
           drawer: userModel != null
               ? BatchIQNavigationDrawer(userModel: userModel!)
               : const Center(
-                  child: Text('User data not available'),
+                  child: Text('We’re having trouble loading your information. Please refresh the app.'),
                 ),
           body: controller.isLoading
               ? const Center(
