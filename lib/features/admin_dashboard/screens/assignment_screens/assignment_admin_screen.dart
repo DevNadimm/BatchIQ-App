@@ -3,7 +3,7 @@ import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/assignment_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_screens/create_assignment_screen.dart';
-import 'package:batchiq_app/features/admin_dashboard/widgets/assignment_card.dart';
+import 'package:batchiq_app/shared/widgets/assignment_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -71,7 +71,7 @@ class _AssignmentAdminScreenState extends State<AssignmentAdminScreen> {
                                 itemCount: controller.assignments.length,
                                 itemBuilder: (context, index) {
                                   final assignment = controller.assignments[index];
-                                  return AssignmentCard(assignment: assignment);
+                                  return AssignmentCard(assignment: assignment, isAdmin: true,);
                                 },
                               ),
                               const SizedBox(height: 8),
