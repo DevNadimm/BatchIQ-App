@@ -12,4 +12,10 @@ class ErrorMessages {
   static const String createAssignmentsError = "Failed to create the assignment. Please check your input and try again.";
   static const String editAssignmentsError = "Failed to update the assignment. Please try again.";
   static const String deleteAssignmentsError = "Failed to delete the assignment. Please try again.";
+
+  /// Notifications
+  static const String fetchNotificationsError = "Failed to load notifications. Please try again.";
+  static const String createNotificationsError = "Failed to create the notification. Please check your input and try again.";
+  static const String editNotificationsError = "Failed to update the notification. Please try again.";
+  static const String deleteNotificationsError = "Failed to delete the notification. Please try again.";
 }
