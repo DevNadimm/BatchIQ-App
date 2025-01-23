@@ -1,4 +1,5 @@
 import 'package:batchiq_app/features/admin_dashboard/screens/admin_dashboard_screen.dart';
+import 'package:batchiq_app/features/auth/models/user_model.dart';
 import 'package:batchiq_app/features/profile/screens/profile_screen.dart';
 import 'package:batchiq_app/features/home/screens/developer_information_screen.dart';
 import 'package:batchiq_app/shared/dialogs/logout_dialog.dart';
@@ -9,7 +10,9 @@ import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class BatchIQNavigationDrawer extends StatelessWidget {
-  const BatchIQNavigationDrawer({super.key});
+  const BatchIQNavigationDrawer({super.key, required this.userModel});
+
+  final UserModel userModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +27,20 @@ class BatchIQNavigationDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage("assets/images/avatar.jpg")),
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: shadeColor,
+                  child: Text(
+                    userModel.name[0],
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 12),
                 Text(
-                  "Nadim Chowdhury",
+                  userModel.name,
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
@@ -37,7 +48,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  "nadimchowdhury87@gmail.com",
+                  userModel.email,
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
@@ -50,14 +61,15 @@ class BatchIQNavigationDrawer extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                _buildDrawerItem(
-                  context,
-                  HugeIcons.strokeRoundedDashboardBrowsing,
-                  "Admin Dashboard",
-                  () {
-                    Get.to(const AdminDashboardScreen());
-                  },
-                ),
+                if (userModel.role == "admin")
+                  _buildDrawerItem(
+                    context,
+                    HugeIcons.strokeRoundedDashboardBrowsing,
+                    "Admin Dashboard",
+                    () {
+                      Get.to(const AdminDashboardScreen());
+                    },
+                  ),
                 _buildDrawerItem(
                   context,
                   HugeIcons.strokeRoundedUserAccount,
