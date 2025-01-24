@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ClassScheduleController.instance.getClassSchedules(),
       ]);
     } catch (e) {
-      SnackBarMessage.errorMessage('Failed to load data: $e');
+      SnackBarMessage.errorMessage('Failed to load data!');
     } finally {
       setState(() => isLoading = false);
     }
