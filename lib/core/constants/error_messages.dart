@@ -18,4 +18,10 @@ class ErrorMessages {
   static const String createNotificationsError = "Failed to create the notification. Please check your input and try again.";
   static const String editNotificationsError = "Failed to update the notification. Please try again.";
   static const String deleteNotificationsError = "Failed to delete the notification. Please try again.";
+
+  /// Class Schedules
+  static const String fetchSchedulesError = "Failed to load class schedules. Please try again.";
+  static const String createSchedulesError = "Failed to create the class schedule. Please check your input and try again.";
+  static const String editSchedulesError = "Failed to update the class schedule. Please try again.";
+  static const String deleteSchedulesError = "Failed to delete the class schedule. Please try again.";
 }
