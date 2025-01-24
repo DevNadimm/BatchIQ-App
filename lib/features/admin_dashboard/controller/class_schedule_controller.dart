@@ -3,7 +3,9 @@ import 'package:batchiq_app/core/utils/id_generator.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/class_schedule_model.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ClassScheduleController extends GetxController {
   static final ClassScheduleController instance = Get.find<ClassScheduleController>();
@@ -30,6 +32,15 @@ class ClassScheduleController extends GetxController {
     };
   }
 
+  void _sortClassesByTime() {
+    classSchedules.sort((a, b) {
+      final startTimeA = DateFormat.jm().parse(a.startTime);
+      final startTimeB = DateFormat.jm().parse(b.startTime);
+      return startTimeA.compareTo(startTimeB);
+    });
+  }
+
+  /// Fetches all class schedules from Firestore
   Future<bool> getClassSchedules() async {
     _setLoading(true);
     try {
@@ -48,6 +59,8 @@ class ClassScheduleController extends GetxController {
           .map((doc) => ClassScheduleModel.fromFirestore(doc.data(), doc.id))
           .toList();
 
+      _sortClassesByTime();
+
       isSuccess = true;
       errorMessage = null;
     } catch (e) {
@@ -57,7 +70,13 @@ class ClassScheduleController extends GetxController {
       _setLoading(false);
     }
 
+    debugPrint(classSchedules.toString());
     return isSuccess;
+  }
+
+  /// Returns a list of class schedules for a specific day
+  List<ClassScheduleModel> dayClasses(String day) {
+    return classSchedules.where((schedule) => schedule.day == day).toList();
   }
 
   Future<bool> createClassSchedule({
@@ -73,7 +92,7 @@ class ClassScheduleController extends GetxController {
     try {
       final userData = await _fetchUserData();
       final batchId = userData["batchId"] ?? "";
-      final docId = generateDocId("CLASS-$day-");
+      final docId = generateDocId("CLASS-${day.toUpperCase()}-");
 
       final batchRef = _firestore.collection("Batches").doc(batchId);
 
@@ -88,7 +107,10 @@ class ClassScheduleController extends GetxController {
         location: location,
       );
 
-      await batchRef.collection("ClassSchedules").doc(docId).set(classSchedule.toFirestore());
+      await batchRef
+          .collection("ClassSchedules")
+          .doc(docId)
+          .set(classSchedule.toFirestore());
 
       classSchedules.add(classSchedule);
 

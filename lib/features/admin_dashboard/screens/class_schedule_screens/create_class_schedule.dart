@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/constants/day_name_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
@@ -23,15 +24,6 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
   final TextEditingController startTimeController = TextEditingController();
   final TextEditingController endTimeController = TextEditingController();
 
-  final List<String> days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
   String? selectedDay;
 
   Future<void> _pickTime(
