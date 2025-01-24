@@ -1,14 +1,20 @@
+import 'package:batchiq_app/core/utils/helper/helper_functions.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
 import 'package:batchiq_app/features/home/widgets/timeline_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TodaysTimeline extends StatelessWidget {
-  const TodaysTimeline({super.key});
+  TodaysTimeline({super.key, required this.controller});
+
+  final ClassScheduleController controller;
+  final String today = HelperFunctions.getDayName();
 
   @override
   Widget build(BuildContext context) {
     final String formattedDate =
         DateFormat('EEE, MMM d, yyyy').format(DateTime.now());
+    final classesToday = controller.dayClasses(today);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,35 +37,36 @@ class TodaysTimeline extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        const SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              SizedBox(width: 16),
-              TimelineCard(
-                time: "08:00-09:30AM",
-                room: "ROOM 101",
-                title: "CSE 101 - Introduction to Programming",
-                status: "COMPLETE CLASS",
-              ),
-              SizedBox(width: 16),
-              TimelineCard(
-                time: "10:00-11:30AM",
-                room: "ROOM 202",
-                title: "CSE 202 - Data Structures and Algorithms",
-                status: "ONGOING CLASS",
-              ),
-              SizedBox(width: 16),
-              TimelineCard(
-                time: "01:00-02:30PM",
-                room: "ROOM 303",
-                title: "CSE 303 - Operating Systems",
-                status: "UPCOMING CLASS",
-              ),
-              SizedBox(width: 16),
-            ],
+        if (classesToday.isNotEmpty)
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                const SizedBox(width: 16),
+                ...classesToday.map(
+                  (classSchedule) => Padding(
+                    padding: const EdgeInsets.only(
+                      top: 4.0,
+                      bottom: 4,
+                      right: 16,
+                    ),
+                    child: TimelineCard(
+                      classSchedule: classSchedule,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+              ],
+            ),
+          )
+        else
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              "No classes today. Relax and recharge!",
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ),
-        )
       ],
     );
   }
