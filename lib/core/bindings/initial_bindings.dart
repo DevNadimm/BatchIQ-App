@@ -1,3 +1,4 @@
+import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
 import 'package:batchiq_app/features/home/controller/batch_info_controller.dart';
 import 'package:get/get.dart';
 import 'package:batchiq_app/features/auth/controller/sign_in_controller.dart';
@@ -27,6 +28,7 @@ class InitialBindings implements Bindings {
     Get.put(AssignmentController());
     Get.put(NotificationController());
     Get.put(AnnouncementController());
+    Get.put(ClassScheduleController());
 
     // Home Feature
     Get.put(BatchInfoController());
