@@ -3,7 +3,6 @@ import 'package:batchiq_app/core/utils/id_generator.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/class_schedule_model.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -70,7 +69,6 @@ class ClassScheduleController extends GetxController {
       _setLoading(false);
     }
 
-    debugPrint(classSchedules.toString());
     return isSuccess;
   }
 

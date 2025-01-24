@@ -1,7 +1,10 @@
+import 'package:batchiq_app/core/constants/day_name_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
+import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/class_schedule_screens/create_class_schedule.dart';
+import 'package:batchiq_app/features/admin_dashboard/widgets/class_schedule_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,11 +12,11 @@ class ClassScheduleAdminScreen extends StatefulWidget {
   const ClassScheduleAdminScreen({super.key});
 
   @override
-  State<ClassScheduleAdminScreen> createState() => _ClassScheduleAdminScreenState();
+  State<ClassScheduleAdminScreen> createState() =>
+      _ClassScheduleAdminScreenState();
 }
 
 class _ClassScheduleAdminScreenState extends State<ClassScheduleAdminScreen> {
-
   @override
   void initState() {
     fetchClassSchedules();
@@ -27,7 +30,6 @@ class _ClassScheduleAdminScreenState extends State<ClassScheduleAdminScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
@@ -57,9 +59,9 @@ class _ClassScheduleAdminScreenState extends State<ClassScheduleAdminScreen> {
                 return Visibility(
                   visible: !controller.isLoading,
                   replacement: const ProgressIndicatorWidget(),
-                  child: const SingleChildScrollView(
-                    child: Column(),
-                  ),
+                  child: controller.classSchedules.isEmpty
+                      ? const EmptyList(title: "Empty Classes!")
+                      : classSchedule(controller),
                 );
               },
             ),
@@ -86,6 +88,53 @@ class _ClassScheduleAdminScreenState extends State<ClassScheduleAdminScreen> {
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget classSchedule(ClassScheduleController controller) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (String day in days)
+            if (controller.dayClasses(day).isNotEmpty)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, bottom: 8, left: 16),
+                    child: Text(
+                      day,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 16),
+                        ...controller.dayClasses(day).map(
+                              (classSchedule) => Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 4.0, bottom: 4, right: 16),
+                                child: ClassScheduleCard(
+                                  classSchedule: classSchedule,
+                                ),
+                              ),
+                            ),
+                        const SizedBox(width: 16),
+                      ],
+                    ),
+                  )
+                ],
+              ),
         ],
       ),
     );

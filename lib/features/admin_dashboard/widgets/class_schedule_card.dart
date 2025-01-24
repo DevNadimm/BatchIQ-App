@@ -1,19 +1,13 @@
+import 'package:batchiq_app/features/admin_dashboard/models/class_schedule_model.dart';
 import 'package:flutter/material.dart';
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class ClassScheduleCard extends StatelessWidget {
-  final String time;
-  final String room;
-  final String courseName;
-  final String teacher;
+  final ClassScheduleModel classSchedule;
 
   const ClassScheduleCard({
-    super.key,
-    required this.time,
-    required this.room,
-    required this.courseName,
-    required this.teacher,
+    super.key, required this.classSchedule,
   });
 
   @override
@@ -35,24 +29,24 @@ class ClassScheduleCard extends StatelessWidget {
           children: [
             topRow(
               context,
-              time,
+              "${classSchedule.startTime} - ${classSchedule.endTime}",
               HugeIcons.strokeRoundedTime03,
             ),
             const SizedBox(height: 4),
             topRow(
               context,
-              room,
+              classSchedule.location,
               HugeIcons.strokeRoundedMeetingRoom,
             ),
             const SizedBox(height: 10),
             topRow(
               context,
-              teacher,
+              classSchedule.teacher,
               HugeIcons.strokeRoundedTeaching,
             ),
             const SizedBox(height: 10),
             Text(
-              courseName,
+              "${classSchedule.courseCode} - ${classSchedule.courseName}",
               style: Theme.of(context).textTheme.titleMedium,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
