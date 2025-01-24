@@ -19,8 +19,10 @@ class ClassScheduleAdminScreen extends StatefulWidget {
 class _ClassScheduleAdminScreenState extends State<ClassScheduleAdminScreen> {
   @override
   void initState() {
-    fetchClassSchedules();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchClassSchedules();
+    });
   }
 
   Future<void> fetchClassSchedules() async {
