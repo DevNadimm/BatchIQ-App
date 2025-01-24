@@ -123,7 +123,10 @@ class _ClassScheduleAdminScreenState extends State<ClassScheduleAdminScreen> {
                         ...controller.dayClasses(day).map(
                               (classSchedule) => Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 4.0, bottom: 4, right: 16),
+                                  top: 4.0,
+                                  bottom: 4,
+                                  right: 16,
+                                ),
                                 child: ClassScheduleCard(
                                   classSchedule: classSchedule,
                                 ),
