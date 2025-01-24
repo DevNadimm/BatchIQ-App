@@ -68,7 +68,6 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
           key: _formKey,
           child: Column(
             children: [
-              // Course Name Field with Validator
               TextFormField(
                 controller: courseNameController,
                 keyboardType: TextInputType.text,
@@ -85,7 +84,6 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Course Code Field with Validator
               TextFormField(
                 controller: courseCodeController,
                 keyboardType: TextInputType.text,
@@ -102,7 +100,6 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Teacher Name Field with Validator
               TextFormField(
                 controller: teacherController,
                 keyboardType: TextInputType.text,
@@ -119,7 +116,6 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Location Field with Validator
               TextFormField(
                 controller: locationController,
                 keyboardType: TextInputType.text,
@@ -136,7 +132,6 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Start Time Picker with Validator
               GestureDetector(
                 onTap: () => _pickTime(context, startTimeController),
                 child: AbsorbPointer(
@@ -158,7 +153,6 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
               ),
               const SizedBox(height: 16),
 
-              // End Time Picker with Validator
               GestureDetector(
                 onTap: () => _pickTime(context, endTimeController),
                 child: AbsorbPointer(
@@ -192,7 +186,6 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Submit Button
               GetBuilder<ClassScheduleController>(
                 builder: (controller) {
                   return Visibility(
