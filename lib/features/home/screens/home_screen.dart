@@ -75,11 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   .copyWith(color: Colors.white),
             ),
           ),
-          leading: IconButton(
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
+          leading: Builder(
+            builder: (context) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                icon: const Icon(HugeIcons.strokeRoundedMenu02),
+              );
             },
-            icon: const Icon(HugeIcons.strokeRoundedMenu02),
           ),
           centerTitle: true,
           actions: [
