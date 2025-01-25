@@ -1,4 +1,4 @@
-import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
+import 'package:batchiq_app/shimmer/admin_dashboard_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
@@ -52,7 +52,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       body: GetBuilder<MemberCountController>(builder: (controller) {
         return Visibility(
           visible: !controller.isLoading,
-          replacement: const ProgressIndicatorWidget(),
+          replacement: const AdminDashboardLoading(),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
