@@ -37,7 +37,6 @@ class MyCalendarEventController extends GetxController {
       events.clear();
       final userDetails = await _getUserDetails();
       final batchId = userDetails["batchId"] ?? "";
-      final memberId = userDetails["uid"] ?? "";
 
       final querySnapshot = await _firestore
           .collection("Batches")
