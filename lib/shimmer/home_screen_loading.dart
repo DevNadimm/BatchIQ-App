@@ -1,30 +1,7 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/shimmer/shimmer_container.dart';
+import 'package:batchiq_app/shimmer/shimmer_row.dart';
 import 'package:flutter/material.dart';
-
-class ShimmerRow extends StatelessWidget {
-  final int itemCount;
-  final double width;
-  final double height;
-
-  const ShimmerRow({
-    required this.itemCount,
-    required this.width,
-    required this.height,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(
-        itemCount,
-            (index) => ShimmerContainer(width: width, height: height),
-      ),
-    );
-  }
-}
 
 class HomeScreenLoading extends StatelessWidget {
   const HomeScreenLoading({super.key});
@@ -56,7 +33,6 @@ class HomeScreenLoading extends StatelessWidget {
             child: ShimmerRow(itemCount: 3, width: 100, height: 50),
           ),
           const SizedBox(height: 8),
-
           const Padding(
             padding: EdgeInsets.only(left: 16.0),
             child: Column(
@@ -80,9 +56,7 @@ class HomeScreenLoading extends StatelessWidget {
               ],
             ),
           ),
-
           const SizedBox(height: 24),
-
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -97,7 +71,8 @@ class HomeScreenLoading extends StatelessWidget {
                 ),
                 itemCount: 8,
                 itemBuilder: (context, index) {
-                  return const ShimmerContainer(width: double.infinity, height: 100);
+                  return const ShimmerContainer(
+                      width: double.infinity, height: 100);
                 },
               ),
             ),
