@@ -8,6 +8,8 @@ class HomeScreenLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -28,28 +30,28 @@ class HomeScreenLoading extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16),
-            child: ShimmerRow(itemCount: 3, width: 100, height: 50),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: ShimmerRow(itemCount: 3, width: width / 3.6, height: 50),
           ),
           const SizedBox(height: 8),
-          const Padding(
-            padding: EdgeInsets.only(left: 16.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ShimmerContainer(width: 130, height: 30),
-                SizedBox(height: 8),
-                ShimmerContainer(width: 130, height: 30),
-                SizedBox(height: 16),
+                ShimmerContainer(width: width / 2.7, height: 30),
+                const SizedBox(height: 8),
+                ShimmerContainer(width: width / 2.7, height: 30),
+                const SizedBox(height: 16),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   child: Row(
                     children: [
-                      ShimmerContainer(width: 250, height: 130),
-                      SizedBox(width: 16),
-                      ShimmerContainer(width: 250, height: 130),
+                      ShimmerContainer(width: width / 1.5, height: 130),
+                      const SizedBox(width: 16),
+                      ShimmerContainer(width: width / 1.5, height: 130),
                     ],
                   ),
                 ),
