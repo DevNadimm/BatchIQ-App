@@ -2,6 +2,7 @@ import 'package:batchiq_app/core/constants/grid_content_class.dart';
 import 'package:batchiq_app/core/constants/icon_image_name.dart';
 import 'package:batchiq_app/features/home/screens/announcement_screen.dart';
 import 'package:batchiq_app/features/home/screens/assignment_screen.dart';
+import 'package:batchiq_app/features/home/screens/my_calendar_screen.dart';
 import 'package:batchiq_app/features/home/screens/notification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,9 @@ List<GridContent> userGridContentList = [
     userDescription: "Track and organize your calendar events.",
     iconPath: IconImageName.calendar,
     color: Colors.blue,
-    onTapUser: () {},
+    onTapUser: () {
+      Get.to(const MyCalendarScreen());
+    },
   ),
   GridContent(
     name: "Announcement",

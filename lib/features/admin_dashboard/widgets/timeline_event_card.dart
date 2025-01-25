@@ -1,5 +1,6 @@
 import 'package:batchiq_app/features/admin_dashboard/models/my_calendar_event_model.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class TimelineEventCard extends StatelessWidget {
   final MyCalendarEventModel event;
@@ -13,7 +14,7 @@ class TimelineEventCard extends StatelessWidget {
       case "announcement":
         return Colors.green;
       case "assignment":
-        return Colors.red;
+        return Colors.redAccent;
       case "exam":
         return Colors.blue;
       default:
@@ -38,7 +39,7 @@ class TimelineEventCard extends StatelessWidget {
         Text(
           '$month $day',
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.w600,
             color: Colors.black.withOpacity(0.7),
           ),
@@ -46,7 +47,7 @@ class TimelineEventCard extends StatelessWidget {
         Text(
           year,
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 14,
             color: Colors.black.withOpacity(0.5),
           ),
         ),
@@ -86,23 +87,44 @@ class TimelineEventCard extends StatelessWidget {
                             ),
                       ),
                       const SizedBox(height: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: _getEventTypeColor(event.eventType),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          event.eventType.toUpperCase(),
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: _getEventTypeColor(event.eventType),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              event.eventType.toUpperCase(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
-                        ),
+                            ),
+                          ),
+                          if(isAdmin)
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: const Icon(
+                                HugeIcons.strokeRoundedDelete01,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            )
+                        ],
                       ),
                     ],
                   ),
