@@ -1,10 +1,10 @@
 import 'package:batchiq_app/core/constants/error_messages.dart';
+import 'package:batchiq_app/core/utils/helper/helper_functions.dart';
 import 'package:batchiq_app/core/utils/id_generator.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/class_schedule_model.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class ClassScheduleController extends GetxController {
   static final ClassScheduleController instance = Get.find<ClassScheduleController>();
@@ -33,8 +33,9 @@ class ClassScheduleController extends GetxController {
 
   void _sortClassesByTime() {
     classSchedules.sort((a, b) {
-      final startTimeA = DateFormat.jm().parse(a.startTime);
-      final startTimeB = DateFormat.jm().parse(b.startTime);
+      final startTimeA = HelperFunctions.parseTime(a.startTime);
+      final startTimeB = HelperFunctions.parseTime(b.startTime);
+
       return startTimeA.compareTo(startTimeB);
     });
   }
