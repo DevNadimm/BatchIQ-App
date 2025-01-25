@@ -62,7 +62,7 @@ class UserContentGrid extends StatelessWidget {
         },
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 1.1,
+          childAspectRatio: 1,
           mainAxisSpacing: 16,
           crossAxisSpacing: 16,
         ),
