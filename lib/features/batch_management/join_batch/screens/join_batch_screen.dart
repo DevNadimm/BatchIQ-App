@@ -1,11 +1,14 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
+import 'package:batchiq_app/features/batch_management/create_batch/screens/apply_for_admin_screen.dart';
+import 'package:batchiq_app/features/batch_management/create_batch/screens/create_batch_screen.dart';
+import 'package:batchiq_app/features/batch_management/create_batch/screens/current_status_screen.dart';
 import 'package:batchiq_app/features/batch_management/join_batch/widgets/batch_id_section.dart';
-import 'package:batchiq_app/features/batch_management/join_batch/widgets/create_batch_section.dart';
 import 'package:batchiq_app/features/batch_management/join_batch/widgets/custom_card.dart';
 import 'package:batchiq_app/features/batch_management/join_batch/widgets/feature_row.dart';
 import 'package:batchiq_app/features/batch_management/join_batch/widgets/greeting_section.dart';
 import 'package:batchiq_app/features/profile/screens/profile_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +21,6 @@ class JoinBatchScreen extends StatefulWidget {
 
 class _JoinBatchScreenState extends State<JoinBatchScreen> {
   final _userController = UserController();
-  bool isUserAdmin = false;
   String? userName;
   String? uid;
 
@@ -31,7 +33,6 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
   Future<void> _fetchUser() async {
     final user = await _userController.fetchUserData();
     setState(() {
-      isUserAdmin = user?.role == "admin";
       userName = user?.name ?? "Guest";
       uid = user?.uid ?? "";
     });
@@ -71,9 +72,18 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
             const SizedBox(height: 16),
             _buildBatchIDSection(uid ?? ""),
             const SizedBox(height: 16),
-            CreateBatchSection(
-              isUserAdmin: isUserAdmin,
-              uid: uid ?? "",
+            SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  onTapCreateBatch();
+                },
+                child: const Text(
+                  "Create a Batch",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+              ),
             ),
           ],
         ),
@@ -117,9 +127,32 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
             style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey),
           ),
           const SizedBox(height: 4),
-          BatchIDSection(userId: uid,),
+          BatchIDSection(userId: uid),
         ],
       ),
     );
+  }
+
+  void onTapCreateBatch () async {
+    final userController = UserController();
+    final user = await userController.fetchUserData();
+    final isUserAdmin = user?.role == 'admin';
+
+    if (isUserAdmin) {
+      Get.to(const CreateBatchScreen());
+    } else {
+      final firestore = FirebaseFirestore.instance;
+      final result = await firestore
+          .collection("AdminApplications")
+          .doc(uid)
+          .get();
+      if (result.exists) {
+        final data = result.data() as Map<String, dynamic>;
+        final status = data["status"];
+        Get.to(CurrentStatusScreen(status: status));
+      } else {
+        Get.to(const ApplyForAdminScreen());
+      }
+    }
   }
 }
