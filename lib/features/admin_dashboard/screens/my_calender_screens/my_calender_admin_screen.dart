@@ -2,6 +2,7 @@ import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/my_calendar_event_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/widgets/timeline_event_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,11 +14,10 @@ class MyCalendarAdminScreen extends StatefulWidget {
 }
 
 class _MyCalendarAdminScreenState extends State<MyCalendarAdminScreen> {
-
   @override
   void initState() {
-    fetchEvents();
     super.initState();
+    fetchEvents();
   }
 
   Future<void> fetchEvents() async {
@@ -50,30 +50,23 @@ class _MyCalendarAdminScreenState extends State<MyCalendarAdminScreen> {
       ),
       body: GetBuilder<MyCalendarEventController>(
         builder: (controller) {
-          return Visibility(
-            visible: !controller.isLoading,
-            replacement: const ProgressIndicatorWidget(),
-            child: controller.events.isEmpty
-                ? const EmptyList(
-                    title: "Empty Events!",
-                  )
-                : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 8),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: controller.events.length,
-                          itemBuilder: (context, index) {
-                            final event = controller.events[index];
-                            return Text("${event.date} - ${event.title}");
-                          },
-                        ),
-                        const SizedBox(height: 8),
-                      ],
-                    ),
-                  ),
+          if (controller.isLoading) {
+            return const Center(child: ProgressIndicatorWidget());
+          }
+
+          if (controller.events.isEmpty) {
+            return const EmptyList(title: "Empty Events!");
+          }
+
+          return ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            itemCount: controller.events.length,
+            itemBuilder: (context, index) {
+              final event = controller.events[index];
+              return TimelineEventCard(
+                event: event,
+              );
+            },
           );
         },
       ),
