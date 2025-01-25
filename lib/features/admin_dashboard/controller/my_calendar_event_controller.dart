@@ -5,8 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class MyCalendarEventController extends GetxController {
-  static MyCalendarEventController get instance =>
-      Get.find<MyCalendarEventController>();
+  static MyCalendarEventController get instance => Get.find<MyCalendarEventController>();
 
   String? errorMessage;
   bool isSuccess = false;
@@ -29,8 +28,7 @@ class MyCalendarEventController extends GetxController {
     };
   }
 
-  /// ============ Get ============
-  Future<bool> getNotifications() async {
+  Future<bool> getEvents() async {
     _setLoading(true);
 
     try {
