@@ -1,10 +1,12 @@
+import 'package:batchiq_app/features/admin_dashboard/models/my_calendar_event_model.dart';
 import 'package:flutter/material.dart';
 
 class TimelineEventCard extends StatelessWidget {
-  final dynamic event;
+  final MyCalendarEventModel event;
+  final bool isAdmin;
 
   const TimelineEventCard(
-      {super.key, required this.event});
+      {super.key, required this.event, required this.isAdmin});
 
   Color _getEventTypeColor(String eventType) {
     switch (eventType.toLowerCase()) {

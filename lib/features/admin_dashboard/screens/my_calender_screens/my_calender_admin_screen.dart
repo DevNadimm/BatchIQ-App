@@ -65,6 +65,7 @@ class _MyCalendarAdminScreenState extends State<MyCalendarAdminScreen> {
               final event = controller.events[index];
               return TimelineEventCard(
                 event: event,
+                isAdmin: true,
               );
             },
           );
