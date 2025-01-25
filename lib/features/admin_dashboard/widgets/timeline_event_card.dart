@@ -14,7 +14,7 @@ class TimelineEventCard extends StatelessWidget {
       case "announcement":
         return Colors.green;
       case "assignment":
-        return Colors.redAccent;
+        return Colors.red;
       case "exam":
         return Colors.blue;
       default:
