@@ -20,6 +20,7 @@ dependencies:
   hugeicons: ^0.0.7
   dropdown_button2: ^2.3.9
   flutter_svg: ^2.0.17
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
