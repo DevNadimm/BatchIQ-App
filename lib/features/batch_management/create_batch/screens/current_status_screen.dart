@@ -1,5 +1,6 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icon_image_name.dart';
+import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:flutter/material.dart';
 
 class CurrentStatusScreen extends StatefulWidget {
@@ -61,8 +62,8 @@ class _CurrentStatusScreenState extends State<CurrentStatusScreen> {
               top: 0,
               child: IconButton(
                 onPressed: () => Navigator.pop(context),
-                icon: const Icon(
-                  Icons.arrow_back,
+                icon: Icon(
+                  backArrow,
                   color: Colors.black,
                 ),
               ),
