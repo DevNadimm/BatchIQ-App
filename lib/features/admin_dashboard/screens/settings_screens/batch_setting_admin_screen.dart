@@ -85,29 +85,37 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
     required String description,
     required VoidCallback onTap,
   }) {
-    return ListTile(
-      splashColor: primaryColor.withOpacity(0.1),
-      leading: CircleAvatar(
-        backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
-        child: Icon(icon, color: Theme.of(context).primaryColor),
-      ),
-      title: Text(
-        title,
-        style: Theme.of(context)
-            .textTheme
-            .titleMedium!
-            .copyWith(fontWeight: FontWeight.bold),
-      ),
-      subtitle: Text(
-        description,
-        style: Theme.of(context)
-            .textTheme
-            .bodySmall!
-            .copyWith(color: secondaryFontColor),
-      ),
-      trailing: const Icon(Icons.chevron_right, color: Colors.grey),
-      onTap: onTap,
-      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16.0),
+    return Column(
+      children: [
+        ListTile(
+          splashColor: primaryColor.withOpacity(0.1),
+          leading: CircleAvatar(
+            backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
+            child: Icon(icon, color: Theme.of(context).primaryColor),
+          ),
+          title: Text(
+            title,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            description,
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall!
+                .copyWith(color: secondaryFontColor),
+          ),
+          trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+          onTap: onTap,
+          contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16.0),
+        ),
+        Divider(
+          height: 1.5,
+          color: Colors.grey.withOpacity(0.2),
+        ),
+      ],
     );
   }
 }

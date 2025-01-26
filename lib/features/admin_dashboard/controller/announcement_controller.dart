@@ -98,7 +98,7 @@ class AnnouncementController extends GetxController {
 
       if (sendNotification) {
         await NotificationController.instance.createNotification(
-          type: 'announcements',
+          type: 'announcement',
           title: title,
           body: message,
           documentId: docId,

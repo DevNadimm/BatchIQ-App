@@ -61,26 +61,17 @@ class _NotificationAdminScreenState extends State<NotificationAdminScreen> {
                       ? const EmptyList(
                           title: "Empty Notification!",
                         )
-                      : SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 8),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: controller.notifications.length,
-                                itemBuilder: (context, index) {
-                                  final notification = controller.notifications[index];
-                                  return NotificationCard(
-                                    notification: notification,
-                                    isAdmin: true,
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 8),
-                            ],
-                          ),
-                        ),
+                      : ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: controller.notifications.length,
+                        itemBuilder: (context, index) {
+                          final notification = controller.notifications[index];
+                          return NotificationCard(
+                            notification: notification,
+                            isAdmin: true,
+                          );
+                        },
+                      ),
                 );
               },
             ),
