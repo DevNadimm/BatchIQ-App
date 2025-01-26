@@ -86,7 +86,7 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
             children: [
               Text(
                 notification.title,
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 16),
               Container(
@@ -102,9 +102,7 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
                 child: Text(
                   notification.body,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontSize: 16.0,
                         color: Colors.grey[800],
-                        height: 1.5,
                       ),
                 ),
               ),
@@ -120,9 +118,10 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
                   Expanded(
                     child: Text(
                       formatDate(notification.createdAt),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: secondaryFontColor,
-                          ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: secondaryFontColor),
                     ),
                   ),
                 ],
