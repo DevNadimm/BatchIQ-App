@@ -1,4 +1,5 @@
 import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/member_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/my_calendar_event_controller.dart';
 import 'package:batchiq_app/features/home/controller/batch_info_controller.dart';
 import 'package:get/get.dart';
@@ -34,5 +35,8 @@ class InitialBindings implements Bindings {
 
     // Home Feature
     Get.put(BatchInfoController());
+
+    // Other
+    Get.put(MemberController());
   }
 }
