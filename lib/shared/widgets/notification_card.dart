@@ -4,7 +4,9 @@ import 'package:batchiq_app/core/utils/helper/helper_functions.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/notification_model.dart';
+import 'package:batchiq_app/features/home/screens/notification_view_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class NotificationCard extends StatelessWidget {
@@ -146,7 +148,9 @@ class NotificationCard extends StatelessWidget {
                   Icons.chevron_right,
                   color: Colors.grey,
                 ),
-          onTap: () {},
+          onTap: () {
+            Get.to(NotificationViewScreen(notification: notification));
+          },
           contentPadding:
               const EdgeInsets.symmetric(vertical: 8, horizontal: 16.0),
         ),

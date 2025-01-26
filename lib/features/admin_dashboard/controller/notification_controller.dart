@@ -210,29 +210,25 @@ class NotificationController extends GetxController {
   /// ============ Mark Notification ============
   Future<bool> markNotificationAsRead({
     required String batchId,
+    required String userId,
     required String notificationId,
   }) async {
     _setLoading(true);
 
     try {
-      final members = await _getBatchMembers(batchId);
-      if (members.isEmpty) throw Exception("No members found in the batch!");
-
       final updateData = {
         "updatedAt": DateTime.now().toString(),
         "read": true,
       };
 
-      for (var member in members) {
-        await _firestore
-            .collection("Batches")
-            .doc(batchId)
-            .collection("Members")
-            .doc(member.id)
-            .collection("Notifications")
-            .doc(notificationId)
-            .update(updateData);
-      }
+      await _firestore
+          .collection("Batches")
+          .doc(batchId)
+          .collection("Members")
+          .doc(userId)
+          .collection("Notifications")
+          .doc(notificationId)
+          .update(updateData);
 
       isSuccess = true;
       errorMessage = null;
