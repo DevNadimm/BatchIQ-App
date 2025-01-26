@@ -59,6 +59,8 @@ class NotificationController extends GetxController {
       notifications.addAll(querySnapshot.docs.map((doc) =>
           NotificationModel.fromFirestore(doc.data(), doc.id)));
 
+      notifications.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
       isSuccess = true;
       errorMessage = null;
     } catch (e) {

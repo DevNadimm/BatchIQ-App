@@ -19,6 +19,26 @@ class HelperFunctions {
     }
   }
 
+  static String parseTimestamp(String timestamp) {
+    final DateTime parsedDate = DateTime.parse(timestamp);
+    final DateTime now = DateTime.now();
+    final Duration difference = now.difference(parsedDate);
+
+    if (difference.inMinutes < 1) {
+      return 'Just now';
+    } else if (difference.inMinutes < 60) {
+      return '${difference.inMinutes} min ago';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} hour${difference.inHours > 1
+          ? 's'
+          : ''} ago';
+    } else if (difference.inDays < 30) {
+      return '${difference.inDays} day${difference.inDays > 1 ? 's' : ''} ago';
+    } else {
+      return DateFormat('d MMM').format(parsedDate);
+    }
+  }
+
   static String getClassStatus(String startTime, String endTime) {
     final now = DateTime.now();
 
