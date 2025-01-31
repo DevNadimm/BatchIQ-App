@@ -5,6 +5,7 @@ import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dar
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class AssignmentController extends GetxController {
   static final AssignmentController instance = Get.find<AssignmentController>();
@@ -40,7 +41,11 @@ class AssignmentController extends GetxController {
           .map((doc) => AssignmentModel.fromFirestore(doc.data(), doc.id))
           .toList();
 
-      assignments.sort((a, b)=> a.deadline.compareTo(b.deadline));
+      assignments.sort((a, b) {
+        final aDate = _parseDate(a.deadline);
+        final bDate = _parseDate(b.deadline);
+        return aDate.compareTo(bDate);
+      });
 
       isSuccess = true;
       errorMessage = null;
@@ -194,5 +199,10 @@ class AssignmentController extends GetxController {
     }
 
     return isSuccess;
+  }
+
+  DateTime _parseDate(String dateStr) {
+    final formatter = DateFormat('MMM dd, yyyy');
+    return formatter.parse(dateStr);
   }
 }
