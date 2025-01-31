@@ -4,6 +4,7 @@ import 'package:batchiq_app/core/utils/helper/helper_functions.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/notification_model.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/notification_screens/edit_notification_screen.dart';
 import 'package:batchiq_app/features/home/screens/notification_view_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -96,7 +97,7 @@ class NotificationCard extends StatelessWidget {
                   itemBuilder: (BuildContext context) => [
                     PopupMenuItem(
                       onTap: () {
-                        // Add your edit notification screen navigation logic
+                        Get.to(() => EditNotificationScreen(notification: notification));
                       },
                       child: Row(
                         children: [
