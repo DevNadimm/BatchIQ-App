@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class HelperFunctions {
@@ -60,5 +61,39 @@ class HelperFunctions {
     } else {
       return 'Upcoming';
     }
+  }
+
+  static Color getEventTypeColor(String eventType, String eventDateString) {
+    DateTime now = DateTime.now();
+    DateTime eventDate;
+
+    try {
+      eventDate = DateFormat("MMM dd, yyyy").parse(eventDateString);
+    } catch (e) {
+      return Colors.grey;
+    }
+
+    if (eventDate.year == now.year && eventDate.month == now.month && eventDate.day == now.day) {
+      return Colors.orange;
+    }
+
+    return eventDate.isBefore(now) ? Colors.red : Colors.green;
+  }
+
+  static String getEventStatus(String eventDateString) {
+    DateTime now = DateTime.now();
+    DateTime eventDate;
+
+    try {
+      eventDate = DateFormat("MMM dd, yyyy").parse(eventDateString);
+    } catch (e) {
+      return "Unknown";
+    }
+
+    if (eventDate.year == now.year && eventDate.month == now.month && eventDate.day == now.day) {
+      return "Happening Today";
+    }
+
+    return eventDate.isBefore(now) ? "Completed" : "Scheduled";
   }
 }

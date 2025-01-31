@@ -45,6 +45,8 @@ class MyCalendarEventController extends GetxController {
       events.addAll(querySnapshot.docs.map((doc) =>
           MyCalendarEventModel.fromFirestore(doc.data(), doc.id)));
 
+      events.sort((a, b) => a.date.compareTo(b.date));
+
       isSuccess = true;
       errorMessage = null;
     } catch (e) {
