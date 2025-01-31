@@ -58,4 +58,27 @@ class MyCalendarEventController extends GetxController {
 
     return isSuccess;
   }
+
+  Future<bool> deleteEvent(String eventId) async {
+    _setLoading(true);
+    try {
+      final data = await _userController.fetchUserData();
+      final batchId = data?.batchId ?? "";
+
+      final batchRef = _firestore.collection("Batches").doc(batchId);
+      await batchRef.collection("MyCalendar").doc(eventId).delete();
+
+      events.removeWhere((event) => event.id == eventId);
+
+      isSuccess = true;
+      errorMessage = null;
+    } catch (e) {
+      isSuccess = false;
+      errorMessage = ErrorMessages.deleteEventsError;
+    } finally {
+      _setLoading(false);
+    }
+
+    return isSuccess;
+  }
 }

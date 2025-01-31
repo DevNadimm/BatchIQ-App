@@ -1,6 +1,10 @@
 import 'package:batchiq_app/core/utils/helper/helper_functions.dart';
+import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/my_calendar_event_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/my_calendar_event_model.dart';
+import 'package:batchiq_app/shared/dialogs/delete_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class TimelineEventCard extends StatelessWidget {
@@ -20,7 +24,7 @@ class TimelineEventCard extends StatelessWidget {
     String year = dateParts[2];
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 10),
@@ -99,19 +103,25 @@ class TimelineEventCard extends StatelessWidget {
                                   ),
                             ),
                           ),
-                          if(isAdmin)
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
+                          if (isAdmin)
+                            IconButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => DeleteDialog(
+                                    onTap: () {
+                                      deleteAssignment();
+                                      Get.back();
+                                    },
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                HugeIcons.strokeRoundedDelete02,
                                 color: Colors.red,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: const Icon(
-                                HugeIcons.strokeRoundedDelete01,
-                                color: Colors.white,
                                 size: 20,
                               ),
-                            )
+                            ),
                         ],
                       ),
                     ],
@@ -123,5 +133,15 @@ class TimelineEventCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> deleteAssignment() async {
+    final controller = MyCalendarEventController.instance;
+    final isDelete = await controller.deleteEvent(event.id);
+    if (isDelete) {
+      SnackBarMessage.successMessage("Your event has been deleted successfully!");
+    } else {
+      SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
+    }
   }
 }
