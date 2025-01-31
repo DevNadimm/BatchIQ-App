@@ -99,14 +99,9 @@ class AssignmentCard extends StatelessWidget {
                         ),
                       ),
                     ],
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 4),
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: primaryColor.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Icon(HugeIcons.strokeRoundedMoreVertical),
+                    child: const Icon(
+                      HugeIcons.strokeRoundedMoreVertical,
+                      color: Colors.black87,
                     ),
                   ),
               ],
