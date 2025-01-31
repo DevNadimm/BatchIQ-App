@@ -2,6 +2,7 @@ import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/notification_screens/create_notification_screen.dart';
 import 'package:batchiq_app/shared/widgets/notification_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -89,7 +90,9 @@ class _NotificationAdminScreenState extends State<NotificationAdminScreen> {
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => const CreateNotificationScreen());
+                  },
                   child: const Text(
                     "Create Notification",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),

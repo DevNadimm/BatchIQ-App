@@ -92,7 +92,7 @@ class NotificationController extends GetxController {
 
       final docId = documentId?.isNotEmpty == true
           ? documentId!
-          : generateDocId(type.toUpperCase());
+          : "${generateDocId(type.toUpperCase())}-";
 
       final notificationData = {
         "title": title,
