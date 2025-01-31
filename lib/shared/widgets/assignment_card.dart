@@ -133,7 +133,7 @@ class AssignmentCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      assignment.deadline,
+                      "Due: ${assignment.deadline}",
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: secondaryFontColor,
                           ),

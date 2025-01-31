@@ -40,6 +40,8 @@ class AssignmentController extends GetxController {
           .map((doc) => AssignmentModel.fromFirestore(doc.data(), doc.id))
           .toList();
 
+      assignments.sort((a, b)=> a.deadline.compareTo(b.deadline));
+
       isSuccess = true;
       errorMessage = null;
     } catch (e) {

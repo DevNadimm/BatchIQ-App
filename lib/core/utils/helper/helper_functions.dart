@@ -96,4 +96,27 @@ class HelperFunctions {
 
     return eventDate.isBefore(now) ? "Completed" : "Scheduled";
   }
+
+  static Color getAnnouncementColor(String type) {
+    switch (type.toLowerCase()) {
+      case 'general':
+        return Colors.blue;
+      case 'reminder':
+        return Colors.orange;
+      case 'event':
+        return Colors.green;
+      case 'assignment':
+        return Colors.deepPurple;
+      case 'exam':
+        return Colors.red;
+      case 'notice':
+        return Colors.teal;
+      case 'task':
+        return Colors.amber;
+      case 'alert':
+        return Colors.pinkAccent;
+      default:
+        return Colors.grey;
+    }
+  }
 }
