@@ -59,7 +59,7 @@ class _MyCalendarScreenState extends State<MyCalendarScreen> {
           }
 
           return ListView.builder(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
             itemCount: controller.events.length,
             itemBuilder: (context, index) {
               final event = controller.events[index];
