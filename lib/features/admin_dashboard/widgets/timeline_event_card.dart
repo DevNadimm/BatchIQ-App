@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/utils/helper/helper_functions.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/my_calendar_event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -8,19 +9,6 @@ class TimelineEventCard extends StatelessWidget {
 
   const TimelineEventCard(
       {super.key, required this.event, required this.isAdmin});
-
-  Color _getEventTypeColor(String eventType) {
-    switch (eventType.toLowerCase()) {
-      case "announcement":
-        return Colors.green;
-      case "assignment":
-        return Colors.red;
-      case "exam":
-        return Colors.blue;
-      default:
-        return Colors.grey;
-    }
-  }
 
   Widget _buildFormattedDate(String date) {
     final dateParts = date.split(' ');
@@ -69,7 +57,7 @@ class TimelineEventCard extends StatelessWidget {
             Expanded(
               child: Card(
                 margin: EdgeInsets.zero,
-                color: _getEventTypeColor(event.eventType).withOpacity(0.1),
+                color: HelperFunctions.getEventTypeColor(event.eventType, event.date).withOpacity(0.1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -97,11 +85,11 @@ class TimelineEventCard extends StatelessWidget {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: _getEventTypeColor(event.eventType),
-                              borderRadius: BorderRadius.circular(8),
+                              color: HelperFunctions.getEventTypeColor(event.eventType, event.date),
+                              borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
-                              event.eventType.toUpperCase(),
+                              HelperFunctions.getEventStatus(event.date).toUpperCase(),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall
