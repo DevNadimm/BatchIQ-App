@@ -1,5 +1,6 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/formatters/date_formatters.dart';
+import 'package:batchiq_app/core/utils/helper/helper_functions.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/announcement_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/announcement_model.dart';
@@ -117,7 +118,7 @@ class AnnouncementCard extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: secondaryFontColor,
                   ),
-              maxLines: 3,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 16),
@@ -143,14 +144,13 @@ class AnnouncementCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.green.shade50,
-                    border: Border.all(width: 1, color: Colors.green)
+                    borderRadius: BorderRadius.circular(6),
+                    color: HelperFunctions.getAnnouncementColor(announcement.type),
                   ),
                   child: Text(
                     announcement.type.toUpperCase(),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: secondaryFontColor,
+                          color: Colors.white,
                         ),
                   ),
                 ),
