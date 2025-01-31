@@ -91,7 +91,7 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
           splashColor: primaryColor.withOpacity(0.1),
           leading: CircleAvatar(
             backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
-            child: Icon(icon, color: Theme.of(context).primaryColor),
+            child: Icon(icon),
           ),
           title: Text(
             title,
