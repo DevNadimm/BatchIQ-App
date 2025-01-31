@@ -48,7 +48,7 @@ class AnnouncementController extends GetxController {
           .map((doc) => AnnouncementModel.fromFirestore(doc.data(), doc.id))
           .toList();
 
-      announcements.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      announcements.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
       isSuccess = true;
       errorMessage = null;

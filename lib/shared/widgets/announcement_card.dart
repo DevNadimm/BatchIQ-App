@@ -1,5 +1,4 @@
 import 'package:batchiq_app/core/colors/colors.dart';
-import 'package:batchiq_app/core/utils/formatters/date_formatters.dart';
 import 'package:batchiq_app/core/utils/helper/helper_functions.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/announcement_controller.dart';
@@ -134,7 +133,7 @@ class AnnouncementCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      DateFormatter.formatDate(announcement.createdAt),
+                      HelperFunctions.parseTimestamp(announcement.createdAt),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: secondaryFontColor,
                           ),
