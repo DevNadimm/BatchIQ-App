@@ -3,6 +3,7 @@ import 'package:batchiq_app/features/admin_dashboard/models/my_calendar_event_mo
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class MyCalendarEventController extends GetxController {
   static MyCalendarEventController get instance => Get.find<MyCalendarEventController>();
@@ -45,7 +46,11 @@ class MyCalendarEventController extends GetxController {
       events.addAll(querySnapshot.docs.map((doc) =>
           MyCalendarEventModel.fromFirestore(doc.data(), doc.id)));
 
-      events.sort((a, b) => a.date.compareTo(b.date));
+      events.sort((a, b) {
+        final aDate = _parseDate(a.date);
+        final bDate = _parseDate(b.date);
+        return aDate.compareTo(bDate);
+      });
 
       isSuccess = true;
       errorMessage = null;
@@ -80,5 +85,10 @@ class MyCalendarEventController extends GetxController {
     }
 
     return isSuccess;
+  }
+
+  DateTime _parseDate(String dateStr) {
+    final formatter = DateFormat('MMM dd, yyyy');
+    return formatter.parse(dateStr);
   }
 }
