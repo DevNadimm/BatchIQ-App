@@ -117,7 +117,7 @@ class AssignmentCard extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: secondaryFontColor,
                   ),
-              maxLines: 3,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 16),
