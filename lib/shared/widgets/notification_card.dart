@@ -141,7 +141,7 @@ class NotificationCard extends StatelessWidget {
                   ],
                   child: const Icon(
                     HugeIcons.strokeRoundedMoreVertical,
-                    color: Colors.grey,
+                    color: Colors.black54,
                   ),
                 )
               : const Icon(
