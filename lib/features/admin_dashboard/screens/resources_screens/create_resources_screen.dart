@@ -1,7 +1,7 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/constants/resource_type_list.dart';
-import 'package:batchiq_app/shared/buttons/custom_dropdown_button.dart';
+import 'package:batchiq_app/features/admin_dashboard/widgets/custom_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController typeController = TextEditingController();
   final TextEditingController urlController = TextEditingController();
-  final TextEditingController subjectController = TextEditingController();
+  final TextEditingController courseController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   bool sendNotification = false;
@@ -102,9 +102,9 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                 const SizedBox(height: 16),
                 TextFormField(
                   readOnly: true,
-                  controller: subjectController,
+                  controller: courseController,
                   decoration: InputDecoration(
-                    hintText: "Subject",
+                    hintText: "Course",
                     hintStyle: TextStyle(
                       color: secondaryFontColor.withOpacity(0.9),
                       fontSize: 16,
@@ -112,28 +112,40 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                     ),
                   ),
                   onTap: () {
-                    showBottomSheet(subjects: [
-                      'Computer Fundamentals and Programming Technique',
-                      'Data Structures and Algorithms',
-                      'Database Management Systems',
-                      'Operating Systems',
-                      'Computer Networks',
-                      'Artificial Intelligence',
-                      'Software Engineering',
-                    ]);
+                    showCustomBottomSheet(
+                      items: [
+                        'Computer Fundamentals and Programming Technique',
+                        'Data Structures and Algorithms',
+                        'Database Management Systems',
+                        'Operating Systems',
+                        'Computer Networks',
+                        'Artificial Intelligence',
+                        'Software Engineering',
+                      ],
+                      controller: courseController,
+                      title: "Choose Course",
+                    );
                   },
                 ),
                 const SizedBox(height: 16),
-                CustomDropdownButton<String>(
-                  items: resourceType,
-                  selectedValue: selectedType,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedType = value;
-                    });
+                TextFormField(
+                  readOnly: true,
+                  controller: typeController,
+                  decoration: InputDecoration(
+                    hintText: "Resource Type",
+                    hintStyle: TextStyle(
+                      color: secondaryFontColor.withOpacity(0.9),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  onTap: () {
+                    showCustomBottomSheet(
+                      items: resourceType,
+                      controller: typeController,
+                      title: "Choose Resource Type",
+                    );
                   },
-                  itemLabel: (item) => item,
-                  hintText: 'Select Resource Type',
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
@@ -182,7 +194,11 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
     );
   }
 
-  Future<void> showBottomSheet({required List<String> subjects}) async {
+  Future<void> showCustomBottomSheet({
+    required List<String> items,
+    required TextEditingController controller,
+    required String title,
+  }) async {
     return showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -191,119 +207,16 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setState) {
-            return Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Choose Subject",
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () => Get.back(),
-                        icon: const Icon(Icons.close),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-
-                  if (subjects.isEmpty)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 24),
-                      child: Center(
-                        child: Text(
-                          "No subjects available",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(color: Colors.grey),
-                        ),
-                      ),
-                    )
-                  else
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ListView.separated(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: subjects.length,
-                              separatorBuilder: (_, __) => const SizedBox(height: 12),
-                              itemBuilder: (context, index) {
-                                final subject = subjects[index];
-                                final isSelected = subjectController.text == subject;
-
-                                return InkWell(
-                                  borderRadius: BorderRadius.circular(12),
-                                  onTap: () {
-                                    setState(() {
-                                      subjectController.text = subject;
-                                    });
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12, horizontal: 16),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: isSelected
-                                          ? Colors.blue.withOpacity(0.1)
-                                          : Colors.transparent,
-                                      border: Border.all(
-                                        color: isSelected ? primaryColor : Colors.grey.shade300,
-                                        width: isSelected ? 1.5 : 1,
-                                      ),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            subject,
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: isSelected ? primaryColor : Colors.black87,
-                                            ),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        if (isSelected)
-                                          Icon(Icons.check_circle, color: primaryColor),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Create Subject",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            return CustomBottomSheetContent(
+              items: items,
+              controller: controller,
+              title: title,
+              onItemSelected: (item) {
+                setState(() {
+                  controller.text = item;
+                });
+                Navigator.pop(context);
+              },
             );
           },
         );
