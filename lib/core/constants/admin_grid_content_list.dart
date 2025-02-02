@@ -5,6 +5,7 @@ import 'package:batchiq_app/features/admin_dashboard/screens/assignment_screens/
 import 'package:batchiq_app/features/admin_dashboard/screens/class_schedule_screens/class_schedule_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/my_calender_screens/my_calender_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/notification_screens/notification_admin_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/resources_screens/resources_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/settings_screens/batch_setting_admin_screen.dart';
 import 'package:batchiq_app/features/others/screens/under_maintenance_screen.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,7 @@ List<GridContent> adminGridContentList = [
     adminDescription: "Manage all available resources.",
     iconPath: IconImageName.resources,
     color: Colors.teal,
-    onTapAdmin: () => Get.to(const UnderMaintenanceScreen()),
+    onTapAdmin: () => Get.to(() => const ResourcesAdminScreen()),
   ),
   GridContent(
     name: "Batch Settings",
