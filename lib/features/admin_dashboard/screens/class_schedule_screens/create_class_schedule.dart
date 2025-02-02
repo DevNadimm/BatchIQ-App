@@ -1,9 +1,10 @@
+import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/day_name_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
-import 'package:batchiq_app/shared/buttons/custom_dropdown_button.dart';
+import 'package:batchiq_app/features/admin_dashboard/widgets/custom_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,8 +24,7 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
   final TextEditingController locationController = TextEditingController();
   final TextEditingController startTimeController = TextEditingController();
   final TextEditingController endTimeController = TextEditingController();
-
-  String? selectedDay;
+  final TextEditingController selectedDayController = TextEditingController();
 
   Future<void> _pickTime(
       BuildContext context, TextEditingController controller) async {
@@ -173,16 +173,30 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              CustomDropdownButton<String>(
-                items: days,
-                selectedValue: selectedDay,
-                onChanged: (value) {
-                  setState(() {
-                    selectedDay = value;
-                  });
+              TextFormField(
+                readOnly: true,
+                controller: selectedDayController,
+                decoration: InputDecoration(
+                  hintText: "Select a Day",
+                  hintStyle: TextStyle(
+                    color: secondaryFontColor.withOpacity(0.9),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                onTap: () {
+                  showCustomBottomSheet(
+                    items: days,
+                    controller: selectedDayController,
+                    title: "Select a Day",
+                  );
                 },
-                itemLabel: (item) => item,
-                hintText: 'Select Day',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please select a day';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 16),
 
@@ -219,7 +233,7 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
   Future<void> createClassSchedule() async {
     final controller = ClassScheduleController.instance;
     final isCreated = await controller.createClassSchedule(
-      day: selectedDay.toString(),
+      day: selectedDayController.text,
       startTime: startTimeController.text,
       endTime: endTimeController.text,
       courseCode: courseCodeController.text,
@@ -236,6 +250,36 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
     }
   }
 
+  Future<void> showCustomBottomSheet({
+    required List<String> items,
+    required TextEditingController controller,
+    required String title,
+  }) async {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return CustomBottomSheetContent(
+              items: items,
+              controller: controller,
+              title: title,
+              onItemSelected: (item) {
+                setState(() {
+                  controller.text = item;
+                });
+                Navigator.pop(context);
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
   void clearFields () {
     courseNameController.clear();
     courseCodeController.clear();
@@ -243,5 +287,6 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
     locationController.clear();
     startTimeController.clear();
     endTimeController.clear();
+    selectedDayController.clear();
   }
 }
