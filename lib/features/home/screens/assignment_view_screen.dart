@@ -61,7 +61,7 @@ class _AssignmentViewScreenState extends State<AssignmentViewScreen> {
             children: [
               Text(
                 assignment.title,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 16),
               Container(

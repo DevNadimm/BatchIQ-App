@@ -86,7 +86,7 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
             children: [
               Text(
                 notification.title,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 16),
               Container(
