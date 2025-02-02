@@ -4,7 +4,7 @@ import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/announcement_controller.dart';
-import 'package:batchiq_app/shared/buttons/custom_dropdown_button.dart';
+import 'package:batchiq_app/features/admin_dashboard/widgets/custom_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -22,12 +22,12 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
   final TextEditingController title = TextEditingController();
   final TextEditingController message = TextEditingController();
   final TextEditingController date = TextEditingController();
+  final TextEditingController selectedAnnouncementType = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   DateTime? selectedDate;
 
   bool sendNotification = false;
   bool addToCalendar = false;
-  String? selectedAnnouncementType;
 
   Future<void> _pickDeadline(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -105,16 +105,30 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-                CustomDropdownButton<String>(
-                  items: announcementType,
-                  selectedValue: selectedAnnouncementType,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedAnnouncementType = value;
-                    });
+                TextFormField(
+                  readOnly: true,
+                  controller: selectedAnnouncementType,
+                  decoration: InputDecoration(
+                    hintText: "Announcement Type",
+                    hintStyle: TextStyle(
+                      color: secondaryFontColor.withOpacity(0.9),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  onTap: () {
+                    showCustomBottomSheet(
+                      items: announcementType,
+                      controller: selectedAnnouncementType,
+                      title: "Choose Announcement Type",
+                    );
                   },
-                  itemLabel: (item) => item,
-                  hintText: 'Select Announcement Type',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select an announcement type';
+                    }
+                    return null;
+                  },
                 ),
                 if (addToCalendar)
                   Column(
@@ -235,7 +249,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
       sendNotification: sendNotification,
       addToCalendar: addToCalendar,
       message: message.text,
-      type: selectedAnnouncementType?.toLowerCase() ?? "",
+      type: selectedAnnouncementType.text.toLowerCase(),
       date: date.text,
     );
 
@@ -244,7 +258,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
       title.clear();
       message.clear();
       date.clear();
-      //selectedAnnouncementType = null;
+      selectedAnnouncementType.clear();
       sendNotification = false;
       addToCalendar = false;
       final controller = AnnouncementController.instance;
@@ -252,5 +266,35 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
     } else {
       SnackBarMessage.errorMessage(announcementController.errorMessage ?? "Something went wrong!");
     }
+  }
+
+  Future<void> showCustomBottomSheet({
+    required List<String> items,
+    required TextEditingController controller,
+    required String title,
+  }) async {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return CustomBottomSheetContent(
+              items: items,
+              controller: controller,
+              title: title,
+              onItemSelected: (item) {
+                setState(() {
+                  controller.text = item;
+                });
+                Navigator.pop(context);
+              },
+            );
+          },
+        );
+      },
+    );
   }
 }
