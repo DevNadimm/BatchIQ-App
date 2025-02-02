@@ -77,8 +77,6 @@ class NotificationCard extends StatelessWidget {
                 const SizedBox(height: 04),
                 Text(
                   HelperFunctions.parseTimestamp(notification.createdAt),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!

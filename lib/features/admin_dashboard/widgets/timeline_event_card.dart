@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/helper/helper_functions.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/my_calendar_event_controller.dart';
@@ -27,23 +28,21 @@ class TimelineEventCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(height: 10),
         Text(
           '$month $day',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Colors.black.withOpacity(0.7),
+          style: const TextStyle(
+            color: Colors.black87,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
           ),
         ),
         Text(
           year,
           style: TextStyle(
-            fontSize: 14,
-            color: Colors.black.withOpacity(0.5),
+            fontSize: 13,
+            color: secondaryFontColor,
           ),
         ),
-        const SizedBox(height: 8),
       ],
     );
   }
@@ -73,10 +72,12 @@ class TimelineEventCard extends StatelessWidget {
                     children: [
                       Text(
                         event.title,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-                            ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
                       Row(
@@ -96,11 +97,8 @@ class TimelineEventCard extends StatelessWidget {
                               HelperFunctions.getEventStatus(event.date).toUpperCase(),
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
+                                  .titleSmall!
+                                  .copyWith(color: Colors.white),
                             ),
                           ),
                           if (isAdmin)
@@ -119,7 +117,7 @@ class TimelineEventCard extends StatelessWidget {
                               icon: const Icon(
                                 HugeIcons.strokeRoundedDelete02,
                                 color: Colors.red,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                         ],

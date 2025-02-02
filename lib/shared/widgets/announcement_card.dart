@@ -35,11 +35,12 @@ class AnnouncementCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     announcement.title,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
                 if (isAdmin)
@@ -100,20 +101,21 @@ class AnnouncementCard extends StatelessWidget {
                       ),
                     ],
                     child: const Icon(
-                    HugeIcons.strokeRoundedMoreVertical,
-                    color: Colors.black87,
-                  ),
+                      HugeIcons.strokeRoundedMoreVertical,
+                      color: Colors.black87,
+                    ),
                   ),
               ],
             ),
             const SizedBox(height: 8),
             Text(
               announcement.message,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: secondaryFontColor,
-                  ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: secondaryFontColor),
             ),
             const SizedBox(height: 16),
             Row(
@@ -123,15 +125,16 @@ class AnnouncementCard extends StatelessWidget {
                   children: [
                     Icon(
                       HugeIcons.strokeRoundedCalendar03,
-                      size: 20,
+                      size: 18,
                       color: secondaryFontColor,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       HelperFunctions.parseTimestamp(announcement.createdAt),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: secondaryFontColor,
-                          ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: secondaryFontColor),
                     ),
                   ],
                 ),
@@ -143,9 +146,10 @@ class AnnouncementCard extends StatelessWidget {
                   ),
                   child: Text(
                     announcement.type.toUpperCase(),
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .copyWith(color: Colors.white),
                   ),
                 ),
               ],

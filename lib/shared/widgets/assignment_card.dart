@@ -35,11 +35,12 @@ class AssignmentCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     assignment.title,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
                 if (isAdmin)
@@ -109,11 +110,12 @@ class AssignmentCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               assignment.description,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: secondaryFontColor,
-                  ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: secondaryFontColor),
             ),
             const SizedBox(height: 16),
             Row(
@@ -123,15 +125,16 @@ class AssignmentCard extends StatelessWidget {
                   children: [
                     Icon(
                       HugeIcons.strokeRoundedCalendar03,
-                      size: 20,
+                      size: 18,
                       color: secondaryFontColor,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       "Due: ${assignment.deadline}",
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: secondaryFontColor,
-                          ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: secondaryFontColor),
                     ),
                   ],
                 ),
@@ -145,12 +148,15 @@ class AssignmentCard extends StatelessWidget {
                             Icon(
                               HugeIcons.strokeRoundedLink02,
                               color: primaryColor,
-                              size: 20,
+                              size: 18,
                             ),
                             const SizedBox(width: 4),
                             Text(
                               "Open Link",
-                              style: TextStyle(color: primaryColor),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(color: primaryColor),
                             ),
                           ],
                         ),
