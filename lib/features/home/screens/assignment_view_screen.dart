@@ -2,7 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/member_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dart';
-import 'package:batchiq_app/shared/url_launcher/launch_url.dart';
+import 'package:batchiq_app/core/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';

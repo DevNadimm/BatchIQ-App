@@ -4,7 +4,7 @@ import 'package:batchiq_app/features/admin_dashboard/controller/assignment_contr
 import 'package:batchiq_app/features/admin_dashboard/models/assignment_model.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_screens/edit_assignment_screen.dart';
 import 'package:batchiq_app/features/home/screens/assignment_view_screen.dart';
-import 'package:batchiq_app/shared/url_launcher/launch_url.dart';
+import 'package:batchiq_app/core/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';

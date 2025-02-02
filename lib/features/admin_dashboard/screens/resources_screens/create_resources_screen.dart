@@ -1,7 +1,7 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/constants/resource_type_list.dart';
-import 'package:batchiq_app/features/admin_dashboard/widgets/custom_bottom_sheet.dart';
+import 'package:batchiq_app/shared/custom_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

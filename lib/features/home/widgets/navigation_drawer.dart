@@ -3,7 +3,7 @@ import 'package:batchiq_app/features/auth/models/user_model.dart';
 import 'package:batchiq_app/features/profile/screens/profile_screen.dart';
 import 'package:batchiq_app/features/home/screens/developer_information_screen.dart';
 import 'package:batchiq_app/shared/dialogs/logout_dialog.dart';
-import 'package:batchiq_app/shared/url_launcher/launch_url.dart';
+import 'package:batchiq_app/core/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:get/get.dart';
