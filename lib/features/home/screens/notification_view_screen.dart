@@ -135,19 +135,21 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
                     color: secondaryFontColor,
                   ),
                   const SizedBox(width: 8),
-                  GetBuilder<MemberController>(builder: (controller) {
-                    return Expanded(
-                      child: Text(
-                        controller.isLoading
-                            ? "Loading...!"
-                            : controller.userData?.name ?? "N/A",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(color: secondaryFontColor),
-                      ),
-                    );
-                  }),
+                  GetBuilder<MemberController>(
+                    builder: (controller) {
+                      return Expanded(
+                        child: Text(
+                          controller.isLoading
+                              ? "Loading...!"
+                              : controller.userData?.name ?? "N/A",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(color: secondaryFontColor),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
