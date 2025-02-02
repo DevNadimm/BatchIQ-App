@@ -2,51 +2,31 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/helper/helper_functions.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/member_controller.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
-import 'package:batchiq_app/features/admin_dashboard/models/notification_model.dart';
-import 'package:batchiq_app/features/auth/controller/user_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/models/announcement_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 
-class NotificationViewScreen extends StatefulWidget {
-  const NotificationViewScreen({super.key, required this.notification});
+class AnnouncementViewScreen extends StatefulWidget {
+  const AnnouncementViewScreen({super.key, required this.announcement});
 
-  final NotificationModel notification;
+  final AnnouncementModel announcement;
 
   @override
-  State<NotificationViewScreen> createState() => _NotificationViewScreenState();
+  State<AnnouncementViewScreen> createState() => _AnnouncementViewScreenState();
 }
 
-class _NotificationViewScreenState extends State<NotificationViewScreen> {
+class _AnnouncementViewScreenState extends State<AnnouncementViewScreen> {
   @override
   void initState() {
-    markNotificationAsRead();
     fetchSenderName();
     super.initState();
   }
 
   Future<void> fetchSenderName() async {
     final controller = MemberController.instance;
-    await controller.getUserDataByUid(widget.notification.createdBy);
-  }
-
-  Future<void> markNotificationAsRead() async {
-    final userController = UserController();
-    final user = await userController.fetchUserData();
-    final batchId = user?.batchId ?? "";
-    final userId = user?.uid ?? "";
-
-    final controller = NotificationController.instance;
-    final result = await controller.markNotificationAsRead(
-      batchId: batchId,
-      notificationId: widget.notification.id,
-      userId: userId,
-    );
-    if (result) {
-      await controller.getNotifications();
-    }
+    await controller.getUserDataByUid(widget.announcement.createdBy);
   }
 
   String formatDate(String dateString) {
@@ -56,13 +36,13 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final notification = widget.notification;
+    final announcement = widget.announcement;
 
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text(
-          "Notification",
+          "Announcement",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         leading: IconButton(
@@ -86,7 +66,7 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                notification.title,
+                announcement.title,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 16),
@@ -94,10 +74,10 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
-                  color: HelperFunctions.getNotificationColor(notification.type),
+                  color: HelperFunctions.getAnnouncementColor(announcement.type),
                 ),
                 child: Text(
-                  notification.type.toUpperCase(),
+                  announcement.type.toUpperCase(),
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
@@ -116,10 +96,10 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
                   ),
                 ),
                 child: Text(
-                  notification.body,
+                  announcement.message,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.grey[800],
-                      ),
+                    color: Colors.grey[800],
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
@@ -133,7 +113,7 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      formatDate(notification.createdAt),
+                      formatDate(announcement.createdAt),
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium

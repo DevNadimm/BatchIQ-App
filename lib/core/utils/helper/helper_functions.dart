@@ -119,4 +119,17 @@ class HelperFunctions {
         return Colors.grey;
     }
   }
+
+  static Color getNotificationColor(String type) {
+    switch (type.toLowerCase()) {
+      case 'assignment':
+        return Colors.deepPurple;
+      case 'announcement':
+        return Colors.blue;
+      case 'exam':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
 }
