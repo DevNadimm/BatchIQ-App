@@ -3,6 +3,7 @@ import 'package:batchiq_app/core/constants/icon_image_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/announcement_screens/announcement_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_screens/assignment_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/class_schedule_screens/class_schedule_admin_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/course_screens/course_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/my_calender_screens/my_calender_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/notification_screens/notification_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/resources_screens/resources_admin_screen.dart';
@@ -59,7 +60,7 @@ List<GridContent> adminGridContentList = [
     adminDescription: "Manage course list & faculty contacts.",
     iconPath: IconImageName.course,
     color: const Color(0xFF3F51B5),
-    onTapAdmin: () => Get.to(() => const UnderMaintenanceScreen()),
+    onTapAdmin: () => Get.to(() => const CourseAdminScreen()),
   ),
   GridContent(
     name: "Resources",
