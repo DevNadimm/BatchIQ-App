@@ -12,6 +12,8 @@ class IconImageName {
   static const String admin = "assets/icons/outline_icons/admin.png";
   static const String classSchedule = "assets/icons/outline_icons/classroom.png";
   static const String batchSettings = "assets/icons/outline_icons/settings.png";
+  static const String course = "assets/icons/outline_icons/course.png";
+  static const String jobInternship = "assets/icons/outline_icons/jobInternship.png";
 
   /// Filled Icons
   static const String pending = "assets/icons/filed_colorful_icons/pending.png";
