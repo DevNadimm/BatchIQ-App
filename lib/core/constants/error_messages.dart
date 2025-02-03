@@ -30,4 +30,10 @@ class ErrorMessages {
   static const String createEventsError = "Failed to create the calendar event. Please check your input and try again.";
   static const String editEventsError = "Failed to update the calendar event. Please try again.";
   static const String deleteEventsError = "Failed to delete the calendar event. Please try again.";
+
+  /// Course Management
+  static const String fetchCoursesError = "Failed to load courses. Please try again.";
+  static const String createCourseError = "Failed to create the course. Please check your input and try again.";
+  static const String editCourseError = "Failed to update the course. Please try again.";
+  static const String deleteCourseError = "Failed to delete the course. Please try again.";
 }
