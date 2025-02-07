@@ -1,6 +1,7 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/constants/resource_type_list.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/course_controller.dart';
 import 'package:batchiq_app/shared/custom_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,12 +22,13 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
   final TextEditingController urlController = TextEditingController();
   final TextEditingController courseController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
-
-  bool sendNotification = false;
+  List<String> courseList = [];
   String? selectedType;
 
-  Future<void> createResource() async {
-    // Implement resource creation logic
+  @override
+  void initState() {
+    fetchCourseList();
+    super.initState();
   }
 
   @override
@@ -113,15 +115,7 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                   ),
                   onTap: () {
                     showCustomBottomSheet(
-                      items: [
-                        'Computer Fundamentals and Programming Technique',
-                        'Data Structures and Algorithms',
-                        'Database Management Systems',
-                        'Operating Systems',
-                        'Computer Networks',
-                        'Artificial Intelligence',
-                        'Software Engineering',
-                      ],
+                      items: courseList,
                       controller: courseController,
                       title: "Choose Course",
                     );
@@ -222,5 +216,15 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
         );
       },
     );
+  }
+
+  Future<void> fetchCourseList () async {
+    final controller = CourseController.instance;
+    await controller.getCourses();
+    courseList = controller.courses.map((course) => course.courseName).toList();
+  }
+
+  Future<void> createResource() async {
+    // Implement resource creation logic
   }
 }
