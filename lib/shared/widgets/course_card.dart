@@ -2,7 +2,9 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/course_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/course_model.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/course_screens/edit_course_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class CourseCard extends StatelessWidget {
@@ -49,7 +51,7 @@ class CourseCard extends StatelessWidget {
                     itemBuilder: (BuildContext context) => [
                       PopupMenuItem(
                         onTap: () {
-                          // Edit course logic here
+                          Get.to(() => EditCourseScreen(course: course));
                         },
                         child: Row(
                           children: [
