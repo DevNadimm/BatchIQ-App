@@ -1,5 +1,9 @@
 import 'package:batchiq_app/core/constants/icons_name.dart';
-import 'package:batchiq_app/features/admin_dashboard/screens/resources_screens/create_resources_screen.dart';
+import 'package:batchiq_app/core/utils/ui/empty_list.dart';
+import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/course_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/course_screens/create_course_screen.dart';
+import 'package:batchiq_app/shared/widgets/course_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +15,17 @@ class CourseAdminScreen extends StatefulWidget {
 }
 
 class _CourseAdminScreenState extends State<CourseAdminScreen> {
+  @override
+  void initState() {
+    fetchCourses();
+    super.initState();
+  }
+
+  Future<void> fetchCourses() async {
+    final controller = CourseController.instance;
+    await controller.getCourses();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +51,35 @@ class _CourseAdminScreenState extends State<CourseAdminScreen> {
       ),
       body: Column(
         children: [
-          const Expanded(
-            child: Center(
-              child: Text("Courses"),
+          Expanded(
+            child: GetBuilder<CourseController>(
+              builder: (controller) {
+                return Visibility(
+                  visible: !controller.isLoading,
+                  replacement: const ProgressIndicatorWidget(),
+                  child: controller.courses.isEmpty
+                      ? const EmptyList(
+                          title: "Empty Assignment!",
+                        )
+                      : SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 8),
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: controller.courses.length,
+                                itemBuilder: (context, index) {
+                                  final course = controller.courses[index];
+                                  return CourseCard(course: course, isAdmin: true);
+                                },
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                          ),
+                        ),
+                );
+              },
             ),
           ),
           Column(
@@ -55,7 +96,7 @@ class _CourseAdminScreenState extends State<CourseAdminScreen> {
                     minimumSize: const Size(double.infinity, 50),
                   ),
                   onPressed: () {
-                    Get.to(() => const CreateResourcesScreen());
+                    Get.to(() => const CreateCourseScreen());
                   },
                   child: const Text(
                     "Create Course",
