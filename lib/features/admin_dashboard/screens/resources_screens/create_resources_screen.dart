@@ -1,7 +1,10 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/constants/resource_type_list.dart';
+import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
+import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/course_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/resource_controller.dart';
 import 'package:batchiq_app/shared/custom_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +25,7 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
   final TextEditingController urlController = TextEditingController();
   final TextEditingController courseController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
-  List<String> courseList = [];
+  List<Map<String, String>> courseList = [];
   String? selectedType;
 
   @override
@@ -115,7 +118,7 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                   ),
                   onTap: () {
                     showCustomBottomSheet(
-                      items: courseList,
+                      items: courseList.map((course) => course['name']!).toList(),
                       controller: courseController,
                       title: "Choose Course",
                     );
@@ -166,19 +169,27 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      await createResource();
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 50),
-                  ),
-                  child: const Text(
-                    "Create Resource",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
+                GetBuilder<ResourceController>(
+                  builder: (controller) {
+                    return Visibility(
+                      visible: !controller.isLoading,
+                      replacement: const ProgressIndicatorWidget(),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            await createResource();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 50),
+                        ),
+                        child: const Text(
+                          "Create Resource",
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    );
+                  }
                 ),
               ],
             ),
@@ -221,10 +232,35 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
   Future<void> fetchCourseList () async {
     final controller = CourseController.instance;
     await controller.getCourses();
-    courseList = controller.courses.map((course) => course.courseName).toList();
+    courseList = controller.courses.map((course) => {
+      'name': course.courseName,
+      'id': course.id
+    }).toList();
   }
 
   Future<void> createResource() async {
-    // Implement resource creation logic
+    final course = courseList.firstWhere((course) => courseController.text == course['name']);
+    String courseId = course['id']!;
+
+    final controller = ResourceController.instance;
+    final result = await controller.createResource(
+      title: titleController.text,
+      description: descriptionController.text,
+      courseName: courseController.text,
+      courseId: courseId,
+      resourcesType: typeController.text,
+      url: urlController.text,
+    );
+
+    if (result) {
+      SnackBarMessage.successMessage("Your resource has been created successfully!");
+      titleController.clear();
+      descriptionController.clear();
+      courseController.clear();
+      typeController.clear();
+      urlController.clear();
+    } else {
+      SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
+    }
   }
 }

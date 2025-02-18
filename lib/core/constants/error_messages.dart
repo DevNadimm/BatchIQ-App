@@ -36,4 +36,10 @@ class ErrorMessages {
   static const String createCourseError = "Failed to create the course. Please check your input and try again.";
   static const String editCourseError = "Failed to update the course. Please try again.";
   static const String deleteCourseError = "Failed to delete the course. Please try again.";
+
+  /// Resources
+  static const String fetchResourcesError = "Failed to load resources. Please try again.";
+  static const String createResourceError = "Failed to upload the resource. Please check your input and try again.";
+  static const String editResourceError = "Failed to update the resource. Please try again.";
+  static const String deleteResourceError = "Failed to delete the resource. Please try again.";
 }

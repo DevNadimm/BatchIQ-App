@@ -128,6 +128,8 @@ class HelperFunctions {
         return Colors.blue;
       case 'exam':
         return Colors.red;
+      case 'notification':
+        return Colors.green;
       default:
         return Colors.grey;
     }
