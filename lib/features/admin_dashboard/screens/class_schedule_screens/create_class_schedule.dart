@@ -4,6 +4,7 @@ import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/course_controller.dart';
 import 'package:batchiq_app/shared/custom_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,12 +20,17 @@ class CreateClassScheduleScreen extends StatefulWidget {
 class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController courseNameController = TextEditingController();
-  final TextEditingController courseCodeController = TextEditingController();
-  final TextEditingController teacherController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   final TextEditingController startTimeController = TextEditingController();
   final TextEditingController endTimeController = TextEditingController();
   final TextEditingController selectedDayController = TextEditingController();
+  List<Map<String, String>> courseList = [];
+
+  @override
+  void initState() {
+    fetchCourseList();
+    super.initState();
+  }
 
   Future<void> _pickTime(
       BuildContext context, TextEditingController controller) async {
@@ -69,49 +75,22 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
           child: Column(
             children: [
               TextFormField(
+                readOnly: true,
                 controller: courseNameController,
-                keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                  hintText: "Enter the name of the course",
-                  labelText: "Course Name",
+                decoration: InputDecoration(
+                  hintText: "Course",
+                  hintStyle: TextStyle(
+                    color: secondaryFontColor.withOpacity(0.9),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the course name';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-
-              TextFormField(
-                controller: courseCodeController,
-                keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                  hintText: "Enter the course code (e.g., CSE 101)",
-                  labelText: "Course Code",
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the course code';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-
-              TextFormField(
-                controller: teacherController,
-                keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                  hintText: "Enter the instructor's name",
-                  labelText: "Instructor Name",
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the instructor\'s name';
-                  }
-                  return null;
+                onTap: () {
+                  showCustomBottomSheet(
+                    items: courseList.map((course) => course['courseName']!).toList(),
+                    controller: courseNameController,
+                    title: "Choose Course",
+                  );
                 },
               ),
               const SizedBox(height: 16),
@@ -230,16 +209,28 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
     );
   }
 
+  Future<void> fetchCourseList () async {
+    final controller = CourseController.instance;
+    await controller.getCourses();
+    courseList = controller.courses.map((course) => {
+      'courseName': course.courseName,
+      'courseCode': course.courseCode,
+      'instructorName': course.instructorName,
+    }).toList();
+  }
+
   Future<void> createClassSchedule() async {
+    final selectedCourse = courseList.firstWhere((course) => course['courseName'] == courseNameController.text);
     final controller = ClassScheduleController.instance;
+
     final isCreated = await controller.createClassSchedule(
+      courseName: courseNameController.text,
+      courseCode: selectedCourse['courseCode']!,
+      teacher: selectedCourse['instructorName']!,
+      location: locationController.text,
       day: selectedDayController.text,
       startTime: startTimeController.text,
       endTime: endTimeController.text,
-      courseCode: courseCodeController.text,
-      courseName: courseNameController.text,
-      teacher: teacherController.text,
-      location: locationController.text,
     );
 
     if(isCreated){
@@ -282,8 +273,6 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
 
   void clearFields () {
     courseNameController.clear();
-    courseCodeController.clear();
-    teacherController.clear();
     locationController.clear();
     startTimeController.clear();
     endTimeController.clear();
