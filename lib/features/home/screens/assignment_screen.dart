@@ -54,9 +54,11 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
             visible: !controller.isLoading,
             replacement: const ProgressIndicatorWidget(),
             child: controller.assignments.isEmpty
-                ? const EmptyList(
-                    title: "Empty Assignment!",
-                  )
+                ? const Center(
+                  child: EmptyList(
+                      title: "Empty Assignment!",
+                    ),
+                )
                 : SingleChildScrollView(
                     child: Column(
                       children: [

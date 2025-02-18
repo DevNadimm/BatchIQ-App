@@ -55,9 +55,11 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
             visible: !controller.isLoading,
             replacement: const ProgressIndicatorWidget(),
             child: controller.announcements.isEmpty
-                ? const EmptyList(
-                    title: "Empty Announcement!",
-                  )
+                ? const Center(
+                  child: EmptyList(
+                      title: "Empty Announcement!",
+                    ),
+                )
                 : SingleChildScrollView(
                     child: Column(
                       children: [

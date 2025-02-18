@@ -55,7 +55,7 @@ class _MyCalendarScreenState extends State<MyCalendarScreen> {
           }
 
           if (controller.events.isEmpty) {
-            return const EmptyList(title: "Empty Events!");
+            return const Center(child: EmptyList(title: "Empty Events!"));
           }
 
           return ListView.builder(

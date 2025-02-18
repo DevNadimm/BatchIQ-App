@@ -54,9 +54,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
             visible: !controller.isLoading,
             replacement: const ProgressIndicatorWidget(),
             child: controller.notifications.isEmpty
-                ? const EmptyList(
-                    title: "Empty Notification!",
-                  )
+                ? const Center(
+                  child: EmptyList(
+                      title: "Empty Notification!",
+                    ),
+                )
                 : ListView.builder(
                   shrinkWrap: true,
                   itemCount: controller.notifications.length,
