@@ -47,7 +47,7 @@ class CourseController extends GetxController {
       courses.addAll(querySnapshot.docs.map((doc) =>
           CourseModel.fromFirestore(doc.data(), doc.id)));
 
-      courses.sort((a, b) => b.courseName.compareTo(a.courseName));
+      courses.sort((a, b) => a.courseName.compareTo(b.courseName));
 
       isSuccess = true;
       errorMessage = null;
