@@ -55,8 +55,11 @@ class TimelineEventCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildFormattedDate(event.date),
-            const SizedBox(width: 16),
+            SizedBox(
+              width: MediaQuery.sizeOf(context).width / 6,
+              child: _buildFormattedDate(event.date),
+            ),
+            const SizedBox(width: 8),
             Expanded(
               child: Card(
                 margin: EdgeInsets.zero,

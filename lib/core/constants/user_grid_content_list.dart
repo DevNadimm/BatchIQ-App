@@ -2,6 +2,7 @@ import 'package:batchiq_app/core/constants/grid_content_class.dart';
 import 'package:batchiq_app/core/constants/icon_image_name.dart';
 import 'package:batchiq_app/features/home/screens/announcement_screen.dart';
 import 'package:batchiq_app/features/home/screens/assignment_screen.dart';
+import 'package:batchiq_app/features/home/screens/class_schedule_screen.dart';
 import 'package:batchiq_app/features/home/screens/my_calendar_screen.dart';
 import 'package:batchiq_app/features/home/screens/notification_screen.dart';
 import 'package:batchiq_app/features/others/screens/under_maintenance_screen.dart';
@@ -28,7 +29,7 @@ List<GridContent> userGridContentList = [
     userDescription: "View your class timetable.",
     iconPath: IconImageName.classSchedule,
     color: const Color(0xFF00838F),
-    onTapUser: () => Get.to(const UnderMaintenanceScreen()),
+    onTapUser: () => Get.to(const ClassScheduleScreen()),
   ),
   GridContent(
     name: "Exams",
