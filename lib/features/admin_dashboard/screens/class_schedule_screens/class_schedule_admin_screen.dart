@@ -99,48 +99,45 @@ class _ClassScheduleAdminScreenState extends State<ClassScheduleAdminScreen> {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (String day in days)
-            if (controller.dayClasses(day).isNotEmpty)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        children: days
+            .where((day) => controller.dayClasses(day).isNotEmpty)
+            .map((day) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20, bottom: 8, left: 16),
+              child: Text(
+                day,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
                 children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, bottom: 8, left: 16),
-                    child: Text(
-                      day,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                  const SizedBox(width: 16),
+                  ...controller.dayClasses(day).map(
+                        (classSchedule) => Padding(
+                      padding: const EdgeInsets.only(
+                        top: 4,
+                        bottom: 16,
+                        right: 16,
+                      ),
+                      child: ClassScheduleCard(
+                        classSchedule: classSchedule,
                       ),
                     ),
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        const SizedBox(width: 16),
-                        ...controller.dayClasses(day).map(
-                              (classSchedule) => Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 4.0,
-                                  bottom: 4,
-                                  right: 16,
-                                ),
-                                child: ClassScheduleCard(
-                                  classSchedule: classSchedule,
-                                ),
-                              ),
-                            ),
-                        const SizedBox(width: 16),
-                      ],
-                    ),
-                  )
+                  const SizedBox(width: 16),
                 ],
               ),
-        ],
+            ),
+          ],
+        )).toList(),
       ),
     );
   }
