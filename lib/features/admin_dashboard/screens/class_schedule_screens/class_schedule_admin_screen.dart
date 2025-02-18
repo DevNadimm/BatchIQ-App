@@ -120,8 +120,7 @@ class _ClassScheduleAdminScreenState extends State<ClassScheduleAdminScreen> {
               child: Row(
                 children: [
                   const SizedBox(width: 16),
-                  ...controller.dayClasses(day).map(
-                        (classSchedule) => Padding(
+                  ...controller.dayClasses(day).map((classSchedule) => Padding(
                       padding: const EdgeInsets.only(
                         top: 4,
                         bottom: 16,
