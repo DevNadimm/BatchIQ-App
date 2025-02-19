@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ResourceModel {
+  final String id;
   final String title;
   final String description;
   final String courseName;
@@ -12,6 +13,7 @@ class ResourceModel {
   final String createdBy;
 
   ResourceModel({
+    required this.id,
     required this.title,
     required this.description,
     required this.courseName,
@@ -25,14 +27,16 @@ class ResourceModel {
 
   factory ResourceModel.fromFirestore(Map<String, dynamic> data, String id) {
     return ResourceModel(
-        courseName: data['courseName'] ?? '',
-        courseCode: data['courseCode'] ?? '',
-        createdAt: data['createdAt'] ?? Timestamp.now(),
-        createdBy: data['createdBy'] ?? '',
-        description: data['description'] ?? '',
-        resourcesType: data['resourcesType'] ?? '',
-        title: data['title'] ?? '',
-        updatedAt: data['updatedAt'] ?? Timestamp.now(),
-        url: data['url'] ?? '');
+      id: id,
+      courseName: data['courseName'] ?? '',
+      courseCode: data['courseCode'] ?? '',
+      createdAt: data['createdAt'] ?? Timestamp.now(),
+      createdBy: data['createdBy'] ?? '',
+      description: data['description'] ?? '',
+      resourcesType: data['resourcesType'] ?? '',
+      title: data['title'] ?? '',
+      updatedAt: data['updatedAt'] ?? Timestamp.now(),
+      url: data['url'] ?? '',
+    );
   }
 }
