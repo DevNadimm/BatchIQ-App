@@ -1,6 +1,6 @@
 import 'package:batchiq_app/core/constants/error_messages.dart';
 import 'package:batchiq_app/core/utils/id_generator.dart';
-import 'package:batchiq_app/features/admin_dashboard/models/course_model.dart';
+import 'package:batchiq_app/features/admin_dashboard/models/resource_model.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -11,7 +11,7 @@ class ResourceController extends GetxController {
   String? errorMessage;
   bool isSuccess = false;
   bool isLoading = false;
-  final List<CourseModel> resources = [];
+  final List<ResourceModel> resources = [];
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final UserController _userController = UserController();
@@ -30,7 +30,7 @@ class ResourceController extends GetxController {
   }
 
   /// ============ Get Resources ============
-  Future<bool> getResources() async {
+  Future<bool> getResources({required String courseId}) async {
     _setLoading(true);
 
     try {
@@ -42,18 +42,20 @@ class ResourceController extends GetxController {
           .collection("Batches")
           .doc(batchId)
           .collection("Courses")
+          .doc(courseId)
+          .collection("Resources")
           .get();
 
       resources.addAll(querySnapshot.docs.map((doc) =>
-          CourseModel.fromFirestore(doc.data(), doc.id)));
+          ResourceModel.fromFirestore(doc.data(), doc.id)));
 
-      resources.sort((a, b) => b.courseName.compareTo(a.courseName));
+      resources.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
       isSuccess = true;
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = ErrorMessages.fetchCoursesError;
+      errorMessage = ErrorMessages.fetchResourcesError;
     } finally {
       _setLoading(false);
     }
