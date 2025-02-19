@@ -234,20 +234,21 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
     await controller.getCourses();
     courseList = controller.courses.map((course) => {
       'name': course.courseName,
-      'id': course.id
+      'code': course.courseCode
     }).toList();
   }
 
   Future<void> createResource() async {
     final course = courseList.firstWhere((course) => courseController.text == course['name']);
-    String courseId = course['id']!;
+    String courseCode = course['code'] ?? "";
+    debugPrint("Selected Course Code => $courseCode");
 
     final controller = ResourceController.instance;
     final result = await controller.createResource(
       title: titleController.text,
       description: descriptionController.text,
       courseName: courseController.text,
-      courseId: courseId,
+      courseCode: courseCode,
       resourcesType: typeController.text,
       url: urlController.text,
     );

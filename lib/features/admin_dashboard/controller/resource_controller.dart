@@ -30,7 +30,7 @@ class ResourceController extends GetxController {
   }
 
   /// ============ Get Resources ============
-  Future<bool> getResources({required String courseId}) async {
+  Future<bool> getResources() async {
     _setLoading(true);
 
     try {
@@ -41,8 +41,6 @@ class ResourceController extends GetxController {
       final querySnapshot = await _firestore
           .collection("Batches")
           .doc(batchId)
-          .collection("Courses")
-          .doc(courseId)
           .collection("Resources")
           .get();
 
@@ -68,7 +66,7 @@ class ResourceController extends GetxController {
     required String title,
     required String description,
     required String courseName,
-    required String courseId,
+    required String courseCode,
     required String resourcesType,
     required String url,
   }) async {
@@ -83,7 +81,8 @@ class ResourceController extends GetxController {
       final courseData = {
         "title": title,
         "description": description,
-        "course": courseName,
+        "courseName": courseName,
+        "courseCode": courseCode,
         "resourcesType": resourcesType,
         "url": url,
         "createdAt": DateTime.now().toString(),
@@ -94,8 +93,6 @@ class ResourceController extends GetxController {
       await _firestore
           .collection("Batches")
           .doc(batchId)
-          .collection("Courses")
-          .doc(courseId)
           .collection("Resources")
           .doc(docId)
           .set(courseData);
