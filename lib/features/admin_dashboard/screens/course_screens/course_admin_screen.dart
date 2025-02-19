@@ -59,7 +59,7 @@ class _CourseAdminScreenState extends State<CourseAdminScreen> {
                   replacement: const ProgressIndicatorWidget(),
                   child: controller.courses.isEmpty
                       ? const EmptyList(
-                          title: "Empty Assignment!",
+                          title: "Empty Course!",
                         )
                       : SingleChildScrollView(
                           child: Column(
