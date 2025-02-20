@@ -5,6 +5,7 @@ import 'package:batchiq_app/features/home/screens/assignment_screen.dart';
 import 'package:batchiq_app/features/home/screens/class_schedule_screen.dart';
 import 'package:batchiq_app/features/home/screens/my_calendar_screen.dart';
 import 'package:batchiq_app/features/home/screens/notification_screen.dart';
+import 'package:batchiq_app/features/home/screens/resource_screen.dart';
 import 'package:batchiq_app/features/others/screens/under_maintenance_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,7 +58,7 @@ List<GridContent> userGridContentList = [
     userDescription: "Access and manage your resources.",
     iconPath: IconImageName.resources,
     color: const Color(0xFF00796B),
-    onTapUser: () => Get.to(() => const UnderMaintenanceScreen()),
+    onTapUser: () => Get.to(() => const ResourcesScreen()),
   ),
   GridContent(
     name: "Job & Internship",
