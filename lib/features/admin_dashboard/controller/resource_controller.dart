@@ -111,13 +111,15 @@ class ResourceController extends GetxController {
 
   /// ============ Edit Resource ============
   Future<bool> editResource({
-    required String batchId,
     required String resourceId,
     required String title,
     required String description,
     required String url,
   }) async {
     _setLoading(true);
+
+    final userDetails = await _getUserDetails();
+    final batchId = userDetails["batchId"] ?? "";
 
     try {
       final updateData = {

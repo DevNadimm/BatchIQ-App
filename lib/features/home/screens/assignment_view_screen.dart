@@ -146,7 +146,7 @@ class _AssignmentViewScreenState extends State<AssignmentViewScreen> {
                       return Expanded(
                         child: Text(
                           controller.isLoading
-                              ? "Loading...!"
+                              ? "Loading..."
                               : controller.userData?.name ?? "N/A",
                           style: Theme.of(context)
                               .textTheme

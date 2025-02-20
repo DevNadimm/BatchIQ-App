@@ -136,7 +136,7 @@ class _AnnouncementViewScreenState extends State<AnnouncementViewScreen> {
                       return Expanded(
                         child: Text(
                           controller.isLoading
-                              ? "Loading...!"
+                              ? "Loading..."
                               : controller.userData?.name ?? "N/A",
                           style: Theme.of(context)
                               .textTheme

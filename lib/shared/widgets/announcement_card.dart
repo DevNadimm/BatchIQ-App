@@ -147,14 +147,14 @@ class AnnouncementCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      color: HelperFunctions.getAnnouncementColor(announcement.type),
+                      color: HelperFunctions.getAnnouncementColor(announcement.type).withOpacity(0.1),
                     ),
                     child: Text(
                       announcement.type.toUpperCase(),
                       style: Theme.of(context)
                           .textTheme
                           .titleSmall!
-                          .copyWith(color: Colors.white),
+                          .copyWith(color: HelperFunctions.getAnnouncementColor(announcement.type)),
                     ),
                   ),
                 ],

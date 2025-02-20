@@ -4,7 +4,10 @@ import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/resource_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/resource_model.dart';
 import 'package:batchiq_app/core/utils/launch_url.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/resources_screens/edit_resource_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/resources_screens/resource_view_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class ResourceCard extends StatelessWidget {
@@ -18,7 +21,7 @@ class ResourceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //Get.to(() => AssignmentViewScreen(assignment: resource));
+        Get.to(() => ResourceViewScreen(resource: resource));
       },
       child: Card(
         elevation: 0,
@@ -56,11 +59,14 @@ class ResourceCard extends StatelessWidget {
                       itemBuilder: (BuildContext context) => [
                         PopupMenuItem(
                           onTap: () {
-                            // Get.to(
-                            //   EditAssignmentScreen(
-                            //     assignment: resource,
-                            //   ),
-                            // );
+                            Get.to(
+                              EditResourcesScreen(
+                                resourceId: resource.id,
+                                title: resource.title,
+                                description: resource.description,
+                                url: resource.url,
+                              ),
+                            );
                           },
                           child: Row(
                             children: [
