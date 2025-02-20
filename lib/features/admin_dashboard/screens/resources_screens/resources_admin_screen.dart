@@ -16,6 +16,9 @@ class ResourcesAdminScreen extends StatefulWidget {
 }
 
 class _ResourcesAdminScreenState extends State<ResourcesAdminScreen> {
+  List<String> courseList = ["All"];
+  String selectedCourse = "All";
+
   @override
   void initState() {
     fetchResources();
@@ -37,81 +40,120 @@ class _ResourcesAdminScreenState extends State<ResourcesAdminScreen> {
           },
           icon: Icon(backArrow),
         ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.5),
-          child: Container(
-            color: Colors.grey.withOpacity(0.2),
-            height: 1.5,
-          ),
-        ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: GetBuilder<ResourceController>(
-              builder: (controller) {
-                return Visibility(
-                  visible: !controller.isLoading,
-                  replacement: const ProgressIndicatorWidget(),
-                  child: controller.resources.isEmpty
-                      ? const EmptyList(
-                          title: "Empty Resource!",
-                        )
-                      : SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: controller.resources.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final resource = controller.resources[index];
+      body: GetBuilder<ResourceController>(
+        builder: (controller) {
+          if (controller.isLoading) {
+            return const Center(child: ProgressIndicatorWidget());
+          }
 
-                                  return ResourceCard(
-                                    resource: resource,
-                                    isAdmin: true,
-                                  );
-                                },
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                            ],
-                          ),
-                        ),
-                );
-              },
-            ),
-          ),
-          Column(
+          if (controller.resources.isEmpty) {
+            return const EmptyList(title: "No resources found!");
+          }
+
+          List filteredResources = selectedCourse == "All"
+              ? controller.resources
+              : controller.resources
+                  .where((resource) => resource.courseCode == selectedCourse)
+                  .toList();
+
+          return Column(
             children: [
-              Divider(
-                height: 1.5,
-                thickness: 1.5,
-                color: Colors.grey.withOpacity(0.2),
+              _buildCourseSelector(),
+              Expanded(
+                child: filteredResources.isEmpty
+                    ? const EmptyList(title: "No resources found!")
+                    : ListView.builder(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        itemCount: filteredResources.length,
+                        itemBuilder: (context, index) {
+                          return ResourceCard(
+                            resource: filteredResources[index],
+                            isAdmin: true,
+                          );
+                        },
+                      ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 50),
+              Column(
+                children: [
+                  Divider(
+                    height: 1.5,
+                    thickness: 1.5,
+                    color: Colors.grey.withOpacity(0.2),
                   ),
-                  onPressed: () {
-                    Get.to(() => const CreateResourcesScreen());
-                  },
-                  child: const Text(
-                    "Create Resource",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50),
+                      ),
+                      onPressed: () {
+                        Get.to(() => const CreateResourcesScreen());
+                      },
+                      child: const Text(
+                        "Create Resource",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
-          ),
-        ],
+          );
+        },
       ),
+    );
+  }
+
+  Widget _buildCourseSelector() {
+    return Column(
+      children: [
+        SizedBox(
+          height: 60,
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            itemCount: courseList.length,
+            itemBuilder: (context, index) {
+              final courseCode = courseList[index];
+
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+                child: GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      selectedCourse = courseCode;
+                    });
+                  },
+                  child: Chip(
+                    label: Text(
+                      courseCode,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: selectedCourse == courseCode
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
+                    side: BorderSide.none,
+                    backgroundColor: selectedCourse == courseCode
+                        ? Theme.of(context).primaryColor
+                        : Colors.grey[200],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        Container(
+          color: Colors.grey.withOpacity(0.2),
+          height: 1.5,
+        ),
+      ],
     );
   }
 
@@ -119,8 +161,18 @@ class _ResourcesAdminScreenState extends State<ResourcesAdminScreen> {
     final controller = ResourceController.instance;
     final result = await controller.getResources();
 
-    if (!result) {
-      SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
+    if (result) {
+      setState(() {
+        courseList = [
+          "All",
+          ...controller.resources
+              .map((resource) => resource.courseCode)
+              .toSet(),
+        ];
+      });
+    } else {
+      SnackBarMessage.errorMessage(
+          controller.errorMessage ?? "Something went wrong!");
     }
   }
 }
