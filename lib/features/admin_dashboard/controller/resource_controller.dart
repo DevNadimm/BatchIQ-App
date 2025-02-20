@@ -112,33 +112,33 @@ class ResourceController extends GetxController {
   /// ============ Edit Resource ============
   Future<bool> editResource({
     required String batchId,
-    required String courseId,
-    required String courseName,
-    required String courseCode,
-    required String instructorName,
+    required String resourceId,
+    required String title,
+    required String description,
+    required String url,
   }) async {
     _setLoading(true);
 
     try {
       final updateData = {
-        "courseName": courseName,
-        "courseCode": courseCode,
-        "instructorName": instructorName,
+        "title": title,
+        "description": description,
+        "url": url,
         "updatedAt": DateTime.now().toString(),
       };
 
       await _firestore
           .collection("Batches")
           .doc(batchId)
-          .collection("Courses")
-          .doc(courseId)
+          .collection("Resources")
+          .doc(resourceId)
           .update(updateData);
 
       isSuccess = true;
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = ErrorMessages.editCourseError;
+      errorMessage = ErrorMessages.editResourceError;
     } finally {
       _setLoading(false);
     }
@@ -148,7 +148,7 @@ class ResourceController extends GetxController {
 
   /// ============ Delete Resource ============
   Future<bool> deleteResource({
-    required String courseId,
+    required String resourceId,
   }) async {
     _setLoading(true);
 
@@ -159,17 +159,17 @@ class ResourceController extends GetxController {
       await _firestore
           .collection("Batches")
           .doc(batchId)
-          .collection("Courses")
-          .doc(courseId)
+          .collection("Resources")
+          .doc(resourceId)
           .delete();
 
-      resources.removeWhere((course) => course.id == courseId);
+      resources.removeWhere((resource) => resource.id == resourceId);
 
       isSuccess = true;
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = ErrorMessages.deleteCourseError;
+      errorMessage = ErrorMessages.deleteResourceError;
     } finally {
       _setLoading(false);
     }
