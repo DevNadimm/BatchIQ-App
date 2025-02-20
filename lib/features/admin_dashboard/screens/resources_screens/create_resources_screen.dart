@@ -260,6 +260,9 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
       courseController.clear();
       typeController.clear();
       urlController.clear();
+
+      final controller = ResourceController.instance;
+      await controller.getResources();
     } else {
       SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
     }

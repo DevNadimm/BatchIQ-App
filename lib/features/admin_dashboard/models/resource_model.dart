@@ -8,8 +8,8 @@ class ResourceModel {
   final String courseCode;
   final String resourcesType;
   final String url;
-  final Timestamp createdAt;
-  final Timestamp updatedAt;
+  final String createdAt;
+  final String updatedAt;
   final String createdBy;
 
   ResourceModel({
@@ -30,12 +30,12 @@ class ResourceModel {
       id: id,
       courseName: data['courseName'] ?? '',
       courseCode: data['courseCode'] ?? '',
-      createdAt: data['createdAt'] ?? Timestamp.now(),
+      createdAt: data['createdAt'] ?? Timestamp.now().toString(),
       createdBy: data['createdBy'] ?? '',
       description: data['description'] ?? '',
       resourcesType: data['resourcesType'] ?? '',
       title: data['title'] ?? '',
-      updatedAt: data['updatedAt'] ?? Timestamp.now(),
+      updatedAt: data['updatedAt'] ?? Timestamp.now().toString(),
       url: data['url'] ?? '',
     );
   }
