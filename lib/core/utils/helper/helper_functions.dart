@@ -134,4 +134,19 @@ class HelperFunctions {
         return Colors.grey;
     }
   }
+
+  static Color getResourceTypeColor(String type) {
+    switch (type.trim().toLowerCase()) {
+      case 'lecture':
+        return Colors.deepPurple;
+      case 'tutorial':
+        return Colors.blueAccent;
+      case 'reference':
+        return Colors.orangeAccent;
+      case 'external resource':
+        return Colors.green[700]!;
+      default:
+        return Colors.grey;
+    }
+  }
 }

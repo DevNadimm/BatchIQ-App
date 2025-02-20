@@ -34,7 +34,6 @@ class ResourceCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Text(
@@ -111,23 +110,59 @@ class ResourceCard extends StatelessWidget {
                     ),
                 ],
               ),
-              resource.description.isNotEmpty
-                  ? Column(
-                      children: [
-                        const SizedBox(height: 8),
-                        Text(
-                          resource.description,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(color: secondaryFontColor),
-                        ),
-                      ],
-                    )
-                  : const SizedBox.shrink(),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: HelperFunctions.getResourceTypeColor(resource.resourcesType).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  resource.resourcesType,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: HelperFunctions.getResourceTypeColor(resource.resourcesType),
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ),
               const SizedBox(height: 16),
+              Row(
+                children: [
+                  Icon(
+                    HugeIcons.strokeRoundedBook02,
+                    size: 16,
+                    color: secondaryFontColor,
+                  ),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: resource.courseCode,
+                            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              fontWeight: FontWeight.w600, color: secondaryFontColor
+                            ),
+                          ),
+                          TextSpan(
+                            text: " - ",
+                            style: TextStyle(color: secondaryFontColor),
+                          ),
+                          TextSpan(
+                            text: resource.courseName,
+                            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: secondaryFontColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -135,7 +170,7 @@ class ResourceCard extends StatelessWidget {
                     children: [
                       Icon(
                         HugeIcons.strokeRoundedCalendar03,
-                        size: 18,
+                        size: 16,
                         color: secondaryFontColor,
                       ),
                       const SizedBox(width: 4),
@@ -148,30 +183,30 @@ class ResourceCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  resource.url.isNotEmpty
-                      ? GestureDetector(
-                          onTap: () {
-                            LaunchURL.launchURL(resource.url);
-                          },
-                          child: Row(
-                            children: [
-                              const Icon(
-                                HugeIcons.strokeRoundedLink02,
-                                color: Colors.blue,
-                                size: 18,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                "Open Link",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(color: Colors.blue),
-                              ),
-                            ],
-                          ),
-                        )
-                      : const SizedBox.shrink(),
+                  GestureDetector(
+                    onTap: () {
+                      LaunchURL.launchURL(resource.url);
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(
+                          HugeIcons.strokeRoundedLink02,
+                          color: Colors.blue,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          "Open Resource",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ],
