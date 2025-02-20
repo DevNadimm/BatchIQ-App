@@ -5,7 +5,7 @@ import 'package:batchiq_app/features/admin_dashboard/controller/resource_control
 import 'package:batchiq_app/features/admin_dashboard/models/resource_model.dart';
 import 'package:batchiq_app/core/utils/launch_url.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/resources_screens/edit_resource_screen.dart';
-import 'package:batchiq_app/features/admin_dashboard/screens/resources_screens/resource_view_screen.dart';
+import 'package:batchiq_app/features/home/screens/resource_view_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
