@@ -49,7 +49,7 @@ class MyCalendarEventController extends GetxController {
       events.sort((a, b) {
         final aDate = _parseDate(a.date);
         final bDate = _parseDate(b.date);
-        return aDate.compareTo(bDate);
+        return bDate.compareTo(aDate);
       });
 
       isSuccess = true;

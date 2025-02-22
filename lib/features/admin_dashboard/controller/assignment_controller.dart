@@ -44,7 +44,7 @@ class AssignmentController extends GetxController {
       assignments.sort((a, b) {
         final aDate = _parseDate(a.deadline);
         final bDate = _parseDate(b.deadline);
-        return aDate.compareTo(bDate);
+        return bDate.compareTo(aDate);
       });
 
       isSuccess = true;
