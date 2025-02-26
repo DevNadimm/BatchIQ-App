@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/services/notification_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,9 @@ class SignInController extends GetxController {
       if (userDoc.exists) {
         final data = userDoc.data() as Map<String, dynamic>;
         isJoinedBatch = data.containsKey("batchId") && data["batchId"] != null;
+
+        // subscribe to topic
+        await NotificationService.instance.subscribeToTopic(data["batchId"]);
       } else {
         isJoinedBatch = false;
       }

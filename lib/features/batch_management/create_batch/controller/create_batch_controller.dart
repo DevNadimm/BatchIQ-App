@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:batchiq_app/core/services/notification_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -44,6 +45,9 @@ class CreateBatchController extends GetxController {
        };
 
       await firestore.collection("Batches").doc(batchId).collection("Members").doc(uid).set(userBody);
+
+      // subscribe to topic
+      await NotificationService.instance.subscribeToTopic(batchId);
 
       isSuccess = true;
       errorMessage = null;
