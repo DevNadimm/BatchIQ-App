@@ -42,4 +42,8 @@ class ErrorMessages {
   static const String createResourceError = "Failed to upload the resource. Please check your input and try again.";
   static const String editResourceError = "Failed to update the resource. Please try again.";
   static const String deleteResourceError = "Failed to delete the resource. Please try again.";
+
+  /// Batch Member
+  static const String fetchBatchMembersError = "Failed to load members. Please try again.";
+  static const String changeMemberRoleError = "Failed to update the role. Please try again.";
 }

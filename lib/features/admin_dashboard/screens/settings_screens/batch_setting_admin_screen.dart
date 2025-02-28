@@ -1,5 +1,6 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/batch_settings/batch_members_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -52,7 +53,7 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
             title: "Member Management",
             description: "Manage members, promote or demote, and remove users.",
             onTap: () {
-              // Navigate to Member Management screen
+              Get.to(() => const BatchMembersScreen());
             },
           ),
           _buildListItem(
@@ -79,12 +80,12 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
   }
 
   Widget _buildListItem(
-    BuildContext context, {
-    required IconData icon,
-    required String title,
-    required String description,
-    required VoidCallback onTap,
-  }) {
+      BuildContext context, {
+        required IconData icon,
+        required String title,
+        required String description,
+        required VoidCallback onTap,
+      }) {
     return Column(
       children: [
         ListTile(

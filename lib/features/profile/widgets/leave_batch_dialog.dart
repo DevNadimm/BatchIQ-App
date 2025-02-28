@@ -1,16 +1,28 @@
-import 'package:batchiq_app/core/services/notification_service.dart';
-import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
+import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
+import 'package:batchiq_app/features/batch_management/join_batch/screens/join_batch_screen.dart';
+import 'package:batchiq_app/features/profile/controller/profile_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class LogoutDialog extends StatelessWidget {
+class LeaveBatchDialog extends StatelessWidget {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   final String batchId;
 
-  LogoutDialog({super.key, required this.batchId});
+  LeaveBatchDialog({super.key, required this.batchId});
+
+  Future<void> leaveBatch () async{
+    final controller = ProfileController.instance;
+    final result = await controller.leaveBatch();
+
+    if(result){
+      Get.offAll(const JoinBatchScreen());
+    } else {
+      SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +40,7 @@ class LogoutDialog extends StatelessWidget {
           ),
           SizedBox(height: 15),
           Text(
-            'Are you sure you want to logout?',
+            'Leave Batch?',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
@@ -41,7 +53,7 @@ class LogoutDialog extends StatelessWidget {
       content: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'You will be logged out of your account and all your sessions will be terminated.',
+          'Are you sure you want to leave this batch? You will lose access to batch-related content and features.',
           style: TextStyle(fontSize: 14),
           textAlign: TextAlign.center,
         ),
@@ -73,15 +85,8 @@ class LogoutDialog extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: ElevatedButton(
                 onPressed: () async {
-                  await firebaseAuth.signOut();
-                  if (firebaseAuth.currentUser == null) {
-                    if (batchId != "No Batch Joined") {
-                      await NotificationService.instance.unsubscribeFromTopic(batchId);
-                    } else {
-                      debugPrint("Skipping unsubscribe: batchId is empty.");
-                    }
-                    Get.to(const SignInScreen());
-                  }
+                  leaveBatch();
+                  Get.back();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
@@ -91,7 +96,7 @@ class LogoutDialog extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'Log Out',
+                  'Leave',
                   style: TextStyle(color: Colors.white),
                 ),
               ),

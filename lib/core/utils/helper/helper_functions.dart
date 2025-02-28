@@ -36,7 +36,7 @@ class HelperFunctions {
     } else if (difference.inDays < 30) {
       return '${difference.inDays} day${difference.inDays > 1 ? 's' : ''} ago';
     } else {
-      return DateFormat('d MMM').format(parsedDate);
+      return DateFormat('d MMM, yyyy').format(parsedDate);
     }
   }
 

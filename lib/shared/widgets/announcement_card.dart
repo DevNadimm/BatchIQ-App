@@ -113,6 +113,21 @@ class AnnouncementCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  color: HelperFunctions.getAnnouncementColor(announcement.type).withOpacity(0.1),
+                ),
+                child: Text(
+                  announcement.type.toUpperCase(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(color: HelperFunctions.getAnnouncementColor(announcement.type)),
+                ),
+              ),
+              const SizedBox(height: 16),
               Text(
                 announcement.message,
                 maxLines: 2,
@@ -122,40 +137,21 @@ class AnnouncementCard extends StatelessWidget {
                     .bodySmall!
                     .copyWith(color: secondaryFontColor),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        HugeIcons.strokeRoundedCalendar03,
-                        size: 18,
-                        color: secondaryFontColor,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        HelperFunctions.parseTimestamp(announcement.createdAt),
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .copyWith(color: secondaryFontColor),
-                      ),
-                    ],
+                  Icon(
+                    HugeIcons.strokeRoundedCalendar03,
+                    size: 18,
+                    color: secondaryFontColor,
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: HelperFunctions.getAnnouncementColor(announcement.type).withOpacity(0.1),
-                    ),
-                    child: Text(
-                      announcement.type.toUpperCase(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall!
-                          .copyWith(color: HelperFunctions.getAnnouncementColor(announcement.type)),
-                    ),
+                  const SizedBox(width: 4),
+                  Text(
+                    HelperFunctions.parseTimestamp(announcement.createdAt),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(color: secondaryFontColor),
                   ),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:batchiq_app/features/admin_dashboard/screens/admin_dashboard_screen.dart';
 import 'package:batchiq_app/features/auth/models/user_model.dart';
+import 'package:batchiq_app/features/home/screens/about_us_screen.dart';
 import 'package:batchiq_app/features/profile/screens/profile_screen.dart';
 import 'package:batchiq_app/features/home/screens/developer_information_screen.dart';
 import 'package:batchiq_app/shared/dialogs/logout_dialog.dart';
@@ -66,7 +67,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                     context,
                     HugeIcons.strokeRoundedDashboardBrowsing,
                     "Admin Dashboard",
-                    () {
+                        () {
                       Get.to(const AdminDashboardScreen());
                     },
                   ),
@@ -74,7 +75,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   context,
                   HugeIcons.strokeRoundedUserAccount,
                   "Manage Profiles",
-                  () {
+                      () {
                     Get.to(const ProfileScreen());
                   },
                 ),
@@ -83,15 +84,15 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   context,
                   HugeIcons.strokeRoundedHelpSquare,
                   "Help & Feedback",
-                  () {
-                    LaunchURL.sendEmail();
+                      () {
+                    LaunchURL.sendEmail("User Feedback");
                   },
                 ),
                 _buildDrawerItem(
                   context,
                   HugeIcons.strokeRoundedDeveloper,
                   "Developer Information",
-                  () {
+                      () {
                     Get.to(const DeveloperInformationScreen());
                   },
                 ),
@@ -100,13 +101,15 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   context,
                   HugeIcons.strokeRoundedShare01,
                   "Share App",
-                  () {},
+                      () {},
                 ),
                 _buildDrawerItem(
                   context,
                   HugeIcons.strokeRoundedUserGroup,
                   "About Us",
-                  () {},
+                      () {
+                    Get.to(() => const AboutUsScreen());
+                  },
                 ),
               ],
             ),
@@ -115,9 +118,9 @@ class BatchIQNavigationDrawer extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton.icon(
               onPressed: () async {
-                Get.dialog(LogoutDialog());
+                Get.dialog(LogoutDialog(batchId: userModel.batchId ?? "",));
               },
-              icon: const Icon(HugeIcons.strokeRoundedLogout03),
+              icon: const Icon(HugeIcons.strokeRoundedLogout03, color: Colors.white,),
               label: const Text("Logout"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red.shade400,
@@ -153,9 +156,9 @@ class BatchIQNavigationDrawer extends StatelessWidget {
               child: Text(
                 title,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: primaryFontColor.withOpacity(0.8),
-                      fontWeight: FontWeight.w600,
-                    ),
+                  color: primaryFontColor.withOpacity(0.8),
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],

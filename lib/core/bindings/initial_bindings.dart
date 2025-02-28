@@ -1,9 +1,11 @@
+import 'package:batchiq_app/features/admin_dashboard/controller/batch_member_list_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/course_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/member_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/my_calendar_event_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/resource_controller.dart';
 import 'package:batchiq_app/features/home/controller/batch_info_controller.dart';
+import 'package:batchiq_app/features/profile/controller/profile_controller.dart';
 import 'package:get/get.dart';
 import 'package:batchiq_app/features/auth/controller/sign_in_controller.dart';
 import 'package:batchiq_app/features/auth/controller/sign_up_controller.dart';
@@ -26,6 +28,7 @@ class InitialBindings implements Bindings {
     Get.put(ApplyAdminController());
     Get.put(CreateBatchController());
     Get.put(JoinBatchController());
+    Get.put(ProfileController());
 
     // Admin Dashboard Feature
     Get.put(MemberCountController());
@@ -42,5 +45,6 @@ class InitialBindings implements Bindings {
 
     // Other
     Get.put(MemberController());
+    Get.put(BatchMemberListController());
   }
 }

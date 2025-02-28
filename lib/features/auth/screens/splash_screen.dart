@@ -25,14 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _navigateToNextScreen() async {
     final auth = FirebaseAuth.instance;
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
 
     if (auth.currentUser == null) {
       Get.offAll(() => const SignInScreen());
     } else {
       final user = await _userController.fetchUserData();
 
-      if (user?.batchId != null) {
+      if (user?.batchId != null && user!.batchId!.isNotEmpty) {
         Get.offAll(() => const HomeScreen());
       } else {
         Get.offAll(() => const JoinBatchScreen());

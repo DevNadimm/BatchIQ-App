@@ -1,4 +1,5 @@
 import 'package:batchiq_app/core/constants/error_messages.dart';
+import 'package:batchiq_app/core/services/notification_service.dart';
 import 'package:batchiq_app/core/utils/id_generator.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/notification_model.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
@@ -114,6 +115,13 @@ class NotificationController extends GetxController {
             .doc(docId)
             .set(notificationData);
       }
+
+      // send fcm notification
+      await NotificationService.instance.sendFcmNotification(
+        title: title,
+        body: body,
+        topic: batchId,
+      );
 
       isSuccess = true;
       errorMessage = null;

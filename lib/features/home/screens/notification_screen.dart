@@ -55,21 +55,21 @@ class _NotificationScreenState extends State<NotificationScreen> {
             replacement: const ProgressIndicatorWidget(),
             child: controller.notifications.isEmpty
                 ? const Center(
-                  child: EmptyList(
-                      title: "Empty Notification!",
-                    ),
-                )
+              child: EmptyList(
+                title: "Empty Notification!",
+              ),
+            )
                 : ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: controller.notifications.length,
-                  itemBuilder: (context, index) {
-                    final notification = controller.notifications[index];
-                    return NotificationCard(
-                      notification: notification,
-                      isAdmin: false,
-                    );
-                  },
-                ),
+              shrinkWrap: true,
+              itemCount: controller.notifications.length,
+              itemBuilder: (context, index) {
+                final notification = controller.notifications[index];
+                return NotificationCard(
+                  notification: notification,
+                  isAdmin: false,
+                );
+              },
+            ),
           );
         },
       ),

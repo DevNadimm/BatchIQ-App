@@ -1,7 +1,10 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
+import 'package:batchiq_app/core/utils/launch_url.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
+import 'package:batchiq_app/features/profile/controller/profile_controller.dart';
+import 'package:batchiq_app/features/profile/widgets/leave_batch_dialog.dart';
 import 'package:batchiq_app/shared/dialogs/logout_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         name = userData?.name ?? "N/A";
         email = userData?.email ?? "N/A";
         role = userData?.role.toUpperCase() ?? "N/A";
-        batchId = userData?.batchId ?? "No Batch Joined";
+        batchId = (userData?.batchId?.isEmpty ?? true) ? "No Batch Joined" : userData!.batchId!;
       });
     } catch (e) {
       setState(() {
@@ -130,15 +133,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           _buildCard(title: "Role", value: role ?? "N/A"),
           const SizedBox(height: 12),
-          _buildCard(title: "Batch ID", value: batchId ?? "No Batch Joined"),
+          _buildCard(
+            title: "Batch ID",
+            value: batchId ?? "No Batch Joined",
+            isBatchIdCard: true,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildCard({required String title, required String value}) {
+  Widget _buildCard({
+    required String title,
+    required String value,
+    bool isBatchIdCard = false,
+  }) {
     return Container(
-      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -150,21 +160,72 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: primaryColor,
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  value,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: primaryColor,
+                  ),
+                ),
+              ],
             ),
           ),
+          isBatchIdCard
+              ? batchId == "No Batch Joined"
+              ? const SizedBox.shrink()
+              : Column(
+            children: [
+              const Divider(height: 1),
+              GetBuilder<ProfileController>(
+                  builder: (controller) {
+                    return Visibility(
+                      visible: !controller.isLoading,
+                      replacement: const Padding(
+                        padding: EdgeInsets.all(16),
+                        child: ProgressIndicatorWidget(size: 20),
+                      ),
+                      child: GestureDetector(
+                        onTap: (){
+                          Get.dialog(LeaveBatchDialog(batchId: batchId ?? ""));
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                HugeIcons.strokeRoundedLogout03,
+                                color: Colors.red,
+                                size: 20,
+                              ),
+                              SizedBox(width: 15),
+                              Text(
+                                "Leave Batch",
+                                style: TextStyle(
+                                    color: Colors.red, fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+              ),
+            ],
+          )
+              : const SizedBox.shrink(),
         ],
       ),
     );
@@ -201,14 +262,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildListTile(
             title: "Help & Support",
             icon: HugeIcons.strokeRoundedHelpSquare,
-            onTap: () {},
+            onTap: () {
+              LaunchURL.sendEmail("Facing an Issue");
+            },
           ),
           const Divider(),
           _buildListTile(
             title: "Logout",
             icon: HugeIcons.strokeRoundedLogout03,
             onTap: () async {
-              Get.dialog(LogoutDialog());
+              Get.dialog(LogoutDialog(
+                batchId: batchId ?? "",
+              ));
             },
             iconColor: Colors.red,
             textColor: Colors.red,
@@ -235,7 +300,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title,
         style: TextStyle(color: textColor, fontWeight: FontWeight.w500),
       ),
-      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.grey,),
+      trailing: const Icon(
+        Icons.arrow_forward_ios_rounded,
+        size: 16,
+        color: Colors.grey,
+      ),
       onTap: onTap,
     );
   }

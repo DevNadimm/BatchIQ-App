@@ -32,7 +32,7 @@ class SignUpController extends GetxController {
         'name': name,
         'email': email,
         'role': 'student',
-        'batchId': null,
+        'batchId': "",
         'createdAt': DateTime.now().toString(),
       });
 

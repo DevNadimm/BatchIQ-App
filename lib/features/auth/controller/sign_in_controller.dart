@@ -1,6 +1,7 @@
 import 'package:batchiq_app/core/services/notification_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignInController extends GetxController {
@@ -28,10 +29,14 @@ class SignInController extends GetxController {
       final userDoc = await _firestore.collection("Users").doc(uid).get();
       if (userDoc.exists) {
         final data = userDoc.data() as Map<String, dynamic>;
-        isJoinedBatch = data.containsKey("batchId") && data["batchId"] != null;
+        isJoinedBatch = data["batchId"]?.isNotEmpty ?? false;
 
         // subscribe to topic
-        await NotificationService.instance.subscribeToTopic(data["batchId"]);
+        if (data["batchId"] != null && data["batchId"].isNotEmpty) {
+          await NotificationService.instance.subscribeToTopic(data["batchId"]);
+        } else {
+          debugPrint("Skipping subscription: batchId is null or empty.");
+        }
       } else {
         isJoinedBatch = false;
       }

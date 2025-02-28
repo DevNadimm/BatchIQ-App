@@ -36,7 +36,7 @@ class LaunchURL {
     }
   }
 
-  static Future<void> sendEmail() async {
-    launchUrl(Uri.parse("mailto:nadimm.dev@gmail.com?subject=BatchIQ: User Feedback"));
+  static Future<void> sendEmail(String subject) async {
+    launchUrl(Uri.parse("mailto:nadimm.dev@gmail.com?subject=BatchIQ: $subject"));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:batchiq_app/core/colors/colors.dart';
@@ -27,8 +28,10 @@ class BatchIDSection extends StatelessWidget {
               controller: batchIdController,
               decoration: const InputDecoration(
                 hintText: "e.g. A7B3D2E1",
-                hintStyle: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey),
-                contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+                hintStyle:
+                TextStyle(fontWeight: FontWeight.w500, color: Colors.grey),
+                contentPadding:
+                EdgeInsets.symmetric(vertical: 0, horizontal: 12),
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
@@ -47,7 +50,18 @@ class BatchIDSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.all(12),
-              child: const Icon(Icons.arrow_forward_rounded, color: Colors.white),
+              child: GetBuilder<JoinBatchController>(
+                builder: (controller) {
+                  return Visibility(
+                    visible: !controller.isLoading,
+                    replacement: const ProgressIndicatorWidget(color: Colors.white, size: 24),
+                    child: const Icon(
+                      Icons.arrow_forward_rounded,
+                      color: Colors.white,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],

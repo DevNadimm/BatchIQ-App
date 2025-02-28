@@ -1,6 +1,7 @@
 import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
+import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/assignment_controller.dart';
 import 'package:batchiq_app/shared/widgets/assignment_card.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,11 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
 
   Future<void> fetchAssignment() async {
     final controller = AssignmentController.instance;
-    await controller.getAssignments();
+    final result = await controller.getAssignments();
+
+    if(!result) {
+      SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
+    }
   }
 
   @override
@@ -55,30 +60,30 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
             replacement: const ProgressIndicatorWidget(),
             child: controller.assignments.isEmpty
                 ? const Center(
-                  child: EmptyList(
-                      title: "Empty Assignment!",
-                    ),
-                )
+              child: EmptyList(
+                title: "Empty Assignment!",
+              ),
+            )
                 : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 8),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: controller.assignments.length,
-                          itemBuilder: (context, index) {
-                            final assignment = controller.assignments[index];
-                            return AssignmentCard(
-                              assignment: assignment,
-                              isAdmin: false,
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 8),
-                      ],
-                    ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 8),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.assignments.length,
+                    itemBuilder: (context, index) {
+                      final assignment = controller.assignments[index];
+                      return AssignmentCard(
+                        assignment: assignment,
+                        isAdmin: false,
+                      );
+                    },
                   ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+            ),
           );
         },
       ),
