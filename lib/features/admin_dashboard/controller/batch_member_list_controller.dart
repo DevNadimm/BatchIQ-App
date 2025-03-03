@@ -76,7 +76,6 @@ class BatchMemberListController extends GetxController {
       isSuccess = true;
       errorMessage = null;
 
-      print("New role is: $role");
     } catch (e) {
       isSuccess = false;
       errorMessage = ErrorMessages.changeMemberRoleError;
