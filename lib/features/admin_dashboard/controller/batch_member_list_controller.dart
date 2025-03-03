@@ -5,12 +5,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 // TODO: Recheck ALL
+// Change file and class name
 class BatchMemberListController extends GetxController {
   static final BatchMemberListController instance = Get.find<BatchMemberListController>();
 
   String? errorMessage;
   bool isSuccess = false;
   bool isLoading = false;
+  bool isLoadingWhenChangeRole = false;
   List<BatchMemberModel> members = [];
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -59,7 +61,8 @@ class BatchMemberListController extends GetxController {
     required String role,
     required String docId,
   }) async {
-    _setLoading(true);
+    isLoadingWhenChangeRole = true;
+    update();
     try {
       final data = await _userController.fetchUserData();
       final batchId = data?.batchId ?? "";
@@ -72,11 +75,14 @@ class BatchMemberListController extends GetxController {
 
       isSuccess = true;
       errorMessage = null;
+
+      print("New role is: $role");
     } catch (e) {
       isSuccess = false;
       errorMessage = ErrorMessages.changeMemberRoleError;
     } finally {
-      _setLoading(false);
+      isLoadingWhenChangeRole = false;
+      update();
     }
 
     return isSuccess;
