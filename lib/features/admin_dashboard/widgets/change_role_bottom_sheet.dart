@@ -37,13 +37,11 @@ class _ChangeRoleBottomSheetState extends State<ChangeRoleBottomSheet> {
     );
 
     if (!result) {
-      SnackBarMessage.errorMessage(
-        controller.errorMessage ?? "Something went wrong!",
-      );
+      SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
       Get.back();
     } else {
-      await controller.getBatchMembers();
       Get.back();
+      await controller.getBatchMembers();
     }
   }
 
@@ -89,12 +87,11 @@ class _ChangeRoleBottomSheetState extends State<ChangeRoleBottomSheet> {
                   });
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 12, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: isSelected
-                        ? Colors.blue.withOpacity(0.1)
+                        ? Colors.blue.withValues(alpha: 0.1)
                         : Colors.transparent,
                     border: Border.all(
                       color: isSelected ? primaryColor : Colors.grey.shade300,
@@ -142,8 +139,7 @@ class _ChangeRoleBottomSheetState extends State<ChangeRoleBottomSheet> {
                     ),
                     child: const Text(
                       "Save",
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
                   );
                 },
