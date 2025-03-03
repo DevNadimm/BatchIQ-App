@@ -1,4 +1,5 @@
-import 'package:batchiq_app/features/admin_dashboard/controller/batch_member_list_controller.dart';
+import 'package:get/get.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/batch_member_management_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/course_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/member_controller.dart';
@@ -6,7 +7,6 @@ import 'package:batchiq_app/features/admin_dashboard/controller/my_calendar_even
 import 'package:batchiq_app/features/admin_dashboard/controller/resource_controller.dart';
 import 'package:batchiq_app/features/home/controller/batch_info_controller.dart';
 import 'package:batchiq_app/features/profile/controller/profile_controller.dart';
-import 'package:get/get.dart';
 import 'package:batchiq_app/features/auth/controller/sign_in_controller.dart';
 import 'package:batchiq_app/features/auth/controller/sign_up_controller.dart';
 import 'package:batchiq_app/features/batch_management/create_batch/controller/apply_admin_controller.dart';
@@ -39,12 +39,12 @@ class InitialBindings implements Bindings {
     Get.put(MyCalendarEventController());
     Get.put(CourseController());
     Get.put(ResourceController());
+    Get.put(BatchMemberManagementController());
 
     // Home Feature
     Get.put(BatchInfoController());
 
     // Other
     Get.put(MemberController());
-    Get.put(BatchMemberListController());
   }
 }

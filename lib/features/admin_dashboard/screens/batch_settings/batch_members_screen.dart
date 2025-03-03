@@ -2,7 +2,7 @@ import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/batch_member_list_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/batch_member_management_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/widgets/change_role_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +22,7 @@ class _BatchMembersScreenState extends State<BatchMembersScreen> {
   }
 
   Future<void> fetchMembers() async {
-    final controller = BatchMemberListController.instance;
+    final controller = BatchMemberManagementController.instance;
     final result = await controller.getBatchMembers();
 
     if (!result) {
@@ -53,7 +53,7 @@ class _BatchMembersScreenState extends State<BatchMembersScreen> {
           ),
         ),
       ),
-      body: GetBuilder<BatchMemberListController>(
+      body: GetBuilder<BatchMemberManagementController>(
         builder: (controller) {
           return Visibility(
             visible: !controller.isLoading,

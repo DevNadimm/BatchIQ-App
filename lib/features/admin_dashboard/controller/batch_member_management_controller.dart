@@ -4,15 +4,13 @@ import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-// TODO: Recheck ALL
-// Change file and class name
-class BatchMemberListController extends GetxController {
-  static final BatchMemberListController instance = Get.find<BatchMemberListController>();
+class BatchMemberManagementController extends GetxController {
+  static final BatchMemberManagementController instance = Get.find<BatchMemberManagementController>();
 
   String? errorMessage;
   bool isSuccess = false;
   bool isLoading = false;
-  bool isLoadingWhenChangeRole = false;
+  bool isLoadingDuringRoleChange = false;
   List<BatchMemberModel> members = [];
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -37,9 +35,7 @@ class BatchMemberListController extends GetxController {
           .collection("Members")
           .get();
 
-      members = querySnapshot.docs
-          .map((doc) => BatchMemberModel.fromFirestore(doc.data(), doc.id))
-          .toList();
+      members = querySnapshot.docs.map((doc) => BatchMemberModel.fromFirestore(doc.data(), doc.id)).toList();
 
       members.sort((a, b) {
         return a.role.compareTo(b.role);
@@ -61,7 +57,7 @@ class BatchMemberListController extends GetxController {
     required String role,
     required String docId,
   }) async {
-    isLoadingWhenChangeRole = true;
+    isLoadingDuringRoleChange = true;
     update();
     try {
       final data = await _userController.fetchUserData();
@@ -75,51 +71,14 @@ class BatchMemberListController extends GetxController {
 
       isSuccess = true;
       errorMessage = null;
-
     } catch (e) {
       isSuccess = false;
       errorMessage = ErrorMessages.changeMemberRoleError;
     } finally {
-      isLoadingWhenChangeRole = false;
+      isLoadingDuringRoleChange = false;
       update();
     }
 
     return isSuccess;
   }
-
-// Future<bool> deleteAssignment(String assignmentId) async {
-//   _setLoading(true);
-//   try {
-//     final data = await _userController.fetchUserData();
-//     final batchId = data?.batchId ?? "";
-//
-//     final batchRef = _firestore.collection("Batches").doc(batchId);
-//
-//     await batchRef.collection("Assignments").doc(assignmentId).delete();
-//
-//     final calendarDocRef = batchRef.collection("MyCalendar").doc(assignmentId);
-//     final calendarDocSnapshot = await calendarDocRef.get();
-//
-//     if (calendarDocSnapshot.exists) {
-//       await calendarDocRef.delete();
-//     }
-//
-//     await NotificationController.instance.deleteNotification(
-//       notificationId: assignmentId,
-//     );
-//
-//     members.removeWhere((assignment) => assignment.id == assignmentId);
-//
-//     isSuccess = true;
-//     errorMessage = null;
-//   } catch (e) {
-//     isSuccess = false;
-//     errorMessage = ErrorMessages.deleteAssignmentsError;
-//   } finally {
-//     _setLoading(false);
-//   }
-//
-//   return isSuccess;
-// }
-
 }

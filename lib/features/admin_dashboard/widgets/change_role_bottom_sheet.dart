@@ -1,7 +1,7 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/batch_member_list_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/batch_member_management_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +30,7 @@ class _ChangeRoleBottomSheetState extends State<ChangeRoleBottomSheet> {
   }
 
   Future<void> _changeRole() async {
-    final controller = BatchMemberListController.instance;
+    final controller = BatchMemberManagementController.instance;
     final result = await controller.changeMemberRole(
       role: selectedRole,
       docId: widget.docId,
@@ -129,10 +129,10 @@ class _ChangeRoleBottomSheetState extends State<ChangeRoleBottomSheet> {
               onPressed: () async {
                 await _changeRole();
               },
-              child: GetBuilder<BatchMemberListController>(
+              child: GetBuilder<BatchMemberManagementController>(
                 builder: (controller) {
                   return Visibility(
-                    visible: !controller.isLoadingWhenChangeRole,
+                    visible: !controller.isLoadingDuringRoleChange,
                     replacement: const ProgressIndicatorWidget(
                       size: 20,
                       color: Colors.white,
