@@ -69,6 +69,10 @@ class BatchMemberManagementController extends GetxController {
         "role": role,
       });
 
+      await _firestore.collection("Users").doc(docId).update({
+        "role": role,
+      });
+
       isSuccess = true;
       errorMessage = null;
     } catch (e) {

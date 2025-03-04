@@ -32,6 +32,7 @@ class ProfileController extends GetxController {
 
       if (canLeaveBatch) {
         try {
+          /// Notification collection delete
           final subCollections = await firestore
               .collection("Batches")
               .doc(batchId)
@@ -44,6 +45,7 @@ class ProfileController extends GetxController {
             await subCollection.reference.delete();
           }
 
+          /// Batch member delete
           await firestore
               .collection("Batches")
               .doc(batchId)
@@ -51,12 +53,13 @@ class ProfileController extends GetxController {
               .doc(uid)
               .delete();
 
+          /// Users collection update
           await firestore.collection("Users").doc(uid).update({
             "batchId": "",
             "role": "student"
           });
 
-          // Unsubscribe from topic
+          /// Unsubscribe from topic
           await NotificationService.instance.unsubscribeFromTopic(batchId);
 
           isSuccess = true;
