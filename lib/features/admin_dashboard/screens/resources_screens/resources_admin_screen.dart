@@ -79,7 +79,7 @@ class _ResourcesAdminScreenState extends State<ResourcesAdminScreen> {
                   Divider(
                     height: 1.5,
                     thickness: 1.5,
-                    color: Colors.grey.withOpacity(0.2),
+                    color: Colors.grey.withValues(alpha: 0.2),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),
@@ -109,11 +109,11 @@ class _ResourcesAdminScreenState extends State<ResourcesAdminScreen> {
     return Column(
       children: [
         SizedBox(
-          height: 60,
+          height: 55,
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
             itemCount: courseList.length,
             itemBuilder: (context, index) {
               final courseCode = courseList[index];
@@ -150,7 +150,7 @@ class _ResourcesAdminScreenState extends State<ResourcesAdminScreen> {
           ),
         ),
         Container(
-          color: Colors.grey.withOpacity(0.2),
+          color: Colors.grey.withValues(alpha: 0.2),
           height: 1.5,
         ),
       ],

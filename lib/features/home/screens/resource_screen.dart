@@ -82,11 +82,11 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
     return Column(
       children: [
         SizedBox(
-          height: 60,
+          height: 55,
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
             itemCount: courseList.length,
             itemBuilder: (context, index) {
               final courseCode = courseList[index];
