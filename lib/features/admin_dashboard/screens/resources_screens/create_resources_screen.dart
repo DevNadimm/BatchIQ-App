@@ -52,7 +52,7 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.5),
           child: Container(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
             height: 1.5,
           ),
         ),
@@ -67,7 +67,7 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                 Container(
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
+                    color: primaryColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -111,7 +111,7 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                   decoration: InputDecoration(
                     hintText: "Course",
                     hintStyle: TextStyle(
-                      color: secondaryFontColor.withOpacity(0.9),
+                      color: secondaryFontColor.withValues(alpha: 0.9),
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -131,7 +131,7 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                   decoration: InputDecoration(
                     hintText: "Resource Type",
                     hintStyle: TextStyle(
-                      color: secondaryFontColor.withOpacity(0.9),
+                      color: secondaryFontColor.withValues(alpha: 0.9),
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
