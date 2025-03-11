@@ -91,7 +91,7 @@ class _ChangeRoleBottomSheetState extends State<ChangeRoleBottomSheet> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: isSelected
-                        ? Colors.blue.withValues(alpha: 0.1)
+                        ? Colors.blue.withOpacity(0.1)
                         : Colors.transparent,
                     border: Border.all(
                       color: isSelected ? primaryColor : Colors.grey.shade300,

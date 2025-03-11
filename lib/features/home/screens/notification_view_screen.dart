@@ -74,7 +74,7 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.5),
           child: Container(
-            color: Colors.grey.withValues(alpha: 0.2),
+            color: Colors.grey.withOpacity(0.2),
             height: 1.5,
           ),
         ),
@@ -94,7 +94,7 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
-                  color: HelperFunctions.getNotificationColor(notification.type).withValues(alpha: 0.1),
+                  color: HelperFunctions.getNotificationColor(notification.type).withOpacity(0.1),
                 ),
                 child: Text(
                   notification.type.toUpperCase(),
@@ -109,10 +109,10 @@ class _NotificationViewScreenState extends State<NotificationViewScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withValues(alpha: 0.05),
+                  color: Theme.of(context).primaryColor.withOpacity(0.05),
                   borderRadius: BorderRadius.circular(12.0),
                   border: Border.all(
-                    color: Colors.grey.withValues(alpha: 0.2),
+                    color: Colors.grey.withOpacity(0.2),
                     width: 1.5,
                   ),
                 ),

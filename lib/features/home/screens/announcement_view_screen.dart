@@ -54,7 +54,7 @@ class _AnnouncementViewScreenState extends State<AnnouncementViewScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.5),
           child: Container(
-            color: Colors.grey.withValues(alpha: 0.2),
+            color: Colors.grey.withOpacity(0.2),
             height: 1.5,
           ),
         ),
@@ -74,7 +74,7 @@ class _AnnouncementViewScreenState extends State<AnnouncementViewScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
-                  color: HelperFunctions.getAnnouncementColor(announcement.type).withValues(alpha: 0.1),
+                  color: HelperFunctions.getAnnouncementColor(announcement.type).withOpacity(0.1),
                 ),
                 child: Text(
                   announcement.type.toUpperCase(),
@@ -88,10 +88,10 @@ class _AnnouncementViewScreenState extends State<AnnouncementViewScreen> {
               Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withValues(alpha: 0.05),
+                  color: Theme.of(context).primaryColor.withOpacity(0.05),
                   borderRadius: BorderRadius.circular(12.0),
                   border: Border.all(
-                    color: Colors.grey.withValues(alpha: 0.2),
+                    color: Colors.grey.withOpacity(0.2),
                     width: 1.5,
                   ),
                 ),

@@ -48,7 +48,7 @@ class _BatchMembersScreenState extends State<BatchMembersScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.5),
           child: Container(
-            color: Colors.grey.withValues(alpha: 0.2),
+            color: Colors.grey.withOpacity(0.2),
             height: 1.5,
           ),
         ),
@@ -96,11 +96,11 @@ class _BatchMembersScreenState extends State<BatchMembersScreen> {
     return Column(
       children: [
         ListTile(
-          splashColor: primaryColor.withValues(alpha: 0.1),
+          splashColor: primaryColor.withOpacity(0.1),
           leading: CircleAvatar(
             backgroundColor: role == "admin"
                 ? Colors.red.shade100
-                : Theme.of(context).primaryColor.withValues(alpha: 0.1),
+                : Theme.of(context).primaryColor.withOpacity(0.1),
             child: Text(
               name[0],
               style: const TextStyle(

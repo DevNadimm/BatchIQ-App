@@ -79,7 +79,7 @@ class _ResourcesAdminScreenState extends State<ResourcesAdminScreen> {
                   Divider(
                     height: 1.5,
                     thickness: 1.5,
-                    color: Colors.grey.withValues(alpha: 0.2),
+                    color: Colors.grey.withOpacity(0.2),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),
@@ -150,7 +150,7 @@ class _ResourcesAdminScreenState extends State<ResourcesAdminScreen> {
           ),
         ),
         Container(
-          color: Colors.grey.withValues(alpha: 0.2),
+          color: Colors.grey.withOpacity(0.2),
           height: 1.5,
         ),
       ],

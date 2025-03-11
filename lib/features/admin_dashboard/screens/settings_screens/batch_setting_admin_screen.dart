@@ -31,7 +31,7 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.5),
           child: Container(
-            color: Colors.grey.withValues(alpha: 0.2),
+            color: Colors.grey.withOpacity(0.2),
             height: 1.5,
           ),
         ),
@@ -89,9 +89,9 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
     return Column(
       children: [
         ListTile(
-          splashColor: primaryColor.withValues(alpha: 0.1),
+          splashColor: primaryColor.withOpacity(0.1),
           leading: CircleAvatar(
-            backgroundColor: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+            backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
             child: Icon(icon),
           ),
           title: Text(
@@ -114,7 +114,7 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
         ),
         Divider(
           height: 1.5,
-          color: Colors.grey.withValues(alpha: 0.2),
+          color: Colors.grey.withOpacity(0.2),
         ),
       ],
     );
