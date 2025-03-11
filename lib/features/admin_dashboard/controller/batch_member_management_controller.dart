@@ -83,7 +83,7 @@ class BatchMemberManagementController extends GetxController {
         await batchRef.collection("Members").doc(docId).update({"role": role});
         await _firestore.collection("Users").doc(docId).update({"role": role});
 
-        if(currentUserDocId == docId && currentRole == "admin" && role == "student"){
+        if (currentUserDocId == docId && currentRole == "admin" && role == "student") {
           Get.offAll(() => const HomeScreen());
         }
         isSuccess = true;
