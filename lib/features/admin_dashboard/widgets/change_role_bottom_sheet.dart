@@ -37,8 +37,8 @@ class _ChangeRoleBottomSheetState extends State<ChangeRoleBottomSheet> {
     );
 
     if (!result) {
-      SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
       Get.back();
+      SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
     } else {
       Get.back();
       await controller.getBatchMembers();

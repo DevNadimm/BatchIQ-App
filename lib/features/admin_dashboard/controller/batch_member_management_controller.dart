@@ -1,6 +1,8 @@
 import 'package:batchiq_app/core/constants/error_messages.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/count_members_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/batch_member_model.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
+import 'package:batchiq_app/features/home/screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -59,22 +61,34 @@ class BatchMemberManagementController extends GetxController {
   }) async {
     isLoadingDuringRoleChange = true;
     update();
+
     try {
       final data = await _userController.fetchUserData();
       final batchId = data?.batchId ?? "";
+      final currentUserDocId = data?.uid ?? "";
+
+      final currentUserSnapshot = await _firestore.collection("Users").doc(docId).get();
+      final currentRole = currentUserSnapshot["role"];
+
+      await MemberCountController.instance.countMembers();
+      final adminCount = MemberCountController.instance.adminCount;
 
       final batchRef = _firestore.collection("Batches").doc(batchId);
 
-      await batchRef.collection("Members").doc(docId).update({
-        "role": role,
-      });
+      // Prevent the last admin from changing their role to student
+      if (currentRole == "admin" && role == "student" && adminCount <= 1) {
+        isSuccess = false;
+        errorMessage = "At least one admin is required. You cannot change your role to student.";
+      } else {
+        await batchRef.collection("Members").doc(docId).update({"role": role});
+        await _firestore.collection("Users").doc(docId).update({"role": role});
 
-      await _firestore.collection("Users").doc(docId).update({
-        "role": role,
-      });
-
-      isSuccess = true;
-      errorMessage = null;
+        if(currentUserDocId == docId && currentRole == "admin" && role == "student"){
+          Get.offAll(() => const HomeScreen());
+        }
+        isSuccess = true;
+        errorMessage = null;
+      }
     } catch (e) {
       isSuccess = false;
       errorMessage = ErrorMessages.changeMemberRoleError;
