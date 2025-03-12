@@ -26,7 +26,7 @@ class FeatureNotAvailableBottomSheet extends StatelessWidget {
             IconImageName.featureNotAvailable,
             height: 80,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           Text(
             "Feature Not Available",
             style: Theme.of(context)
@@ -34,7 +34,7 @@ class FeatureNotAvailableBottomSheet extends StatelessWidget {
                 .headlineSmall
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           Text(
             "We're sorry! This feature is currently unavailable. Please check back later.",
             textAlign: TextAlign.center,
