@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:batchiq_app/core/services/notification_service.dart';
+import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -54,6 +55,38 @@ class CreateBatchController extends GetxController {
     } catch (e) {
       isSuccess = false;
       errorMessage = "Failed to submit application!";
+    } finally {
+      isLoading = false;
+      update();
+    }
+
+    return isSuccess;
+  }
+
+  Future<bool> updateBatch({
+    required String batchName,
+    required String description,
+  }) async {
+    final firestore = FirebaseFirestore.instance;
+
+    isLoading = true;
+    update();
+
+    final UserController userController = UserController();
+    final user = await userController.fetchUserData();
+    final batchId = user?.batchId ?? "";
+
+    try {
+      await firestore.collection("Batches").doc(batchId).update({
+        "name": batchName,
+        "description": description,
+      });
+
+      isSuccess = true;
+      errorMessage = null;
+    } catch (e) {
+      isSuccess = false;
+      errorMessage = "Failed to save changes. Please try again!";
     } finally {
       isLoading = false;
       update();

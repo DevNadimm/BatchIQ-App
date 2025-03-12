@@ -134,7 +134,7 @@ class _ChangeRoleBottomSheetState extends State<ChangeRoleBottomSheet> {
                   return Visibility(
                     visible: !controller.isLoadingDuringRoleChange,
                     replacement: const ProgressIndicatorWidget(
-                      size: 20,
+                      size: 25,
                       color: Colors.white,
                     ),
                     child: const Text(

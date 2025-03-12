@@ -1,6 +1,7 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/batch_settings/batch_members_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/settings_screens/info_management_screen.dart';
 import 'package:batchiq_app/shared/feature_not_available_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,9 +44,9 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
             context,
             icon: HugeIcons.strokeRoundedSetting07,
             title: "Info Management",
-            description: "Update batch name, description, and view batch ID.",
+            description: "Edit batch name and description",
             onTap: () {
-              // Navigate to Info Management screen
+              Get.to(() => const InfoManagementScreen());
             },
           ),
           _buildListItem(

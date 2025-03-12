@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _fetchBatchInfo() async {
-    await BatchInfoController.instance.fetchBatchInfo(userModel!.batchId!);
+    await BatchInfoController.instance.fetchBatchInfo();
   }
 
   Future<void> _fetchClassSchedules() async {

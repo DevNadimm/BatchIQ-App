@@ -1,3 +1,4 @@
+import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/home/models/batch_info_model.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,12 +9,16 @@ class BatchInfoController extends GetxController {
   var isLoading = false;
   var assignmentCount = 0;
   BatchInfoModel batchInfoModel = BatchInfoModel();
+  final UserController _userController = UserController();
 
   /// Method to count assignments for a specific batch
-  Future<void> countAssignments(String batchId) async {
+  Future<void> countAssignments() async {
     try {
       isLoading = true;
       update();
+
+      final user = await _userController.fetchUserData();
+      final batchId = user?.batchId ?? "";
 
       if (batchId.isEmpty) {
         throw Exception('Batch ID is not available.');
@@ -37,10 +42,13 @@ class BatchInfoController extends GetxController {
   }
 
   /// Method to fetch batch information
-  Future<void> fetchBatchInfo(String batchId) async {
+  Future<void> fetchBatchInfo() async {
     try {
       isLoading = true;
       update();
+
+      final user = await _userController.fetchUserData();
+      final batchId = user?.batchId ?? "";
 
       if (batchId.isEmpty) {
         throw Exception('Batch ID is not available.');
