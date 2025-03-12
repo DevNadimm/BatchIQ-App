@@ -6,6 +6,7 @@ import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:batchiq_app/features/profile/controller/profile_controller.dart';
 import 'package:batchiq_app/features/profile/widgets/leave_batch_dialog.dart';
 import 'package:batchiq_app/shared/dialogs/logout_dialog.dart';
+import 'package:batchiq_app/shared/feature_not_available_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -107,10 +108,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               radius: 18,
               backgroundColor: shadeColor,
               child: IconButton(
-                icon: Icon(HugeIcons.strokeRoundedEdit02,
-                    color: primaryColor, size: 16),
+                icon: Icon(HugeIcons.strokeRoundedEdit02, color: primaryColor, size: 16),
                 onPressed: () {
-                  // Add edit functionality here
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                    ),
+                    builder: (context) => const FeatureNotAvailableBottomSheet(),
+                  );
                 },
               ),
             ),
@@ -257,7 +265,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildListTile(
             title: "Notifications",
             icon: HugeIcons.strokeRoundedNotification02,
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(16),
+                  ),
+                ),
+                builder: (context) => const FeatureNotAvailableBottomSheet(),
+              );
+            },
           ),
           _buildListTile(
             title: "Help & Support",

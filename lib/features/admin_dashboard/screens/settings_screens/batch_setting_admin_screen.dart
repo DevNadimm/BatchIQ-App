@@ -1,6 +1,7 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/batch_settings/batch_members_screen.dart';
+import 'package:batchiq_app/shared/feature_not_available_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -51,7 +52,7 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
             context,
             icon: HugeIcons.strokeRoundedUser,
             title: "Member Management",
-            description: "Manage members, promote or demote, and remove users.",
+            description: "Manage members, promote or demote roles.",
             onTap: () {
               Get.to(() => const BatchMembersScreen());
             },
@@ -62,7 +63,15 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
             title: "Download Member List",
             description: "Export the member list as a downloadable file.",
             onTap: () {
-              // Add download logic
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(16),
+                  ),
+                ),
+                builder: (context) => const FeatureNotAvailableBottomSheet(),
+              );
             },
           ),
           _buildListItem(
@@ -71,7 +80,15 @@ class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
             title: "Delete Batch",
             description: "Permanently delete this batch.",
             onTap: () {
-              // Add delete logic
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(16),
+                  ),
+                ),
+                builder: (context) => const FeatureNotAvailableBottomSheet(),
+              );
             },
           ),
         ],
