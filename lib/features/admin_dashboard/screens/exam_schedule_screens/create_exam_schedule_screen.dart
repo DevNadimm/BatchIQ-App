@@ -22,6 +22,9 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
   final TextEditingController courseNameController = TextEditingController();
   final TextEditingController examTypeController = TextEditingController();
   final TextEditingController scheduledDateController = TextEditingController();
+
+  bool addToCalendar = false;
+  bool sendNotification = false;
   List<Map<String, String>> courseList = [];
 
   @override
@@ -63,7 +66,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.5),
           child: Container(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
             height: 1.5,
           ),
         ),
@@ -80,7 +83,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 decoration: InputDecoration(
                   hintText: "Course",
                   hintStyle: TextStyle(
-                    color: secondaryFontColor.withOpacity(0.9),
+                    color: secondaryFontColor.withValues(alpha: 0.9),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -102,7 +105,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 decoration: InputDecoration(
                   hintText: "Select a Day",
                   hintStyle: TextStyle(
-                    color: secondaryFontColor.withOpacity(0.9),
+                    color: secondaryFontColor..withValues(alpha: 0.9),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -128,7 +131,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 decoration: InputDecoration(
                   hintText: "Pick Exam Date",
                   hintStyle: TextStyle(
-                    color: secondaryFontColor.withOpacity(0.9),
+                    color: secondaryFontColor..withValues(alpha: 0.9),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -142,6 +145,59 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 },
               ),
               const SizedBox(height: 16),
+
+              /// Send Notification Switch
+              SwitchListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(
+                    width: 1,
+                    color: primaryColor..withValues(alpha: 0.4),
+                  ),
+                ),
+                value: sendNotification,
+                onChanged: (value) {
+                  setState(() {
+                    sendNotification = value;
+                  });
+                },
+                title: Text(
+                  "Send Notification",
+                  style: TextStyle(
+                    color: secondaryFontColor..withValues(alpha: 0.9),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              /// Add to My Calendar Switch
+              SwitchListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(
+                    width: 1,
+                    color: primaryColor..withValues(alpha: 0.4),
+                  ),
+                ),
+                value: addToCalendar,
+                onChanged: (value) {
+                  setState(() {
+                    addToCalendar = value;
+                  });
+                },
+                title: Text(
+                  "Add to My Calendar",
+                  style: TextStyle(
+                    color: secondaryFontColor..withValues(alpha: 0.9),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+
               GetBuilder<ExamScheduleController>(builder: (controller) {
                 return SizedBox(
                   height: 50,
@@ -194,11 +250,12 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
       teacher: selectedCourse['instructorName']!,
       scheduledDate: scheduledDateController.text,
       examType: examTypeController.text,
+      sendNotification: sendNotification,
+      addToCalendar: addToCalendar,
     );
 
     if (isCreated) {
-      SnackBarMessage.successMessage(
-          "Your exam schedule has been created successfully!");
+      SnackBarMessage.successMessage("Your exam schedule has been created successfully!");
       clearFields();
     } else {
       SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
@@ -239,5 +296,10 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
     courseNameController.clear();
     examTypeController.clear();
     scheduledDateController.clear();
+
+    setState(() {
+      addToCalendar = false;
+      sendNotification = false;
+    });
   }
 }

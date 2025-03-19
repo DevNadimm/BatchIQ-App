@@ -1,9 +1,11 @@
 import 'package:batchiq_app/core/constants/error_messages.dart';
 import 'package:batchiq_app/core/utils/id_generator.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/exam_schedule_model.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ExamScheduleController extends GetxController {
   static final ExamScheduleController instance = Get.find<ExamScheduleController>();
@@ -67,6 +69,8 @@ class ExamScheduleController extends GetxController {
     required String courseName,
     required String teacher,
     required String examType,
+    required bool sendNotification,
+    required bool addToCalendar,
   }) async {
     _setLoading(true);
     try {
@@ -93,6 +97,34 @@ class ExamScheduleController extends GetxController {
           .doc(docId)
           .set(examSchedule.toFirestore());
 
+      if (addToCalendar) {
+        String calendarTitle = "Exam for $courseName ($courseCode)";
+        String calendarDescription = "Exam scheduled for $courseName ($courseCode) with $teacher. Exam Type: $examType. Scheduled Date: $scheduledDate.";
+        await batchRef.collection("MyCalendar").doc(docId).set({
+          "title": calendarTitle,
+          "description": calendarDescription,
+          "createdBy": uid,
+          "date": formatDateString(scheduledDate),
+          "eventType": "exam",
+        });
+      }
+
+      if (sendNotification) {
+        String notificationTitle = "Your $examType Exam for '$courseName' ($courseCode) is Coming Up!";
+        String notificationBody =
+            "Attention all students: The $examType exam for '$courseName' ($courseCode) is approaching!\n\n"
+            "Instructor: $teacher\n"
+            "Scheduled Date: ${formatDateString(scheduledDate)}\n\n"
+            "Be prepared and mark your calendars!";
+
+        await NotificationController.instance.createNotification(
+          type: 'exam',
+          title: notificationTitle,
+          body: notificationBody,
+          documentId: docId,
+        );
+      }
+
       examSchedules.add(examSchedule);
 
       isSuccess = true;
@@ -106,6 +138,13 @@ class ExamScheduleController extends GetxController {
 
     return isSuccess;
   }
+
+  String formatDateString(String dateString) {
+    DateTime date = DateTime.parse(dateString);
+    String formattedDate = DateFormat('MMM d, yyyy').format(date);
+    return formattedDate;
+  }
+
   //
   // Future<bool> editClassSchedule({
   //   required String docId,
