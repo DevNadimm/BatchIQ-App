@@ -53,7 +53,7 @@ class ExamScheduleController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = ErrorMessages.fetchSchedulesError;
+      errorMessage = ErrorMessages.fetchExamSchedulesError;
     } finally {
       _setLoading(false);
     }
@@ -99,7 +99,7 @@ class ExamScheduleController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = ErrorMessages.createSchedulesError;
+      errorMessage = ErrorMessages.createExamScheduleError;
     } finally {
       _setLoading(false);
     }

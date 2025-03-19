@@ -65,7 +65,7 @@ class ClassScheduleController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = ErrorMessages.fetchSchedulesError;
+      errorMessage = ErrorMessages.fetchClassSchedulesError;
     } finally {
       _setLoading(false);
     }
@@ -117,7 +117,7 @@ class ClassScheduleController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = ErrorMessages.createSchedulesError;
+      errorMessage = ErrorMessages.createClassSchedulesError;
     } finally {
       _setLoading(false);
     }
@@ -171,7 +171,7 @@ class ClassScheduleController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = ErrorMessages.editSchedulesError;
+      errorMessage = ErrorMessages.editClassSchedulesError;
     } finally {
       _setLoading(false);
     }
@@ -195,7 +195,7 @@ class ClassScheduleController extends GetxController {
       errorMessage = null;
     } catch (e) {
       isSuccess = false;
-      errorMessage = ErrorMessages.deleteSchedulesError;
+      errorMessage = ErrorMessages.deleteClassSchedulesError;
     } finally {
       _setLoading(false);
     }

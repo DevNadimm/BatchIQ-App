@@ -3,7 +3,6 @@ import 'package:batchiq_app/core/constants/exam_type.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/course_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/exam_schedule_controller.dart';
 import 'package:batchiq_app/shared/custom_bottom_sheet.dart';
@@ -143,19 +142,19 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 },
               ),
               const SizedBox(height: 16),
-              GetBuilder<ClassScheduleController>(builder: (controller) {
-                return Visibility(
-                  visible: !controller.isLoading,
-                  replacement: const ProgressIndicatorWidget(),
-                  child: SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          await createExamSchedule();
-                        }
-                      },
+              GetBuilder<ExamScheduleController>(builder: (controller) {
+                return SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        await createExamSchedule();
+                      }
+                    },
+                    child: Visibility(
+                      visible: !controller.isLoading,
+                      replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
                       child: const Text(
                         "Create Exam Schedule",
                         style: TextStyle(
@@ -199,7 +198,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
 
     if (isCreated) {
       SnackBarMessage.successMessage(
-          "Your class schedule has been created successfully!");
+          "Your exam schedule has been created successfully!");
       clearFields();
     } else {
       SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");

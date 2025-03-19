@@ -3,7 +3,6 @@ import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/exam_schedule_screens/create_exam_schedule_screen.dart';
-import 'package:batchiq_app/features/admin_dashboard/screens/notification_screens/create_notification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

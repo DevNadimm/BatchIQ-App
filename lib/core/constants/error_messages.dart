@@ -20,10 +20,16 @@ class ErrorMessages {
   static const String deleteNotificationsError = "Failed to delete the notification. Please try again.";
 
   /// Class Schedules
-  static const String fetchSchedulesError = "Failed to load class schedules. Please try again.";
-  static const String createSchedulesError = "Failed to create the class schedule. Please check your input and try again.";
-  static const String editSchedulesError = "Failed to update the class schedule. Please try again.";
-  static const String deleteSchedulesError = "Failed to delete the class schedule. Please try again.";
+  static const String fetchClassSchedulesError = "Failed to load class schedules. Please try again.";
+  static const String createClassSchedulesError = "Failed to create the class schedule. Please check your input and try again.";
+  static const String editClassSchedulesError = "Failed to update the class schedule. Please try again.";
+  static const String deleteClassSchedulesError = "Failed to delete the class schedule. Please try again.";
+
+  /// Exam Schedules
+  static const String fetchExamSchedulesError = "Failed to load exam schedules. Please try again.";
+  static const String createExamScheduleError = "Failed to create the exam schedule. Please check your input and try again.";
+  static const String editExamScheduleError = "Failed to update the exam schedule. Please try again.";
+  static const String deleteExamScheduleError = "Failed to delete the exam schedule. Please try again.";
 
   /// Calendar Events
   static const String fetchEventsError = "Failed to load calendar events. Please try again.";
