@@ -123,6 +123,12 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                       title: "Choose Course",
                     );
                   },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select a course';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
@@ -142,6 +148,12 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                       controller: typeController,
                       title: "Choose Resource Type",
                     );
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select a resource type';
+                    }
+                    return null;
                   },
                 ),
                 const SizedBox(height: 16),

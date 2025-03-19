@@ -132,12 +132,11 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
-                    suffixIcon: IconButton(
-                      onPressed: () => _pickDeadline(context),
-                      icon: const Icon(HugeIcons.strokeRoundedCalendar03),
-                      tooltip: "Pick Deadline",
-                    ),
+                    suffixIcon: const Icon(HugeIcons.strokeRoundedCalendar03),
                   ),
+                  onTap: () {
+                    _pickDeadline(context);
+                  },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please select deadline';

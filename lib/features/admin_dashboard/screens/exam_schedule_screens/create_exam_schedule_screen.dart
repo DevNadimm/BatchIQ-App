@@ -97,13 +97,19 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                     title: "Choose Course",
                   );
                 },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please select a course';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 16),
               TextFormField(
                 readOnly: true,
                 controller: examTypeController,
                 decoration: InputDecoration(
-                  hintText: "Select a Day",
+                  hintText: "Exam Type",
                   hintStyle: TextStyle(
                     color: secondaryFontColor.withValues(alpha: 0.9),
                     fontSize: 16,
@@ -114,12 +120,12 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                   showCustomBottomSheet(
                     items: examTypes,
                     controller: examTypeController,
-                    title: "Select a Day",
+                    title: "Choose Exam Type",
                   );
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please select a day';
+                    return 'Please select an exam type.';
                   }
                   return null;
                 },

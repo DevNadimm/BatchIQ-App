@@ -92,6 +92,12 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
                     title: "Choose Course",
                   );
                 },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please select a course';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 16),
 
