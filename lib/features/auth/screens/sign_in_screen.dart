@@ -105,18 +105,18 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 50,
                   width: double.infinity,
                   child: GetBuilder<SignInController>(builder: (controller) {
-                    return Visibility(
-                      visible: !controller.isLoading,
-                      replacement: const ProgressIndicatorWidget(),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_globalKey.currentState?.validate() ?? false) {
-                            onTapSignIn(
-                              _emailController.text.trim(),
-                              _passwordController.text.trim(),
-                            );
-                          }
-                        },
+                    return ElevatedButton(
+                      onPressed: () {
+                        if (_globalKey.currentState?.validate() ?? false) {
+                          onTapSignIn(
+                            _emailController.text.trim(),
+                            _passwordController.text.trim(),
+                          );
+                        }
+                      },
+                      child: Visibility(
+                        visible: !controller.isLoading,
+                        replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
                         child: const Text(
                           "Sign In",
                           style: TextStyle(

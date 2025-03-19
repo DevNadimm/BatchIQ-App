@@ -7,7 +7,7 @@ import 'package:batchiq_app/features/admin_dashboard/screens/course_screens/cour
 import 'package:batchiq_app/features/admin_dashboard/screens/my_calender_screens/my_calender_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/notification_screens/notification_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/resources_screens/resources_admin_screen.dart';
-import 'package:batchiq_app/features/admin_dashboard/screens/settings_screens/batch_setting_admin_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/batch_settings/batch_settings_screen.dart';
 import 'package:batchiq_app/features/others/screens/under_maintenance_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -81,6 +81,6 @@ List<GridContent> adminGridContentList = [
     adminDescription: "Manage and configure batch settings.",
     iconPath: IconImageName.batchSettings,
     color: const Color(0xFF512DA8),
-    onTapAdmin: () => Get.to(const BatchSettingAdminScreen()),
+    onTapAdmin: () => Get.to(const BatchSettingScreen()),
   ),
 ];

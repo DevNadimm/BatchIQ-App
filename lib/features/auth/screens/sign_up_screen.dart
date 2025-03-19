@@ -124,19 +124,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: double.infinity,
                   child: GetBuilder<SignUpController>(
                     builder: (controller) {
-                      return Visibility(
-                        visible: !controller.isLoading,
-                        replacement: const ProgressIndicatorWidget(),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_globalKey.currentState?.validate() ?? false) {
-                              onTapSignUp(
-                                _nameTEController.text.trim(),
-                                _emailTEController.text.trim(),
-                                _passwordTEController.text.trim(),
-                              );
-                            }
-                          },
+                      return ElevatedButton(
+                        onPressed: () {
+                          if (_globalKey.currentState?.validate() ?? false) {
+                            onTapSignUp(
+                              _nameTEController.text.trim(),
+                              _emailTEController.text.trim(),
+                              _passwordTEController.text.trim(),
+                            );
+                          }
+                        },
+                        child: Visibility(
+                          visible: !controller.isLoading,
+                          replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
                           child: const Text(
                             "Create Account",
                             style:

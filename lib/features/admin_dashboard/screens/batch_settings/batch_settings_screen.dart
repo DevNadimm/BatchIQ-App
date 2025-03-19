@@ -1,20 +1,20 @@
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/batch_settings/batch_members_screen.dart';
-import 'package:batchiq_app/features/admin_dashboard/screens/settings_screens/info_management_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/batch_settings/info_management_screen.dart';
 import 'package:batchiq_app/shared/feature_not_available_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class BatchSettingAdminScreen extends StatefulWidget {
-  const BatchSettingAdminScreen({super.key});
+class BatchSettingScreen extends StatefulWidget {
+  const BatchSettingScreen({super.key});
 
   @override
-  State<BatchSettingAdminScreen> createState() => _BatchSettingAdminScreenState();
+  State<BatchSettingScreen> createState() => _BatchSettingScreenState();
 }
 
-class _BatchSettingAdminScreenState extends State<BatchSettingAdminScreen> {
+class _BatchSettingScreenState extends State<BatchSettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
