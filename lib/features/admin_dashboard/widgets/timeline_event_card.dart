@@ -63,9 +63,10 @@ class TimelineEventCard extends StatelessWidget {
             Expanded(
               child: Card(
                 margin: EdgeInsets.zero,
-                color: HelperFunctions.getEventTypeColor(event.eventType, event.date).withOpacity(0.1),
+                color: Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(width: 1.5, color: primaryColor.withOpacity(0.1)),
                 ),
                 elevation: 0,
                 child: Padding(
@@ -93,7 +94,7 @@ class TimelineEventCard extends StatelessWidget {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: HelperFunctions.getEventTypeColor(event.eventType, event.date),
+                              color: HelperFunctions.getEventTypeColor(event.eventType, event.date).withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
@@ -101,7 +102,7 @@ class TimelineEventCard extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
-                                  .copyWith(color: Colors.white),
+                                  .copyWith(color: HelperFunctions.getEventTypeColor(event.eventType, event.date)),
                             ),
                           ),
                           if (isAdmin)

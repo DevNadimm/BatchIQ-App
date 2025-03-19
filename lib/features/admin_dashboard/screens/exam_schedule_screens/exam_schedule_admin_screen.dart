@@ -1,7 +1,7 @@
 import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
-import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/exam_schedule_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/exam_schedule_screens/create_exam_schedule_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,14 +16,14 @@ class ExamScheduleAdminScreen extends StatefulWidget {
 class _ExamScheduleAdminScreenState extends State<ExamScheduleAdminScreen> {
   @override
   void initState() {
-    // fetchExams();
+    fetchExams();
     super.initState();
   }
 
-  // Future<void> fetchExams() async {
-  //   final controller = NotificationController.instance;
-  //   await controller.getNotifications();
-  // }
+  Future<void> fetchExams() async {
+    final controller = ExamScheduleController.instance;
+    await controller.getExamSchedules();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _ExamScheduleAdminScreenState extends State<ExamScheduleAdminScreen> {
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text(
-          "Exams",
+          "Exam Schedules",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         leading: IconButton(
@@ -51,20 +51,21 @@ class _ExamScheduleAdminScreenState extends State<ExamScheduleAdminScreen> {
       body: Column(
         children: [
           Expanded(
-            child: GetBuilder<NotificationController>(
+            child: GetBuilder<ExamScheduleController>(
               builder: (controller) {
                 return Visibility(
                   visible: !controller.isLoading,
                   replacement: const ProgressIndicatorWidget(),
-                  child: controller.notifications.isEmpty
+                  child: controller.examSchedules.isEmpty
                       ? const EmptyList(
                           title: "No Exams Scheduled Yet!",
                         )
                       : ListView.builder(
                           shrinkWrap: true,
-                          itemCount: controller.notifications.length,
+                          itemCount: controller.examSchedules.length,
                           itemBuilder: (context, index) {
-                            return SizedBox();
+                            final examSchedule = controller.examSchedules[index];
+                            return Text(examSchedule.examType);
                           },
                         ),
                 );
