@@ -96,7 +96,6 @@ class _JoinBatchScreenState extends State<JoinBatchScreen> {
       "Manage assignments & deadlines",
       "Access notices & announcements",
       "Real-time updates & notifications",
-      "Collaborate with batchmates",
       "Track progress & deadlines",
       "View & manage class schedule",
     ];
