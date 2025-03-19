@@ -4,6 +4,7 @@ import 'package:batchiq_app/features/admin_dashboard/screens/announcement_screen
 import 'package:batchiq_app/features/admin_dashboard/screens/assignment_screens/assignment_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/class_schedule_screens/class_schedule_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/course_screens/course_admin_screen.dart';
+import 'package:batchiq_app/features/admin_dashboard/screens/exam_schedule_screens/exam_schedule_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/my_calender_screens/my_calender_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/notification_screens/notification_admin_screen.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/resources_screens/resources_admin_screen.dart';
@@ -39,7 +40,7 @@ List<GridContent> adminGridContentList = [
     adminDescription: "Manage exam schedules.",
     iconPath: IconImageName.exam,
     color: const Color(0xFFD32F2F),
-    onTapAdmin: () => Get.to(const UnderMaintenanceScreen()),
+    onTapAdmin: () => Get.to(const ExamScheduleAdminScreen()),
   ),
   GridContent(
     name: "Announcement",
