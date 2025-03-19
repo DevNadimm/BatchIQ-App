@@ -25,7 +25,7 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
     final controller = AssignmentController.instance;
     final result = await controller.getAssignments();
 
-    if(!result) {
+    if (!result) {
       SnackBarMessage.errorMessage(controller.errorMessage ?? "Something went wrong!");
     }
   }
@@ -59,31 +59,29 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
             visible: !controller.isLoading,
             replacement: const ProgressIndicatorWidget(),
             child: controller.assignments.isEmpty
-                ? const Center(
-              child: EmptyList(
-                title: "Empty Assignment!",
-              ),
-            )
+                ? const EmptyList(
+                  title: "Empty Assignment!",
+                )
                 : SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 8),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: controller.assignments.length,
-                    itemBuilder: (context, index) {
-                      final assignment = controller.assignments[index];
-                      return AssignmentCard(
-                        assignment: assignment,
-                        isAdmin: false,
-                      );
-                    },
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 8),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: controller.assignments.length,
+                          itemBuilder: (context, index) {
+                            final assignment = controller.assignments[index];
+                            return AssignmentCard(
+                              assignment: assignment,
+                              isAdmin: false,
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 8),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 8),
-                ],
-              ),
-            ),
           );
         },
       ),

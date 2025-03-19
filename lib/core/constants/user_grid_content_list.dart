@@ -3,6 +3,7 @@ import 'package:batchiq_app/core/constants/icon_image_name.dart';
 import 'package:batchiq_app/features/home/screens/announcement_screen.dart';
 import 'package:batchiq_app/features/home/screens/assignment_screen.dart';
 import 'package:batchiq_app/features/home/screens/class_schedule_screen.dart';
+import 'package:batchiq_app/features/home/screens/exam_schedule_screen.dart';
 import 'package:batchiq_app/features/home/screens/my_calendar_screen.dart';
 import 'package:batchiq_app/features/home/screens/notification_screen.dart';
 import 'package:batchiq_app/features/home/screens/resource_screen.dart';
@@ -37,7 +38,7 @@ List<GridContent> userGridContentList = [
     userDescription: "View your upcoming exams.",
     iconPath: IconImageName.exam,
     color: const Color(0xFFD32F2F),
-    onTapUser: () => Get.to(() => const UnderMaintenanceScreen()),
+    onTapUser: () => Get.to(() => const ExamScheduleScreen()),
   ),
   GridContent(
     name: "Announcement",
