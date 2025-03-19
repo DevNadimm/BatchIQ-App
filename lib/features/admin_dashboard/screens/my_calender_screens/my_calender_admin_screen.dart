@@ -2,7 +2,7 @@ import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/my_calendar_event_controller.dart';
-import 'package:batchiq_app/features/admin_dashboard/widgets/timeline_event_card.dart';
+import 'package:batchiq_app/shared/widgets/timeline_event_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

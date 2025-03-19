@@ -50,6 +50,8 @@ class ExamScheduleController extends GetxController {
       examSchedules = querySnapshot.docs
           .map((doc) => ExamScheduleModel.fromFirestore(doc.data(), doc.id))
           .toList();
+      
+      examSchedules.sort((a, b) => b.scheduledDate.compareTo(a.scheduledDate));
 
       isSuccess = true;
       errorMessage = null;
@@ -89,7 +91,7 @@ class ExamScheduleController extends GetxController {
           scheduledDate: scheduledDate,
           examType: examType,
           createdBy: uid,
-          createdAt: DateTime.now().toString()
+          createdAt: DateTime.now().toString(),
       );
 
       await batchRef
@@ -145,83 +147,27 @@ class ExamScheduleController extends GetxController {
     return formattedDate;
   }
 
-  //
-  // Future<bool> editClassSchedule({
-  //   required String docId,
-  //   required String day,
-  //   required String startTime,
-  //   required String endTime,
-  //   required String courseCode,
-  //   required String courseName,
-  //   required String teacher,
-  //   required String location,
-  // }) async {
-  //   _setLoading(true);
-  //   try {
-  //     final userData = await _fetchUserData();
-  //     final batchId = userData["batchId"] ?? "";
-  //
-  //     final batchRef = _firestore.collection("Batches").doc(batchId);
-  //
-  //     await batchRef.collection("ClassSchedules").doc(docId).update({
-  //       "day": day,
-  //       "startTime": startTime,
-  //       "endTime": endTime,
-  //       "courseCode": courseCode,
-  //       "courseName": courseName,
-  //       "teacher": teacher,
-  //       "location": location,
-  //       "updatedAt": DateTime.now().toString(),
-  //     });
-  //
-  //     final index = classSchedules.indexWhere((schedule) =>
-  //     schedule.id == docId);
-  //     if (index != -1) {
-  //       classSchedules[index] = ClassScheduleModel(
-  //         id: docId,
-  //         day: day,
-  //         startTime: startTime,
-  //         endTime: endTime,
-  //         courseCode: courseCode,
-  //         courseName: courseName,
-  //         teacher: teacher,
-  //         location: location,
-  //       );
-  //     }
-  //
-  //     isSuccess = true;
-  //     errorMessage = null;
-  //   } catch (e) {
-  //     isSuccess = false;
-  //     errorMessage = ErrorMessages.editSchedulesError;
-  //   } finally {
-  //     _setLoading(false);
-  //   }
-  //
-  //   return isSuccess;
-  // }
+  Future<bool> deleteExamSchedule(String id) async {
+    _setLoading(true);
+    try {
+      final userData = await _fetchUserData();
+      final batchId = userData["batchId"] ?? "";
 
-  // Future<bool> deleteClassSchedule(String scheduleId) async {
-  //   _setLoading(true);
-  //   try {
-  //     final userData = await _fetchUserData();
-  //     final batchId = userData["batchId"] ?? "";
-  //
-  //     final batchRef = _firestore.collection("Batches").doc(batchId);
-  //
-  //     await batchRef.collection("ClassSchedules").doc(scheduleId).delete();
-  //
-  //     classSchedules.removeWhere((schedule) => schedule.id == scheduleId);
-  //
-  //     isSuccess = true;
-  //     errorMessage = null;
-  //   } catch (e) {
-  //     isSuccess = false;
-  //     errorMessage = ErrorMessages.deleteSchedulesError;
-  //   } finally {
-  //     _setLoading(false);
-  //   }
-  //
-  //   return isSuccess;
-  // }
+      final batchRef = _firestore.collection("Batches").doc(batchId);
+
+      await batchRef.collection("ExamSchedules").doc(id).delete();
+
+      examSchedules.removeWhere((schedule) => schedule.id == id);
+
+      isSuccess = true;
+      errorMessage = null;
+    } catch (e) {
+      isSuccess = false;
+      errorMessage = ErrorMessages.deleteExamScheduleError;
+    } finally {
+      _setLoading(false);
+    }
+
+    return isSuccess;
+  }
 }

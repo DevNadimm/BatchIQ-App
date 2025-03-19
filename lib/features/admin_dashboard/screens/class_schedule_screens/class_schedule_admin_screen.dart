@@ -4,7 +4,7 @@ import 'package:batchiq_app/core/utils/ui/empty_list.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/class_schedule_screens/create_class_schedule.dart';
-import 'package:batchiq_app/features/admin_dashboard/widgets/class_schedule_card.dart';
+import 'package:batchiq_app/shared/widgets/class_schedule_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

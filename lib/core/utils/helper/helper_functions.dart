@@ -6,7 +6,15 @@ class HelperFunctions {
 
   static String getDayName() {
     final now = DateTime.now();
-    final days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    final days = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ];
     return days[now.weekday % 7];
   }
 
@@ -16,7 +24,8 @@ class HelperFunctions {
       time = time.trim();
       return dateFormat.parse(time);
     } catch (e) {
-      throw FormatException("Error parsing time: $time. Please ensure it is in the format 'hh:mm AM/PM'.");
+      throw FormatException(
+          "Error parsing time: $time. Please ensure it is in the format 'hh:mm AM/PM'.");
     }
   }
 
@@ -30,9 +39,7 @@ class HelperFunctions {
     } else if (difference.inMinutes < 60) {
       return '${difference.inMinutes} min ago';
     } else if (difference.inHours < 24) {
-      return '${difference.inHours} hour${difference.inHours > 1
-          ? 's'
-          : ''} ago';
+      return '${difference.inHours} hour${difference.inHours > 1 ? 's' : ''} ago';
     } else if (difference.inDays < 30) {
       return '${difference.inDays} day${difference.inDays > 1 ? 's' : ''} ago';
     } else {
@@ -73,7 +80,9 @@ class HelperFunctions {
       return Colors.grey;
     }
 
-    if (eventDate.year == now.year && eventDate.month == now.month && eventDate.day == now.day) {
+    if (eventDate.year == now.year &&
+        eventDate.month == now.month &&
+        eventDate.day == now.day) {
       return Colors.orange;
     }
 
@@ -90,7 +99,9 @@ class HelperFunctions {
       return "Unknown";
     }
 
-    if (eventDate.year == now.year && eventDate.month == now.month && eventDate.day == now.day) {
+    if (eventDate.year == now.year &&
+        eventDate.month == now.month &&
+        eventDate.day == now.day) {
       return "Happening Today";
     }
 
@@ -145,6 +156,23 @@ class HelperFunctions {
         return Colors.orangeAccent;
       case 'external resource':
         return Colors.green[700]!;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  static Color getExamTypeColor(String type) {
+    switch (type.trim().toLowerCase()) {
+      case 'class test':
+        return Colors.blue;
+      case 'midterm':
+        return Colors.deepPurple;
+      case 'final':
+        return Colors.green;
+      case 'quiz test':
+        return Colors.orangeAccent;
+      case 'assignment test':
+        return Colors.pink;
       default:
         return Colors.grey;
     }

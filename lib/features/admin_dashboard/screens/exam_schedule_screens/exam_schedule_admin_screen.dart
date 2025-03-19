@@ -3,6 +3,7 @@ import 'package:batchiq_app/core/constants/icons_name.dart';
 import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/exam_schedule_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/screens/exam_schedule_screens/create_exam_schedule_screen.dart';
+import 'package:batchiq_app/shared/widgets/exam_schedule_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,7 +44,7 @@ class _ExamScheduleAdminScreenState extends State<ExamScheduleAdminScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.5),
           child: Container(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
             height: 1.5,
           ),
         ),
@@ -61,11 +62,15 @@ class _ExamScheduleAdminScreenState extends State<ExamScheduleAdminScreen> {
                           title: "No Exams Scheduled Yet!",
                         )
                       : ListView.builder(
+                          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                           shrinkWrap: true,
                           itemCount: controller.examSchedules.length,
                           itemBuilder: (context, index) {
                             final examSchedule = controller.examSchedules[index];
-                            return Text(examSchedule.examType);
+                            return ExamScheduleCard(
+                              isAdmin: true,
+                              exam: examSchedule,
+                            );
                           },
                         ),
                 );
@@ -77,7 +82,7 @@ class _ExamScheduleAdminScreenState extends State<ExamScheduleAdminScreen> {
               Divider(
                 height: 1.5,
                 thickness: 1.5,
-                color: Colors.grey.withOpacity(0.2),
+                color: Colors.grey.withValues(alpha: 0.2),
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
