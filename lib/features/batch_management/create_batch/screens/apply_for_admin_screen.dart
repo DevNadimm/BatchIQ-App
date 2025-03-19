@@ -171,15 +171,15 @@ class _ApplyForAdminScreenState extends State<ApplyForAdminScreen> {
       height: 50,
       child: GetBuilder<ApplyAdminController>(
         builder: (controller) {
-          return Visibility(
-            visible: !controller.isLoading,
-            replacement: const ProgressIndicatorWidget(),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState?.validate() ?? false) {
-                  applyAdmin();
-                }
-              },
+          return ElevatedButton(
+            onPressed: () {
+              if (_formKey.currentState?.validate() ?? false) {
+                applyAdmin();
+              }
+            },
+            child: Visibility(
+              visible: !controller.isLoading,
+              replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
               child: const Text(
                 "Apply for Admin",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),

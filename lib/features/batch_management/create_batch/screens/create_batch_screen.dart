@@ -102,15 +102,15 @@ class _CreateBatchScreenState extends State<CreateBatchScreen> {
                 width: double.infinity,
                 child: GetBuilder<CreateBatchController>(
                   builder: (controller) {
-                    return Visibility(
-                      visible: !controller.isLoading,
-                      replacement: const ProgressIndicatorWidget(),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_globalKey.currentState?.validate() ?? false) {
-                            createBatch();
-                          }
-                        },
+                    return ElevatedButton(
+                      onPressed: () {
+                        if (_globalKey.currentState?.validate() ?? false) {
+                          createBatch();
+                        }
+                      },
+                      child: Visibility(
+                        visible: !controller.isLoading,
+                        replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
                         child: const Text(
                           "Create Batch",
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
