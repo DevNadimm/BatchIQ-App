@@ -17,7 +17,8 @@ class ClassScheduleCard extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 1.5,
-          color: Colors.grey.withOpacity(0.7),
+          // color: Colors.grey.withOpacity(0.7),
+          color: primaryColor.withOpacity(0.1),
         ),
         borderRadius: BorderRadius.circular(12),
       ),
