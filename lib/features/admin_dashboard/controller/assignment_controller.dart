@@ -97,8 +97,8 @@ class AssignmentController extends GetxController {
       if (sendNotification) {
         await NotificationController.instance.createNotification(
           type: 'assignment',
-          title: title,
-          body: description,
+          title: "📑 New Assignment Posted!",
+          body: "You have a new assignment titled '$title'.\n\nDeadline: $deadline\n\nGo to the Assignment section in your dashboard to check the details and submit on time!",
           documentId: docId,
         );
       }
