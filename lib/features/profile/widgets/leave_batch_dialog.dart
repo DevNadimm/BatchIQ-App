@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/batch_management/join_batch/screens/join_batch_screen.dart';
 import 'package:batchiq_app/features/profile/controller/profile_controller.dart';
@@ -69,10 +70,12 @@ class LeaveBatchDialog extends StatelessWidget {
                   Get.back();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white38,
+                  backgroundColor: Colors.white,
                   minimumSize: const Size(100, 45),
+                  shadowColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
+                    side: BorderSide(width: 1, color: primaryColor.withValues(alpha: 0.7)),
                   ),
                 ),
                 child: const Text(

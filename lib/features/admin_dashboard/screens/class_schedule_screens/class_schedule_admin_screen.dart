@@ -128,6 +128,7 @@ class _ClassScheduleAdminScreenState extends State<ClassScheduleAdminScreen> {
                       ),
                       child: ClassScheduleCard(
                         classSchedule: classSchedule,
+                        isAdmin: true,
                       ),
                     ),
                   ),

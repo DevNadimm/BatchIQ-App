@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -52,10 +53,12 @@ class DeleteDialog extends StatelessWidget {
                   Get.back();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white38,
+                  backgroundColor: Colors.white,
                   minimumSize: const Size(100, 45),
+                  shadowColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
+                    side: BorderSide(width: 1, color: primaryColor.withValues(alpha: 0.7)),
                   ),
                 ),
                 child: const Text(

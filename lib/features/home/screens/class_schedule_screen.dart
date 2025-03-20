@@ -105,6 +105,7 @@ class _ClassScheduleScreenState extends State<ClassScheduleScreen> {
                     ),
                     child: ClassScheduleCard(
                       classSchedule: classSchedule,
+                      isAdmin: false,
                     ),
                   ),
                   ),

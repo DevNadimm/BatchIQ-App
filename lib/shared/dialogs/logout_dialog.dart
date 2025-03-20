@@ -1,3 +1,4 @@
+import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:batchiq_app/core/services/notification_service.dart';
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -57,10 +58,12 @@ class LogoutDialog extends StatelessWidget {
                   Get.back();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white38,
+                  backgroundColor: Colors.white,
                   minimumSize: const Size(100, 45),
+                  shadowColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
+                    side: BorderSide(width: 1, color: primaryColor.withValues(alpha: 0.7)),
                   ),
                 ),
                 child: const Text(
