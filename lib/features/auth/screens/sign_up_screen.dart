@@ -2,8 +2,6 @@ import 'package:batchiq_app/core/utils/ui/progress_indicator.dart';
 import 'package:batchiq_app/core/utils/ui/snackbar_message.dart';
 import 'package:batchiq_app/features/auth/controller/sign_up_controller.dart';
 import 'package:batchiq_app/features/auth/screens/sign_in_screen.dart';
-import 'package:batchiq_app/features/auth/widgets/auth_divider.dart';
-import 'package:batchiq_app/features/auth/widgets/social_button.dart';
 import 'package:batchiq_app/features/auth/widgets/auth_footer.dart';
 import 'package:batchiq_app/features/batch_management/join_batch/screens/join_batch_screen.dart';
 import 'package:flutter/material.dart';
@@ -147,32 +145,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     }
                   ),
                 ),
-                const SizedBox(height: 32),
-                const AuthDivider(
-                  label: 'or sign up with',
-                ),
-                const SizedBox(height: 32),
-                Row(
-                  children: [
-                    Expanded(
-                      child: SocialButton(
-                        onTap: () {},
-                        imgPath: 'assets/logos/google.png',
-                        label: 'Google',
-                        context: context,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: SocialButton(
-                        onTap: () {},
-                        imgPath: 'assets/logos/facebook.png',
-                        label: 'Facebook',
-                        context: context,
-                      ),
-                    )
-                  ],
-                ),
+                // const SizedBox(height: 32),
+                // const AuthDivider(
+                //   label: 'or sign up with',
+                // ),
+                // const SizedBox(height: 32),
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       child: SocialButton(
+                //         onTap: () {},
+                //         imgPath: 'assets/logos/google.png',
+                //         label: 'Google',
+                //         context: context,
+                //       ),
+                //     ),
+                //     const SizedBox(width: 16),
+                //     Expanded(
+                //       child: SocialButton(
+                //         onTap: () {},
+                //         imgPath: 'assets/logos/facebook.png',
+                //         label: 'Facebook',
+                //         context: context,
+                //       ),
+                //     )
+                //   ],
+                // ),
                 const SizedBox(height: 24),
                 AuthFooter(
                   label: "Already have an account? ",

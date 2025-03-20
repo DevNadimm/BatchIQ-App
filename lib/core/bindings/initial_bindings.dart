@@ -1,5 +1,6 @@
-import 'package:batchiq_app/features/admin_dashboard/controller/exam_schedule_controller.dart';
 import 'package:get/get.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/exam_schedule_controller.dart';
+import 'package:batchiq_app/features/auth/controller/google_auth_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/batch_member_management_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/class_schedule_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/controller/course_controller.dart';
@@ -24,6 +25,7 @@ class InitialBindings implements Bindings {
     // Auth Feature
     Get.put(SignInController());
     Get.put(SignUpController());
+    Get.put(GoogleAuthController());
 
     // Batch Management Feature
     Get.put(ApplyAdminController());
