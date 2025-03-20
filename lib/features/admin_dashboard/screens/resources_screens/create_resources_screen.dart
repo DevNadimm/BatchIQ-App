@@ -27,6 +27,7 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   List<Map<String, String>> courseList = [];
   String? selectedType;
+  bool isSendNotification = false;
 
   @override
   void initState() {
@@ -181,6 +182,30 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
+                SwitchListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      width: 1,
+                      color: primaryColor.withOpacity(0.4),
+                    ),
+                  ),
+                  value: isSendNotification,
+                  onChanged: (value) {
+                    setState(() {
+                      isSendNotification = value;
+                    });
+                  },
+                  title: Text(
+                    "Send Notification",
+                    style: TextStyle(
+                      color: secondaryFontColor.withOpacity(0.9),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
                 GetBuilder<ResourceController>(
                   builder: (controller) {
                     return Visibility(
@@ -263,6 +288,7 @@ class _CreateResourcesScreenState extends State<CreateResourcesScreen> {
       courseCode: courseCode,
       resourcesType: typeController.text,
       url: urlController.text,
+      sendNotification: isSendNotification,
     );
 
     if (result) {

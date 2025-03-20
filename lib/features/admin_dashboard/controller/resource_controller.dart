@@ -1,5 +1,6 @@
 import 'package:batchiq_app/core/constants/error_messages.dart';
 import 'package:batchiq_app/core/utils/id_generator.dart';
+import 'package:batchiq_app/features/admin_dashboard/controller/notification_controller.dart';
 import 'package:batchiq_app/features/admin_dashboard/models/resource_model.dart';
 import 'package:batchiq_app/features/auth/controller/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -69,6 +70,7 @@ class ResourceController extends GetxController {
     required String courseCode,
     required String resourcesType,
     required String url,
+    required bool sendNotification,
   }) async {
     _setLoading(true);
 
@@ -96,6 +98,15 @@ class ResourceController extends GetxController {
           .collection("Resources")
           .doc(docId)
           .set(courseData);
+
+      if (sendNotification) {
+        await NotificationController.instance.createNotification(
+          type: 'notification',
+          title: "🔔 New Resource for $courseName",
+          body: "A new resource has been added to your batch for the $courseName course. Access it now!",
+          documentId: docId,
+        );
+      }
 
       isSuccess = true;
       errorMessage = null;
