@@ -58,7 +58,7 @@ class DeleteDialog extends StatelessWidget {
                   shadowColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
-                    side: BorderSide(width: 1, color: primaryColor.withValues(alpha: 0.7)),
+                    side: BorderSide(width: 1, color: primaryColor.withOpacity(0.7)),
                   ),
                 ),
                 child: const Text(

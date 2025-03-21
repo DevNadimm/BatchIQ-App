@@ -94,7 +94,7 @@ class TimelineEventCard extends StatelessWidget {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: HelperFunctions.getEventTypeColor(event.eventType, event.date).withValues(alpha: 0.1),
+                              color: HelperFunctions.getEventTypeColor(event.eventType, event.date).withOpacity(0.1),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(

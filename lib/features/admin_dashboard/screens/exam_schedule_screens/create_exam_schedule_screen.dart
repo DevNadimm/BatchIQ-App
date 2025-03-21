@@ -66,7 +66,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.5),
           child: Container(
-            color: Colors.grey.withValues(alpha: 0.2),
+            color: Colors.grey.withOpacity(0.2),
             height: 1.5,
           ),
         ),
@@ -83,7 +83,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 decoration: InputDecoration(
                   hintText: "Course",
                   hintStyle: TextStyle(
-                    color: secondaryFontColor.withValues(alpha: 0.9),
+                    color: secondaryFontColor.withOpacity(0.9),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -111,7 +111,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 decoration: InputDecoration(
                   hintText: "Exam Type",
                   hintStyle: TextStyle(
-                    color: secondaryFontColor.withValues(alpha: 0.9),
+                    color: secondaryFontColor.withOpacity(0.9),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -137,7 +137,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 decoration: InputDecoration(
                   hintText: "Exam Date",
                   hintStyle: TextStyle(
-                    color: secondaryFontColor.withValues(alpha: 0.9),
+                    color: secondaryFontColor.withOpacity(0.9),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -158,7 +158,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(
                     width: 1,
-                    color: primaryColor.withValues(alpha: 0.4),
+                    color: primaryColor.withOpacity(0.4),
                   ),
                 ),
                 value: sendNotification,
@@ -170,7 +170,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 title: Text(
                   "Send Notification",
                   style: TextStyle(
-                    color: secondaryFontColor.withValues(alpha: 0.9),
+                    color: secondaryFontColor.withOpacity(0.9),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -184,7 +184,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(
                     width: 1,
-                    color: primaryColor.withValues(alpha: 0.4),
+                    color: primaryColor.withOpacity(0.4),
                   ),
                 ),
                 value: addToCalendar,
@@ -196,7 +196,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 title: Text(
                   "Add to My Calendar",
                   style: TextStyle(
-                    color: secondaryFontColor.withValues(alpha: 0.9),
+                    color: secondaryFontColor.withOpacity(0.9),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),

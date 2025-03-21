@@ -44,7 +44,7 @@ class _ExamScheduleAdminScreenState extends State<ExamScheduleAdminScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.5),
           child: Container(
-            color: Colors.grey.withValues(alpha: 0.2),
+            color: Colors.grey.withOpacity(0.2),
             height: 1.5,
           ),
         ),
@@ -82,7 +82,7 @@ class _ExamScheduleAdminScreenState extends State<ExamScheduleAdminScreen> {
               Divider(
                 height: 1.5,
                 thickness: 1.5,
-                color: Colors.grey.withValues(alpha: 0.2),
+                color: Colors.grey.withOpacity(0.2),
               ),
               Padding(
                 padding: const EdgeInsets.all(16),

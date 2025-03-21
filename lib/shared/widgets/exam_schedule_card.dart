@@ -39,7 +39,7 @@ class ExamScheduleCard extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(
-                      width: 1.5, color: primaryColor.withValues(alpha: 0.1)),
+                      width: 1.5, color: primaryColor.withOpacity(0.1)),
                 ),
                 elevation: 0,
                 child: Padding(
@@ -69,7 +69,7 @@ class ExamScheduleCard extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: HelperFunctions.getExamTypeColor(
                                 exam.examType,
-                              ).withValues(alpha: 0.1),
+                              ).withOpacity(0.1),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
