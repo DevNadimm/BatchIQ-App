@@ -12,8 +12,8 @@ class BatchInfoController extends GetxController {
   BatchInfoModel batchInfoModel = BatchInfoModel();
   final UserController _userController = UserController();
 
-  /// Method to count assignments for a specific batch
-  Future<void> countAssignments() async {
+  /// Method to count assignments and exams for a specific batch
+  Future<void> countAssignmentsAndExams() async {
     try {
       isLoading = true;
       update();

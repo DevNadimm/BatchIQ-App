@@ -51,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _fetchBatchInfo() async {
     await BatchInfoController.instance.fetchBatchInfo();
+    await BatchInfoController.instance.countAssignmentsAndExams();
   }
 
   Future<void> _fetchClassSchedules() async {
@@ -111,7 +112,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
         body: Column(
           children: [
-            const HeaderSection(height: 85),
+            GetBuilder<BatchInfoController>(builder: (controller) {
+              return HeaderSection(
+                height: 85,
+                assignmentCount: controller.assignmentCount,
+                examCount: controller.examCount,
+              );
+            }),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
