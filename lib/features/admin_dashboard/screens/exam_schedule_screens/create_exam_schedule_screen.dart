@@ -135,7 +135,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 readOnly: true,
                 controller: scheduledDateController,
                 decoration: InputDecoration(
-                  hintText: "Pick Exam Date",
+                  hintText: "Exam Date",
                   hintStyle: TextStyle(
                     color: secondaryFontColor.withValues(alpha: 0.9),
                     fontSize: 16,
@@ -145,7 +145,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
                 onTap: _pickDate,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please pick a date";
+                    return "Please select a date";
                   }
                   return null;
                 },
@@ -246,8 +246,7 @@ class _CreateExamScheduleScreenState extends State<CreateExamScheduleScreen> {
   }
 
   Future<void> createExamSchedule() async {
-    final selectedCourse = courseList.firstWhere(
-        (course) => course['courseName'] == courseNameController.text);
+    final selectedCourse = courseList.firstWhere((course) => course['courseName'] == courseNameController.text);
     final controller = ExamScheduleController.instance;
 
     final isCreated = await controller.createExamSchedule(

@@ -260,7 +260,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildListTile(
             title: "Edit Profile",
             icon: HugeIcons.strokeRoundedEdit02,
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(16),
+                  ),
+                ),
+                builder: (context) => const FeatureNotAvailableBottomSheet(),
+              );
+            },
           ),
           _buildListTile(
             title: "Notifications",

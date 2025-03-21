@@ -104,24 +104,6 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
-                  controller: link,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    hintText: "Add a link (optional)",
-                    labelText: "Link (Optional)",
-                    suffixIcon: IconButton(
-                      icon: const Icon(HugeIcons.strokeRoundedFilePaste),
-                      onPressed: () async {
-                        final data = await Clipboard.getData('text/plain');
-                        if (data?.text != null) {
-                          link.text = data!.text!;
-                        }
-                      },
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
                   controller: deadline,
                   keyboardType: TextInputType.text,
                   readOnly: true,
@@ -145,6 +127,24 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
                     }
                     return null;
                   },
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: link,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    hintText: "Add a link (optional)",
+                    labelText: "Link (Optional)",
+                    suffixIcon: IconButton(
+                      icon: const Icon(HugeIcons.strokeRoundedFilePaste),
+                      onPressed: () async {
+                        final data = await Clipboard.getData('text/plain');
+                        if (data?.text != null) {
+                          link.text = data!.text!;
+                        }
+                      },
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 16),
 
@@ -202,18 +202,18 @@ class _CreateAssignmentScreenState extends State<CreateAssignmentScreen> {
 
                 GetBuilder<AssignmentController>(
                   builder: (controller) {
-                    return Visibility(
-                      visible: !controller.isLoading,
-                      replacement: const ProgressIndicatorWidget(),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState?.validate() ?? false) {
-                            await createAssignment();
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                        ),
+                    return ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          await createAssignment();
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50),
+                      ),
+                      child: Visibility(
+                        visible: !controller.isLoading,
+                        replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
                         child: const Text(
                           "Create Assignment",
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),

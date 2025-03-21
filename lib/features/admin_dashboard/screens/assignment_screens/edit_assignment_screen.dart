@@ -167,18 +167,18 @@ class _EditAssignmentScreenState extends State<EditAssignmentScreen> {
                 const SizedBox(height: 16),
                 GetBuilder<AssignmentController>(
                     builder: (controller) {
-                      return Visibility(
-                        visible: !controller.isLoading,
-                        replacement: const ProgressIndicatorWidget(),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (_formKey.currentState?.validate() ?? false) {
-                              await editAssignment();
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(double.infinity, 50),
-                          ),
+                      return ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            await editAssignment();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 50),
+                        ),
+                        child: Visibility(
+                          visible: !controller.isLoading,
+                          replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
                           child: const Text(
                             "Edit Assignment",
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),

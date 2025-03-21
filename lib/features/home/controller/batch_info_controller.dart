@@ -8,6 +8,7 @@ class BatchInfoController extends GetxController {
 
   var isLoading = false;
   var assignmentCount = 0;
+  var examCount = 0;
   BatchInfoModel batchInfoModel = BatchInfoModel();
   final UserController _userController = UserController();
 
@@ -29,14 +30,23 @@ class BatchInfoController extends GetxController {
           .doc(batchId)
           .collection('Assignments');
 
+      final examRef = FirebaseFirestore.instance
+          .collection('Batches')
+          .doc(batchId)
+          .collection('ExamSchedules');
+
       final assignmentSnapshot = await assignmentRef.get();
       assignmentCount = assignmentSnapshot.docs.length;
+
+      final examSnapshot = await examRef.get();
+      examCount = examSnapshot.docs.length;
 
       isLoading = false;
       update();
     } catch (e) {
       isLoading = false;
       assignmentCount = 0;
+      examCount = 0;
       update();
     }
   }

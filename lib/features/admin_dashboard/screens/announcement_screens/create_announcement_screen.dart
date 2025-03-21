@@ -138,17 +138,15 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                         controller: date,
                         keyboardType: TextInputType.text,
                         readOnly: true,
+                        onTap: () => _pickDeadline(context),
                         decoration: InputDecoration(
-                          hintText: "Date",
+                          hintText: "Event Date",
                           hintStyle: TextStyle(
                             color: secondaryFontColor.withOpacity(0.9),
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
-                          suffixIcon: IconButton(
-                            onPressed: () => _pickDeadline(context),
-                            icon: const Icon(HugeIcons.strokeRoundedCalendar03),
-                          ),
+                          suffixIcon: const Icon(HugeIcons.strokeRoundedCalendar03),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -212,18 +210,18 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                 const SizedBox(height: 16),
                 GetBuilder<AnnouncementController>(
                   builder: (controller) {
-                    return Visibility(
-                      visible: !controller.isLoading,
-                      replacement: const ProgressIndicatorWidget(),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState?.validate() ?? false) {
-                            await createAnnouncement();
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                        ),
+                    return ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          await createAnnouncement();
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50),
+                      ),
+                      child: Visibility(
+                        visible: !controller.isLoading,
+                        replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
                         child: const Text(
                           "Create Announcement",
                           style: TextStyle(

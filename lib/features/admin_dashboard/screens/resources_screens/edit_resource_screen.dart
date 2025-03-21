@@ -119,18 +119,18 @@ class _EditResourcesScreenState extends State<EditResourcesScreen> {
                 ),
                 const SizedBox(height: 16),
                 GetBuilder<ResourceController>(builder: (controller) {
-                  return Visibility(
-                    visible: !controller.isLoading,
-                    replacement: const ProgressIndicatorWidget(),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          await editResource();
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                      ),
+                  return ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        await editResource();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
+                    ),
+                    child: Visibility(
+                      visible: !controller.isLoading,
+                      replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
                       child: const Text(
                         "Edit Resource",
                         style: TextStyle(

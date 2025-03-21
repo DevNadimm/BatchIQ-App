@@ -98,18 +98,18 @@ class _EditNotificationScreenState extends State<EditNotificationScreen> {
                 const SizedBox(height: 16),
                 GetBuilder<NotificationController>(
                     builder: (controller) {
-                      return Visibility(
-                        visible: !controller.isLoading,
-                        replacement: const ProgressIndicatorWidget(),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (_formKey.currentState?.validate() ?? false) {
-                              await editNotification();
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(double.infinity, 50),
-                          ),
+                      return ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            await editNotification();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 50),
+                        ),
+                        child: Visibility(
+                          visible: !controller.isLoading,
+                          replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
                           child: const Text(
                             "Edit Notification",
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),

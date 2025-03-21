@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 
 class HeaderSection extends StatelessWidget {
   final double height;
+  final int assignmentCount;
+  final int examCount;
 
   const HeaderSection({
     super.key,
     this.height = 100,
+    required this.assignmentCount,
+    required this.examCount,
   });
 
   @override
@@ -50,13 +54,13 @@ class HeaderSection extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Stat(number: "02", label: "ASSIGNMENTS"),
-                      Stat(number: "92", label: "CLASSES"),
-                      Stat(number: "05", label: "EXAMS"),
+                      Stat(number: assignmentCount.toString().padLeft(2, "0"), label: "ASSIGNMENTS"),
+                      // Stat(number: "92", label: "CLASSES"),
+                      Stat(number: examCount.toString().padLeft(2, "0"), label: "EXAMS"),
                     ],
                   ),
                 ),

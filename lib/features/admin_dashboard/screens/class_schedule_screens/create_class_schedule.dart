@@ -187,18 +187,18 @@ class _CreateClassScheduleScreenState extends State<CreateClassScheduleScreen> {
 
               GetBuilder<ClassScheduleController>(
                 builder: (controller) {
-                  return Visibility(
-                    visible: !controller.isLoading,
-                    replacement: const ProgressIndicatorWidget(),
-                    child: SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState?.validate() ?? false) {
-                            await createClassSchedule();
-                          }
-                        },
+                  return SizedBox(
+                    height: 50,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          await createClassSchedule();
+                        }
+                      },
+                      child: Visibility(
+                        visible: !controller.isLoading,
+                        replacement: const ProgressIndicatorWidget(size: 25, color: Colors.white),
                         child: const Text(
                           "Create Class Schedule",
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
