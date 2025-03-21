@@ -29,7 +29,7 @@ class DeveloperInformationScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(38),
                 child: Image.asset(
                   height: 140,
-                  "assets/images/developer_profile.jpg",
+                  "assets/images/developer_cartoon.jpg",
                 ),
               ),
             ),

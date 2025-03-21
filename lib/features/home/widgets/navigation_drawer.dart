@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:batchiq_app/core/colors/colors.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:share_plus/share_plus.dart';
 
 class BatchIQNavigationDrawer extends StatelessWidget {
   const BatchIQNavigationDrawer({super.key, required this.userModel});
@@ -67,7 +68,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                     context,
                     HugeIcons.strokeRoundedDashboardBrowsing,
                     "Admin Dashboard",
-                        () {
+                    () {
                       Get.to(const AdminDashboardScreen());
                     },
                   ),
@@ -75,7 +76,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   context,
                   HugeIcons.strokeRoundedUserAccount,
                   "Manage Profiles",
-                      () {
+                  () {
                     Get.to(const ProfileScreen());
                   },
                 ),
@@ -84,7 +85,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   context,
                   HugeIcons.strokeRoundedHelpSquare,
                   "Help & Feedback",
-                      () {
+                  () {
                     LaunchURL.sendEmail("User Feedback");
                   },
                 ),
@@ -92,7 +93,7 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   context,
                   HugeIcons.strokeRoundedDeveloper,
                   "Developer Information",
-                      () {
+                  () {
                     Get.to(const DeveloperInformationScreen());
                   },
                 ),
@@ -101,13 +102,15 @@ class BatchIQNavigationDrawer extends StatelessWidget {
                   context,
                   HugeIcons.strokeRoundedShare01,
                   "Share App",
-                      () {},
+                  () {
+                    shareApp();
+                  },
                 ),
                 _buildDrawerItem(
                   context,
                   HugeIcons.strokeRoundedUserGroup,
                   "About Us",
-                      () {
+                  () {
                     Get.to(() => const AboutUsScreen());
                   },
                 ),
@@ -118,9 +121,14 @@ class BatchIQNavigationDrawer extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton.icon(
               onPressed: () async {
-                Get.dialog(LogoutDialog(batchId: userModel.batchId ?? "",));
+                Get.dialog(LogoutDialog(
+                  batchId: userModel.batchId ?? "",
+                ));
               },
-              icon: const Icon(HugeIcons.strokeRoundedLogout03, color: Colors.white,),
+              icon: const Icon(
+                HugeIcons.strokeRoundedLogout03,
+                color: Colors.white,
+              ),
               label: const Text("Logout"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red.shade400,
@@ -156,14 +164,25 @@ class BatchIQNavigationDrawer extends StatelessWidget {
               child: Text(
                 title,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: primaryFontColor.withOpacity(0.8),
-                  fontWeight: FontWeight.w600,
-                ),
+                      color: primaryFontColor.withOpacity(0.8),
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void shareApp() async {
+    final result = await Share.share(
+        '🎓 BatchIQ makes uni life easier!\n\nStay organized and never miss deadlines with BatchIQ. Manage assignments, track progress, access notices, and stay updated in real-time.\n\nGet it now: https://drive.google.com/file/d/1iXz9wj4gdHZMfYCFrnik_scml3fWuBtb/view?usp=sharing',
+        subject: 'BatchIQ - Uni Batch Management App'
+    );
+
+    if (result.status == ShareResultStatus.success) {
+      debugPrint('Successful!');
+    }
   }
 }

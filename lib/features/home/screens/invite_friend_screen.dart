@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:share_plus/share_plus.dart';
 
 class InviteFriendScreen extends StatelessWidget {
   const InviteFriendScreen({super.key, required this.batchId});
@@ -102,6 +103,29 @@ class InviteFriendScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  Share.share(
+                    'You’re invited to join our batch on BatchIQ!\n\nStay connected, manage assignments, track progress, and never miss important updates.\n\nBatch ID: $batchId\n\nJoin us now: https://drive.google.com/file/d/1iXz9wj4gdHZMfYCFrnik_scml3fWuBtb/view?usp=sharing',
+                    subject: 'BatchIQ - Join Our Batch',
+                  );
+                },
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(HugeIcons.strokeRoundedShare01, color: Colors.white,),
+                    SizedBox(width: 06),
+                    Text(
+                      "Invite Friend",
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
